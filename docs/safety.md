@@ -84,3 +84,7 @@ The reference stops at the boundary of your systems. Before either agent is expo
 - **Approval surface.** The merchant approval surface and who may use it. The gate checks only that your code
   set the mark.
 - **Guardrail values.** The defaults in the two `config.py` modules are demonstration values.
+
+## Further reading
+
+- [生产环境就绪度分析（中文）](ua_prod_readiness.zh-CN.md) — expands "What a deployment owns" into a concrete production-readiness audit: the deployment-owned gaps, the single-process state that must be redesigned for multi-worker, model-layer risks, and a prioritized P0/P1/P2 improvement list. Also available in the [onboarding guide](ua_onboarding.md) as tour step 15.

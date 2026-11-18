@@ -1,6 +1,6 @@
 # Claude Commerce Agents — 新人上手指南
 
-> 生成自 `.ua/knowledge-graph.json` · 分析 commit `790a108b` · 图谱规模 568 文件 / 1758 节点 / 3471 边 / 9 层 / 14 步导览
+> 生成自 `.ua/knowledge-graph.json` · 分析 commit `790a108b` · 图谱规模 568 文件 / 1758 节点 / 3471 边 / 9 层 / 15 步导览（第 15 步为后补的生产就绪度指南）
 
 ## 1. 项目概览
 
@@ -69,7 +69,7 @@ python scripts/run_demo.py retail                          # API :8000 + 店面 
 9. **无凭证测试**：`commerce_common/testing.py` 提供 scripted 替身与 spy 记忆存储，`conftest.py` 提供内存假后端，保证 credential-free 的确定性测试。
 10. **单 worker 与回环绑定**：会话、购物车、暂存变更都放在 `demo_common` 单进程内存里，因此示例只跑一个 worker。
 
-## 4. 导览（14 步，来自图谱 tour）
+## 4. 导览（15 步，来自图谱 tour）
 
 | 步 | 标题 | 重点文件 |
 |---|---|---|
@@ -87,8 +87,9 @@ python scripts/run_demo.py retail                          # API :8000 + 店面 
 | 12 | 一个端到端垂直示例：零售 | `retail/api/main.py`、`retail/storefront-web/app/page.tsx` |
 | 13 | 用 Claude Code 插件脚手架你的智能体 | `plugin.json`、`scaffold-commerce-agent.md` |
 | 14 | 安全规则与工程基础设施 | `docs/safety.md`、`.github/workflows/ci.yml`、`scripts/run_demo.py` |
+| 15 | 生产环境就绪度与改进路线 | `docs/ua_prod_readiness.zh-CN.md` |
 
-路径是递进的：先看整体地图 → 底层公共零件 → 安全约束 → 两个角色各一遍 → 三种运行时 → 拼成产品 → 落地一个垂直 → 脚手架复用 → 收尾看不可见但必须存在的规则。第 12 步读懂零售后，其余三个垂直只是换数据与换 UI 卡片。
+路径是递进的：先看整体地图 → 底层公共零件 → 安全约束 → 两个角色各一遍 → 三种运行时 → 拼成产品 → 落地一个垂直 → 脚手架复用 → 收尾看不可见但必须存在的规则。第 12 步读懂零售后，其余三个垂直只是换数据与换 UI 卡片。第 15 步把视角从"读懂系统"切到"把系统送上生产"：逐条列出部署方必须补齐的边界（认证、凭据、限流、业务规则、支付、记忆合规等）、需要重新设计的单进程状态，以及 P0/P1/P2 改进清单。
 
 ## 5. 文件地图（按层，精选）
 
@@ -128,4 +129,4 @@ python scripts/run_demo.py retail                          # API :8000 + 店面 
 | `examples/entertainment/api/ticketing.py` | 8 | 计时持有 / FIFO 候补 / 可撤销转让状态机 |
 | `examples/web-shared/ui.tsx`、`format.ts` | 8 / 5 | 8 个 Web 应用共用的 UI 与格式化原语 |
 
-**上手建议**：先按导览第 1–4 步读共享库，再挑一个垂直（推荐 `retail`）从头到尾走一遍；改动前先跑 `pytest` 基线，改 `lib/types.ts` 或 `protocol.ts` 时同步检查四个前端；任何涉及提示词/工具数组的改动都要复查提示缓存前缀是否仍稳定。
+**上手建议**：先按导览第 1–4 步读共享库，再挑一个垂直（推荐 `retail`）从头到尾走一遍；改动前先跑 `pytest` 基线，改 `lib/types.ts` 或 `protocol.ts` 时同步检查四个前端；任何涉及提示词/工具数组的改动都要复查提示缓存前缀是否仍稳定。准备上线时，直接跳到第 15 步的 `docs/ua_prod_readiness.zh-CN.md`，它把本文第 3 节第 2、10 条（安全内建、单 worker 限制）展开成了完整的生产改造清单。
