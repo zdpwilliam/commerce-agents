@@ -80,12 +80,12 @@ export function AssistantPanel({
         {onToggleFullscreen ? (
           <IconButton
             icon={fullscreen ? "collapse" : "expand"}
-            label={fullscreen ? "Exit full screen" : "Full screen"}
+            label={fullscreen ? "退出全屏" : "全屏"}
             onClick={onToggleFullscreen}
             className="hidden lg:grid"
           />
         ) : null}
-        <IconButton icon="x" label="Hide assistant" onClick={onClose} />
+        <IconButton icon="x" label="隐藏助手" onClick={onClose} />
       </div>
 
       <div className="relative min-h-0 flex-1">

@@ -8,7 +8,7 @@ const CURRENCY_METRICS = new Set(["sales", "average_order_value", "revenue", "sp
 const RATE_METRICS = new Set(["conversion_rate", "return_rate", "click_through_rate"]);
 
 function metricLabel(metric: string): string {
-  if (metric === "average_order_value") return "Average order";
+  if (metric === "average_order_value") return "平均订单";
   return titleCase(metric);
 }
 
@@ -23,7 +23,7 @@ export default function MetricsCard({ payload }: { payload: MetricsPayload }) {
   const metrics = payload.metrics ?? [];
   return (
     <GenCard>
-      <GenCardHeader title={payload.title ?? "Performance"} aside={payload.period ? formatPeriodLabel(payload.period) : null} />
+      <GenCardHeader title={payload.title ?? "经营表现"} aside={payload.period ? formatPeriodLabel(payload.period) : null} />
       <div className="mt-2 grid grid-cols-2 border-t border-(--line) [&>*:nth-child(even)]:border-l [&>*:nth-child(n+3)]:border-t [&>*]:border-(--line)">
         {metrics.map((entry, index) => {
           const value = metricValue(entry);

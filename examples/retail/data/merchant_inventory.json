@@ -10,8 +10,8 @@
       "unit_cost": 10.5,
       "content_quality": "needs_work",
       "missing_attributes": [
-        "wall coverage",
-        "material"
+        "材质",
+        "规格说明"
       ]
     },
     {
@@ -86,7 +86,8 @@
       "return_rate_pct": 11.0,
       "content_quality": "needs_work",
       "missing_attributes": [
-        "firmness"
+        "材质",
+        "规格说明"
       ]
     },
     {

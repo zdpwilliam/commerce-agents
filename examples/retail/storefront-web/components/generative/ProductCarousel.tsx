@@ -45,10 +45,10 @@ function PriceIntelligenceRow({ intel }: { intel: PriceIntelligence }) {
         <div className="text-[13px] font-semibold text-(--ink)">{intel.verdict}</div>
         <div className="text-[11px] text-(--ink-soft)">
           {intel.position === "low"
-            ? "Sitting near the low end of its own range"
+            ? "接近自身价格区间低位"
             : intel.position === "high"
-              ? "Sitting near the high end of its own range"
-              : "Sitting in the typical band of its own range"}
+              ? "接近自身价格区间高位"
+              : "处于自身常见价位区间"}
           {" "}· last {intel.days} days
         </div>
       </div>
@@ -102,7 +102,7 @@ function VariantList({ family, variants }: { family: Product; variants: Product[
   const { ask } = useStoreFrame();
   const pricesDiffer = variants.some((variant) => variant.price !== variants[0]?.price);
   return (
-    <ul className="mt-2 flex flex-wrap gap-1.5" aria-label="Options">
+    <ul className="mt-2 flex flex-wrap gap-1.5" aria-label="选项">
       {variants.map((variant) => {
         const label = optionValuesLabel(variant);
         const available = variant.in_stock !== false;
@@ -176,7 +176,7 @@ function ProductDetail({
             </div>
             <button
               onClick={onClose}
-              aria-label="Collapse details"
+              aria-label="收起详情"
               className="shrink-0 rounded-md px-1.5 text-base leading-none text-(--ink-soft) hover:text-(--ink)"
             >
               ×
@@ -325,7 +325,7 @@ export default function ProductCarousel({
             />
             <button
               onClick={() => nudge(-1)}
-              aria-label="Scroll to previous products"
+              aria-label="滚动查看之前的商品"
               className="absolute left-0 top-1/2 -translate-y-1/2 rounded-full border border-(--line) bg-(--card) px-2 py-1 text-sm text-(--ink) shadow-md transition hover:border-(--accent)"
             >
               ‹
@@ -340,7 +340,7 @@ export default function ProductCarousel({
             />
             <button
               onClick={() => nudge(1)}
-              aria-label="Scroll to more products"
+              aria-label="滚动查看更多商品"
               className="absolute right-0 top-1/2 -translate-y-1/2 rounded-full border border-(--line) bg-(--card) px-2 py-1 text-sm text-(--ink) shadow-md transition hover:border-(--accent)"
             >
               ›

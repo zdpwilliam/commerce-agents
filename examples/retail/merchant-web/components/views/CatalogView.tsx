@@ -102,10 +102,10 @@ function ListingSheet({
 
   return (
     <Sheet
-      title="Listing"
+      title="商品"
       detail={listingId}
       onClose={onClose}
-      closeLabel="Close listing detail"
+      closeLabel="关闭商品详情"
       footer={
         listing ? (
           <>
@@ -146,11 +146,11 @@ function ListingSheet({
           </div>
 
           <Facts>
-            <Fact label={hasOptions(listing) ? "Price from" : "Price"} value={formatMoney(listing.price, listing.currency)} />
-            <Fact label="In stock" value={formatNumber(listing.stock)} tone={listing.stock === 0 ? "danger" : alert?.kind === "low_stock" ? "warn" : undefined} />
+            <Fact label={hasOptions(listing) ? "起价" : "价格"} value={formatMoney(listing.price, listing.currency)} />
+            <Fact label="有货" value={formatNumber(listing.stock)} tone={listing.stock === 0 ? "danger" : alert?.kind === "low_stock" ? "warn" : undefined} />
             <Fact label="Sold, 30 days" value={listing.sales_last_30d != null ? formatNumber(listing.sales_last_30d) : null} />
             <Fact
-              label={pricing?.margin_pct != null ? "Margin" : "Return rate"}
+              label={pricing?.margin_pct != null ? "毛利" : "退货率"}
               value={pricing?.margin_pct != null ? formatRate(pricing.margin_pct) : listing.return_rate_pct != null ? formatRate(listing.return_rate_pct) : null}
             />
           </Facts>
@@ -187,7 +187,7 @@ function ListingSheet({
                   </Pill>
                 ))}
                 <AskButton
-                  label="Draft these attributes"
+                  label="起草这些属性"
                   onClick={() => ask(`Draft the missing attributes (${listing.missing_attributes?.join(", ")}) for ${ref}.`)}
                 />
               </div>
@@ -386,7 +386,7 @@ export default function CatalogView({ refreshKey, onAskAssistant }: { refreshKey
 
   return (
     <div className="ac-reveal flex flex-col gap-4">
-      <PageHeader title="Catalog" subtitle={summary}>
+      <PageHeader title="商品目录" subtitle={summary}>
         <Button variant="secondary" icon="spark" onClick={() => onAskAssistant("Which listings need the most work right now, and why?")}>
           Ask about the catalog
         </Button>
@@ -399,17 +399,17 @@ export default function CatalogView({ refreshKey, onAskAssistant }: { refreshKey
       ) : (
         <>
           <div className="flex flex-wrap items-center gap-2.5">
-            <SearchField value={query} onChange={setQuery} placeholder="Search by title, ID, or attribute" label="Search listings" className="min-w-[260px] flex-1 sm:max-w-sm" />
+            <SearchField value={query} onChange={setQuery} placeholder="按标题、编号或属性搜索" label="搜索商品" className="min-w-[260px] flex-1 sm:max-w-sm" />
             <Segmented<Filter>
-              label="Filter listings"
+              label="筛选商品"
               value={filter}
               onChange={setFilter}
               options={[
-                { id: "all", label: "All", count: counts.all },
-                { id: "active", label: "Active", count: counts.active },
-                { id: "low_stock", label: "Low stock", count: counts.low_stock },
-                { id: "content", label: "Needs content", count: counts.content },
-                { id: "inactive", label: "Inactive", count: counts.inactive },
+                { id: "all", label: "全部", count: counts.all },
+                { id: "active", label: "在售", count: counts.active },
+                { id: "low_stock", label: "库存偏低", count: counts.low_stock },
+                { id: "content", label: "内容待完善", count: counts.content },
+                { id: "inactive", label: "停售", count: counts.inactive },
               ]}
             />
           </div>
@@ -419,13 +419,13 @@ export default function CatalogView({ refreshKey, onAskAssistant }: { refreshKey
           ) : null}
 
           {attention.length ? (
-            <Panel title="Needs attention" subtitle={`${attention.length} · sold out and low stock first`}>
+            <Panel title="需要关注" subtitle={`${attention.length} · sold out and low stock first`}>
               <ListingTable listings={attention} alerts={alerts} onOpen={setOpenListing} />
             </Panel>
           ) : null}
 
           {rest.length ? (
-            <Panel title={attention.length ? "Everything else" : "All listings"} subtitle={formatNumber(rest.length)}>
+            <Panel title={attention.length ? "其他" : "全部商品"} subtitle={formatNumber(rest.length)}>
               <ListingTable listings={rest} alerts={alerts} onOpen={setOpenListing} />
             </Panel>
           ) : null}

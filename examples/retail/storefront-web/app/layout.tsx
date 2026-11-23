@@ -13,7 +13,7 @@ const instrumentSans = Instrument_Sans({
 
 export const metadata: Metadata = {
   title: "ACME",
-  description: "Shop the ACME catalog with the ACME Assistant.",
+  description: "与 ACME 助手一起浏览 ACME 商品目录。",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

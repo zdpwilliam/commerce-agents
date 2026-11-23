@@ -417,7 +417,7 @@ export function useAgentTurn(api: AgentApi, options: AgentTurnOptions): AgentTur
           return;
         }
         case "error": {
-          const text = String(event.data.message ?? "Something went wrong.");
+          const text = String(event.data.message ?? "出错了。");
           updateTurn(turn, (item) => ({
             ...item,
             segments: [...item.segments, { type: "error", text }],

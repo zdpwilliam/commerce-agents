@@ -2,25 +2,25 @@
   "users": [
     {
       "user_id": "demo-user",
-      "display_name": "Dr. Priya Nair",
-      "loyalty_tier": "ACME Dental member",
-      "default_location": "Maple Heights",
+      "display_name": "普里娅医生",
+      "loyalty_tier": "ACME 牙科会员",
+      "default_location": "枫岭区",
       "preferences": {
-        "spending": "keeps to mid-range clinical options",
-        "clinic": "general practice, two chairs",
-        "focus": "restorative and endodontics",
-        "team": "one associate and a hygienist",
-        "style": "reliable, autoclavable instruments"
+        "spending": "通常选择中端临床方案",
+        "clinic": "综合诊所，两把牙椅",
+        "focus": "修复与根管治疗",
+        "team": "一名助理和一名洁牙师",
+        "style": "可靠、可高温灭菌的器械"
       }
     },
     {
       "user_id": "demo-user-2",
-      "display_name": "Dr. Sam Lee",
-      "loyalty_tier": "Guest",
-      "default_location": "Springfield",
+      "display_name": "李山姆医生",
+      "loyalty_tier": "访客",
+      "default_location": "春田区",
       "preferences": {
-        "budget": "value-focused",
-        "focus": "implant and surgical cases"
+        "budget": "注重性价比",
+        "focus": "种植与外科病例"
       }
     }
   ]

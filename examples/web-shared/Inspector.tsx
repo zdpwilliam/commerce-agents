@@ -110,9 +110,9 @@ function ToolCallRow({ row }: { row: ToolRow }) {
         <div className="mb-2 ml-5 space-y-2">
           {row.input ? <Detail label="Input" tone="bg-(--well)/70 text-(--ink)" text={row.input} /> : null}
           {row.excerpt !== undefined ? (
-            <Detail label="Result (excerpt)" tone={RESULT_TONE[status]} text={row.excerpt || "(empty)"} />
+            <Detail label="结果（节选）" tone={RESULT_TONE[status]} text={row.excerpt || "(empty)"} />
           ) : row.result !== undefined ? (
-            <Detail label="Result" tone={RESULT_TONE[status]} text={row.result || "(empty)"} />
+            <Detail label="结果" tone={RESULT_TONE[status]} text={row.result || "(empty)"} />
           ) : null}
         </div>
       ) : null}
@@ -148,7 +148,7 @@ export function Inspector({
   trace,
   memory,
   newMemoryKeys,
-  memoryTitle = "Memory",
+  memoryTitle = "记忆",
   onClose,
 }: {
   turnCount: number;
@@ -186,11 +186,11 @@ export function Inspector({
         <div className="flex items-start justify-between gap-3 border-b border-(--line) px-4 py-3">
           <div className="flex min-w-0 items-start gap-2">
             {turnCount > 1 ? (
-              <span className="flex shrink-0 items-center gap-0.5" role="group" aria-label="Reply">
-                <button type="button" onClick={() => stepTo(turn - 1)} disabled={turn <= 1} aria-label="Previous reply" className={stepButton}>
+              <span className="flex shrink-0 items-center gap-0.5" role="group" aria-label="回复">
+                <button type="button" onClick={() => stepTo(turn - 1)} disabled={turn <= 1} aria-label="上一条回复" className={stepButton}>
                   ‹
                 </button>
-                <button type="button" onClick={() => stepTo(turn + 1)} disabled={turn >= turnCount} aria-label="Next reply" className={stepButton}>
+                <button type="button" onClick={() => stepTo(turn + 1)} disabled={turn >= turnCount} aria-label="下一条回复" className={stepButton}>
                   ›
                 </button>
               </span>
@@ -226,7 +226,7 @@ export function Inspector({
           <button
             type="button"
             onClick={onClose}
-            aria-label="Close activity"
+            aria-label="关闭活动"
             className="rounded-md px-2 py-0.5 text-lg leading-none text-(--ink-soft) hover:text-(--ink)"
           >
             ×
@@ -239,7 +239,7 @@ export function Inspector({
             {turnCount === 0 ? (
               <Empty>No replies yet.</Empty>
             ) : rows.length === 0 ? (
-              <Empty>{working ? "Working…" : "No tool calls this reply."}</Empty>
+              <Empty>{working ? "处理中…" : "本轮没有工具调用。"}</Empty>
             ) : (
               <ul className="mt-1 divide-y divide-(--line)">
                 {rows.map((row, index) => (

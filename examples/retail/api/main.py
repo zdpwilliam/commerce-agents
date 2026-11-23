@@ -26,7 +26,6 @@ from shopping_agent import ProductDetails
 from shopping_agent_runtime import ShoppingAgent
 
 from .agent_config import build_shopping_config
-from .i18n import load_translations, localize
 from .merchant import create_merchant_router
 from .mock_retail import DATA_DIR, MockRetail
 
@@ -34,13 +33,6 @@ load_demo_env(DATA_DIR.parent)
 PRODUCT_IMAGES = DATA_DIR.parent / "storefront-web" / "public" / "products"
 
 backend = MockRetail()
-_TRANSLATIONS = load_translations(DATA_DIR)
-
-
-def localize_product(product: ProductDetails, language: str) -> ProductDetails:
-    """Localize a catalog read for the home grid and detail panel."""
-    return localize(product, language, _TRANSLATIONS)
-
 
 agent = ShoppingAgent(
     backend=backend,
@@ -67,7 +59,6 @@ host = build_storefront_host(
         DATA_DIR / "memory-seed.json", marker=DATA_DIR / ".memory-seeded.json"
     ),
     product_detail=product_detail,
-    product_localizer=localize_product,
 )
 app = host.app
 app.include_router(create_merchant_router(backend, InMemoryMemoryStore()), prefix="/api/merchant")

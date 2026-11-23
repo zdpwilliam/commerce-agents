@@ -4,24 +4,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import {
-  type AgentEvent,
-  asLang,
-  formatMoney,
-  I18nProvider,
-  LanguageSwitcher,
-  type Lang,
-  OrdersView,
-  plural,
-  storeLanguage,
-  StoreShell,
-  type StoreView,
-  translate,
-  upcoming,
-  useAgentTurn,
-  useResource,
-  useSession,
-} from "web-shared";
+import { type AgentEvent, formatMoney, OrdersView, plural, StoreShell, type StoreView, upcoming, useAgentTurn, useResource, useSession } from "web-shared";
 import CartPanel from "@/components/CartPanel";
 import Chat from "@/components/Chat";
 import HomeView from "@/components/views/HomeView";
@@ -31,7 +14,7 @@ import type { CartPayload } from "@/lib/types";
 
 type View = "assistant" | "orders";
 
-const ASSISTANT = "ACME Assistant";
+const ASSISTANT = "ACME 助手";
 
 function Wordmark() {
   return (
@@ -39,19 +22,18 @@ function Wordmark() {
       <span aria-hidden className="grid h-[30px] w-[30px] place-items-center rounded-lg bg-(--ink) text-[15px] font-bold text-(--surface)">
         A
       </span>
-      <span className="text-[17px] font-bold tracking-[-0.02em] text-(--ink)">ACME Dental</span>
+      <span className="text-[17px] font-bold tracking-[-0.02em] text-(--ink)">ACME 牙科</span>
     </span>
   );
 }
 
-function Storefront() {
+export default function StorefrontPage() {
   const session = useSession(api);
   const [view, setView] = useState<View>("assistant");
   const [cart, setCart] = useState<CartPayload | null>(null);
+  // A staged checkout owns the panel's primary action until the cart changes again.
   const [checkoutStaged, setCheckoutStaged] = useState(false);
   const [panelOpen, setPanelOpen] = useState(false);
-  const [language, setLanguage] = useState<Lang>(asLang(session.language));
-  const t = useCallback((key: string) => translate(language, key), [language]);
 
   const handleCartUpdate = useCallback((next: CartPayload) => {
     setCart(next);
@@ -67,66 +49,56 @@ function Storefront() {
   );
 
   const chat = useAgentTurn(api, { ...session, unreachable: UNREACHABLE, onEvent });
-  const { data: orders, failed: ordersFailed } = useResource(session.sessionId ? () => api.fetchOrders() : null, [session.sessionId, chat.completed, language]);
+  // A reply may have started a return, so orders re-read after each one.
+  const { data: orders, failed: ordersFailed } = useResource(session.sessionId ? () => api.fetchOrders() : null, [session.sessionId, chat.completed]);
 
   useEffect(() => {
     if (session.sessionId) void api.fetchCart<CartPayload>().then((next) => next && setCart(next));
-  }, [session.sessionId, language]);
-
-  const onLanguageChange = useCallback((next: Lang) => {
-    storeLanguage(next);
-    setLanguage(next);
-  }, []);
+  }, [session.sessionId]);
 
   const late = orders?.filter((order) => order.status === "delayed").length ?? 0;
   const views: StoreView<View>[] = [
-    { id: "assistant", label: t("Assistant"), icon: "spark" },
-    { id: "orders", label: t("Orders"), icon: "box", attention: late ? { count: late, label: `${late} ${t("running late")}` } : null },
+    { id: "assistant", label: "智能助手", icon: "spark" },
+    { id: "orders", label: "订单", icon: "box", attention: late ? { count: late, label: `${late} 笔延误` } : null },
   ];
-  const shopper = session.shopper ?? { name: t("Guest") };
+  const shopper = session.shopper ?? { name: "访客" };
   const count = cart?.item_count ?? 0;
 
   return (
-    <I18nProvider api={api} language={language} onChange={onLanguageChange}>
-      <StoreShell
-        brand={<Wordmark />}
-        views={views}
-        view={view}
-        onViewChange={setView}
-        chat={chat}
-        api={api}
-        assistantName={ASSISTANT}
-        shopper={shopper}
-        bag={{ label: t("Cart"), count, noun: t("item"), figure: count ? formatMoney(cart?.subtotal ?? 0, cart?.currency) : null }}
-        panel={<CartPanel cart={cart} checkoutStaged={checkoutStaged} />}
-        panelOpen={panelOpen}
-        onPanelOpenChange={setPanelOpen}
-        placeholder={view === "orders" ? t("Ask about an order, a return, a delivery…") : t("Ask about a product, a project, an order…")}
-        headerExtra={<LanguageSwitcher />}
-      >
-        <div className={view === "assistant" ? "h-full" : "hidden"}>
-          <Chat chat={chat} onCartUpdate={handleCartUpdate} home={<HomeView shopperName={shopper.name} orders={orders} ordersFailed={ordersFailed} onSeeOrders={() => setView("orders")} />} />
-        </div>
-        {view === "orders" ? (
-          <OrdersView
-            orders={orders}
-            failed={ordersFailed}
-            nouns={NOUNS}
-            subtitle={
-              orders
-                ? late
-                  ? `${plural(late, t("order"))} ${t("running late")}. ${t("Ask why, or ask about a return on anything delivered.")}`
-                  : `${plural(upcoming(orders).length, t("order"))} ${t("on the way")}. ${t("Ask about any of them, or about a return on anything delivered.")}`
-                : undefined
-            }
-            thumb={(order) => <OrderThumb order={order} />}
-          />
-        ) : null}
-      </StoreShell>
-    </I18nProvider>
+    <StoreShell
+      brand={<Wordmark />}
+      views={views}
+      view={view}
+      onViewChange={setView}
+      chat={chat}
+      api={api}
+      assistantName={ASSISTANT}
+      shopper={shopper}
+      bag={{ label: "购物车", count, noun: "件", figure: count ? formatMoney(cart?.subtotal ?? 0, cart?.currency) : null }}
+      panel={<CartPanel cart={cart} checkoutStaged={checkoutStaged} />}
+      panelOpen={panelOpen}
+      onPanelOpenChange={setPanelOpen}
+      placeholder={view === "orders" ? "询问订单、退货或配送…" : "咨询商品、方案或订单…"}
+    >
+      {/* The conversation stays mounted under the other view so its cards keep their state. */}
+      <div className={view === "assistant" ? "h-full" : "hidden"}>
+        <Chat chat={chat} onCartUpdate={handleCartUpdate} home={<HomeView shopperName={shopper.name} orders={orders} ordersFailed={ordersFailed} onSeeOrders={() => setView("orders")} />} />
+      </div>
+      {view === "orders" ? (
+        <OrdersView
+          orders={orders}
+          failed={ordersFailed}
+          nouns={NOUNS}
+          subtitle={
+            orders
+              ? late
+                ? `${plural(late, "笔订单")}延误。可询问原因，或对已送达商品申请退货。`
+                : `${plural(upcoming(orders).length, "笔订单")}配送中。可询问其中任意一笔，或申请退货。`
+              : undefined
+          }
+          thumb={(order) => <OrderThumb order={order} />}
+        />
+      ) : null}
+    </StoreShell>
   );
-}
-
-export default function StorefrontPage() {
-  return <Storefront />;
 }

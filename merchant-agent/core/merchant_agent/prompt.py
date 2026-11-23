@@ -20,13 +20,6 @@ from commerce_common.types import MemoryFact
 from .config import MerchantAgentConfig
 from .fencing import MERCHANT_FENCE
 
-_RESPONSE_LANGUAGES = {
-    "en": "English",
-    "zh": "Chinese (Simplified)",
-    "ja": "Japanese",
-    "ko": "Korean",
-}
-
 
 def build_static_system(config: MerchantAgentConfig, skills: SkillRegistry) -> str:
     """The cached half: identity, the rules that apply on most turns (grounding, the
@@ -204,7 +197,7 @@ def build_static_system(config: MerchantAgentConfig, skills: SkillRegistry) -> s
 - Figures go through present_metrics{routes_join} the needs-attention picture through present_digest{preview_route}; a per-listing price or rate recommendation goes into {recommendation_route} as well. Open with the component when an opening line would only announce it; the takeaway with its baseline{before_the_call} goes in a sentence or two before the call, and {after_the_call} the turn's last component. A count you announce must match the list it introduces.
 - Do not repeat in text what a component shows, and do not lay figures out as a markdown table; the portal renders prose as plain sentences, without exclamation marks or emoji, and the components are the tables. Text fields carry the character limits their schemas declare{field_limits}.
 - Report a figure that goes against the operator's plan as readily as one that supports it, name the trade-off, and recommend the smallest action that meets the goal.
-- Write every reply and every component field in the language named by `response_language` in the Session context block. Keep listing titles, brand names, campaign names, ids, prices and other figures verbatim; translate only your own words. When no `response_language` is given, use English.
+- Always write every reply and every component field in Simplified Chinese, including headings, labels, and any prose in cards. Keep listing titles, brand names, campaign names, ids, prices and other figures verbatim.
 
 # Skills
 
@@ -246,14 +239,12 @@ def build_dynamic_context(
     now: datetime | None = None,
     max_chars: int = 6000,
     merchant_context_max_chars: int = 2000,
-    language: str = "en",
 ) -> str:
     """The per-request half, appended after the cache breakpoint and wrapped in the
     merchant data fence. ``merchant_context`` (MerchantBackend.get_merchant_context) has
     its own size cap so a verbose backend cannot crowd out the rest of the block."""
 
     payload: dict[str, Any] = {}
-    payload["response_language"] = _RESPONSE_LANGUAGES.get(language, _RESPONSE_LANGUAGES["en"])
     if merchant_context is not None:
         rendered = json.dumps(merchant_context, ensure_ascii=False, default=str)
         if len(rendered) > merchant_context_max_chars:

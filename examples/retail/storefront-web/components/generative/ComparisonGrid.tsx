@@ -6,7 +6,7 @@ import { formatMoney } from "web-shared";
 import type { ComparisonPayload } from "@/lib/types";
 import { ProductImage, ProductTitle, Rating } from "../ProductTile";
 
-const RECOMMENDED_LABEL = "Recommended";
+const RECOMMENDED_LABEL = "推荐";
 
 /** The sign has its own column so text shares a left edge across rows. */
 function TermRow({ sign, text }: { sign: "+" | "−"; text: string }) {

@@ -57,7 +57,6 @@ export function StoreShell<V extends string>({
   onPanelOpenChange,
   placeholder,
   banner,
-  headerExtra,
   children,
 }: {
   brand: ReactNode;
@@ -80,8 +79,6 @@ export function StoreShell<V extends string>({
   placeholder: string;
   /** A strip between the app bar and the page. */
   banner?: ReactNode;
-  /** Extra controls in the app bar, such as a language switcher. */
-  headerExtra?: ReactNode;
   children: ReactNode;
 }) {
   const [activityOpen, setActivityOpen] = useState(false);
@@ -126,7 +123,7 @@ export function StoreShell<V extends string>({
       <div className="flex h-dvh flex-col text-(--ink)">
         <header className="flex h-[58px] shrink-0 items-center gap-2 border-b border-(--line) bg-(--chrome) px-3 sm:gap-5 sm:px-5">
           <div className="flex shrink-0 items-center">{brand}</div>
-          <nav className="flex min-w-0 items-center gap-1" aria-label="Views">
+          <nav className="flex min-w-0 items-center gap-1" aria-label="视图">
             {views.map((item) => {
               const active = item.id === view;
               return (
@@ -152,7 +149,6 @@ export function StoreShell<V extends string>({
             })}
           </nav>
           <div className="ml-auto flex items-center gap-2">
-            {headerExtra}
             <ActivityButton
               streaming={chat.streaming}
               newMemoryCount={chat.newMemoryKeys.size}

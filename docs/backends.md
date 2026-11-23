@@ -1,92 +1,63 @@
-# Backends: mapping your systems
+# Backend：映射你的系统
 
-`StorefrontBackend` and `MerchantBackend` translate your systems into the records the
-agents read. This guide covers identity and credentials, ordered flows, checkout, products
-with options, and missing figures. The method docstrings in each role's `backend.py` and
-`types.py` are the contract. The retail and telecom examples show all of it running.
+`StorefrontBackend` 和 `MerchantBackend` 将你的系统转换成 Agent 读取的记录。本指南涵盖身份与凭据、有序流程、结账、带选项的商品以及缺失的数字。各角色 `backend.py` 和 `types.py` 中的方法 docstring 即契约。retail 和 telecom 示例展示了全部运行方式。
 
-## Step 1: Decide who the caller is and how you authenticate
+## 第 1 步：确定调用方是谁以及如何认证
 
-**Bind identity at session start.** Your host authenticates the caller and starts a session
-with the principal it resolved: a customer id for the shopping agent, a merchant id and an
-operator for the merchant agent. Every backend method receives that session object and
-reads the identity from it. No route and no tool argument ever carries a user id.
+**在会话开始时绑定身份。** 宿主对调用方进行认证，并用解析出的主体开启会话：购物 Agent 用顾客 id，商家 Agent 用商家 id 和操作员。每个 backend 方法都接收该会话对象并从中读取身份。任何路由或工具参数都不携带用户 id。
 
-**Keep the credential beside the identity.** Whatever your backend needs to call your
-platform for that principal lives with the session, never with the model:
+**让凭据与身份在一起。** backend 为该主体调用你的平台所需的一切都随会话存放，绝不交给模型：
 
-- A per-customer token: put it on a subclass of the session context, or in a store your host
-  fills at sign-in and the backend reads by customer id.
-- A service credential: pass it to the backend's constructor.
+- 按顾客的令牌：放在会话 context 的子类上，或放在宿主的登录时填充、backend 按顾客 id 读取的存储中。
+- 服务凭据：传给 backend 的构造函数。
 
-**Treat a guest as a principal.** Mark the session as a guest. When a read needs an account
-(order history, saved addresses), raise an exception your executor subclass turns into "ask
-the customer to sign in". When the guest signs in, start a new session. The example hosts
-take a demo profile id at session start as a stand-in for real sign-in.
+**将访客视为主体。** 将会话标记为访客。当读操作需要账户（订单历史、已存地址）时，抛出一个由你的执行器子类转换为"请顾客登录"的异常。访客登录后，开启新会话。示例宿主在会话开始时接收一个演示档案 id 作为真实登录的替代。
 
-**On Managed Agents,** the platform holds one credential per MCP server in a vault, and your
-MCP server derives the customer from the authenticated request. Carry a per-customer
-identity as one vault credential per customer session, or as a signed claim your gateway
-verifies on each request.
+**在 Managed Agents 上，** 平台在保险库中为每个 MCP server 持有一个凭据，你的 MCP server 从已认证的请求中派生顾客。将按顾客的身份作为每个顾客会话一个保险库凭据，或作为网关在每个请求上验证的签名声明来携带。
 
-## Step 2: Keep multi-step flows in order
+## 第 2 步：保持多步骤流程有序
 
-Some flows only make sense in sequence: verify identity, then check eligibility, then
-submit; hold seats, then confirm. The backend enforces that order.
+有些流程只有在顺序执行时才有意义：先验证身份，再检查资格，然后提交；先占座，再确认。顺序由 backend 强制。
 
-1. Keep the flow's state in the backend, keyed by session.
-2. When a call arrives before the step it depends on, raise your own exception class.
-3. Map that class in an executor subclass (`domain_error`) so the tool result names the
-   missing step instead of reading as a system failure. The model then tells the customer
-   what comes first.
-4. For a write your platform deduplicates, derive an idempotency key from the session id
-   and a hash of the cart lines.
-5. When the customer completes a step outside the conversation (a payment page, a
-   verification code), have the host queue an app event on the session; the next turn reads
-   it.
+1. 将流程状态保存在 backend 中，以会话为键。
+2. 当调用早于它所依赖的步骤到达时，抛出你自己的异常类。
+3. 在执行器子类（`domain_error`）中映射该类，使工具结果指出缺失的步骤，而不是读作系统故障。模型随后告诉顾客先做什么。
+4. 对于你的平台会去重的写操作，从会话 id 和购物车行的哈希派生幂等键。
+5. 当顾客在对话之外完成某一步（支付页面、验证码），让宿主在会话上排队一个 app 事件；下一回合读取它。
 
-The entertainment example's ticketing engine enforces hold limits, expiry, and ownership
-this way, and its executor subclass relays the engine's messages to the model.
+entertainment 示例的票务引擎以此强制占座上限、过期和所有权，其执行器子类将引擎的消息转达给模型。
 
-## Step 3: Decide how checkout completes
+## 第 3 步：决定结账如何完成
 
-The `checkout` tool ends the agent's part: it renders the cart. Nothing in this repo places
-an order or takes payment. Pick one of three handoffs for the checkout card:
+`checkout` 工具结束 Agent 的部分：它渲染购物车。仓库中没有任何部分下单或收款。为结账卡片选择三种交接之一：
 
-| Your situation | What the card does | What you implement |
+| 你的情况 | 卡片做什么 | 你实现什么 |
 |---|---|---|
-| Checkout is a route in your own app | Links to that route | Nothing; the default applies |
-| Platform hosted checkout (the cart API cannot take payment server-side) | Opens the platform's hosted checkout URL | `checkout_handoff` returns the URL for this cart |
-| Marketplace where each seller checks out separately | Shows one link per seller | `checkout_handoff` returns one entry per seller |
+| 结账是你自己应用中的路由 | 链接到该路由 | 无需操作；使用默认行为 |
+| 平台托管结账（购物车 API 无法在服务端收款） | 打开平台的托管结账 URL | `checkout_handoff` 返回该购物车的 URL |
+| 每个卖家分别结账的 marketplace | 每个卖家显示一个链接 | `checkout_handoff` 为每个卖家返回一个条目 |
 
-The executor adds what `checkout_handoff` returns to the card's payload after the model's
-call, so the URL never passes through the model. The example cards link only `https` URLs. When payment completes, queue an app event
-so the next turn knows.
+执行器在模型调用之后将 `checkout_handoff` 返回的内容加入卡片 payload，因此 URL 永不经过模型。示例卡片只链接 `https` URL。支付完成后，排队一个 app 事件，让下一回合知晓。
 
-## Step 4: Map products with options
+## 第 4 步：映射带选项的商品
 
-A product or listing record is one of three shapes:
+商品或 listing 记录是三种形态之一：
 
-| Shape | How to recognize it | What the agents do with it |
+| 形态 | 如何识别 | Agent 如何使用 |
 |---|---|---|
-| Plain | No options | Search returns it; the cart, price updates, and restocks take its id |
-| Family | Has `options`, e.g. size: twin, queen, king | Search returns it; details list its variants. Cart, price, and restock writes need a variant id; pause, promotion, and content edits may name the family |
-| Variant | Has `option_values` (one value per option) and `variant_of` (the family's id) | Returned inside its family's details with its own id, price, and stock; the cart, price updates, and restocks take its id |
+| 普通（Plain） | 没有选项 | 搜索返回它；购物车、价格更新和补货使用它的 id |
+| 族（Family） | 有 `options`，如 size: twin, queen, king | 搜索返回它；详情列出其变体。购物车、价格和补货写操作需要变体 id；暂停、促销和内容编辑可以指名族 |
+| 变体（Variant） | 有 `option_values`（每个选项一个值）和 `variant_of`（族的 id） | 在其族的详情内返回，带自己的 id、价格和库存；购物车、价格更新和补货使用它的 id |
 
-A variant's id goes wherever a product or listing id goes; there is no separate variant-id
-field. Family and variant ids share one namespace, so if a parent's platform id can equal a
-child's, prefix the family id in your backend. Search matches option values as well as
-attributes, so a filter like size = king works. A backend that has already resolved every
-option from the query may return the variant from search; otherwise search returns
-families.
+变体 id 用于任何商品或 listing id 出现的地方；没有单独的变体 id 字段。族 id 和变体 id 共享一个命名空间，因此如果父级平台 id 可能等于子级的，请在 backend 中为族 id 加前缀。搜索既匹配选项值也匹配属性，因此像 size = king 这样的过滤可用。已经从查询中解析出所有选项的 backend 可以从搜索返回变体；否则搜索返回族。
 
-**Mapping from common catalog models.**
+**从常见目录模型映射。**
 
-| Your catalog | Family | Variant | Plain |
+| 你的目录 | 族 | 变体 | 普通 |
 |---|---|---|---|
-| Parent and child records; the parent is not purchasable | The parent: its id, content, and variation attributes as options | Each child: id, price, stock, option values, parent id | A standalone product |
-| Every row is a purchasable SKU; siblings share a group key (a shopping feed) | Synthesized: a prefixed group key as the id, the first row's title and image, options collected from the rows; details resolve that id | Each row, with the synthesized id as its family | A row with no group |
-| A product shell that always has variants; price and stock only on variants | The product: id, content, option names and values | Each variant | A one-variant product, served under the variant's id with no options |
+| 父子记录；父级不可购买 | 父级：其 id、内容和作为选项的变体属性 | 每个子级：id、价格、库存、选项值、父 id | 独立商品 |
+| 每一行都是可购买的 SKU；兄弟行共享组键（购物 feed） | 合成：带前缀的组键作为 id，首行的标题和图片，从各行收集的 options；详情解析该 id | 每一行，以合成的 id 作为其族 | 没有组的行 |
+| 始终带变体的商品外壳；价格和库存只在变体上 | 商品：id、内容、选项名称和值 | 每个变体 | 单变体商品，以变体 id 提供且不带 options |
 
 ```text
 your platform                              this record
@@ -97,85 +68,55 @@ product  P-88  "Trail Tee"                 {"product_id": "P-88", "title": "Trai
   variant V-3  L  26.00   4 in stock         "variant_of": "P-88"}  … and V-2, V-3
 ```
 
-**What is not a variant.**
+**什么不是变体。**
 
-- A price or availability computed per request (a nightly rate for searched dates, a fare
-  for a party size, a seat). The request's dimensions arrive as search filters and the
-  record returned is a quote for that context. The travel example prices stays this way. A
-  booking engine whose room types are stocked and priced apart may still list them as
-  variants of a property.
-- Siblings that differ in more than their option values (ticket tiers with their own
-  sections and fees; plan tiers with their own allowances). Keep them as separate records
-  grouped by an attribute, as the entertainment example does.
-- One product sold by several sellers at different prices. A record has one price: return
-  the offer you would sell, or list each offer as its own record.
-- Built-to-order products, bundles, and menu items with modifiers. The choices travel as
-  request attributes or in your own cart extension, and the backend prices them.
-- Goods priced by measured weight. Quantity counts whole units, so sell them as fixed packs,
-  which may themselves be variants.
+- 按请求计算的价格或可得性（搜索日期的每晚房价、按人数的票价、座位）。请求的维度作为搜索过滤到达，返回的记录是该上下文的报价。travel 示例以此给住宿定价。房型单独库存和定价的预订引擎仍可将其列为房产的变体。
+- 差异不止于选项值的兄弟项（有各自区域和费用的票档；有各自额度的套餐档）。将它们作为按属性分组的独立记录，如 entertainment 示例。
+- 一个商品由多个卖家以不同价格出售。一条记录只有一个价格：返回你会出售的报价，或将每个报价作为独立记录。
+- 按订单生产的产品、捆绑包和带配菜的菜单项。选择作为请求属性或在你自己的购物车扩展中传递，由 backend 定价。
+- 按度量重量计价的商品。数量按整件计，因此以固定包装出售，包装本身可以是变体。
 
-**A family's own figures.**
+**族自身的数字。**
 
-- Storefront price is the lowest in-stock variant's (a "from" price); a family is in stock
-  while any variant is.
-- Portal price is the lowest variant's, in stock or not, so the catalog does not show a move
-  when a size sells out; stock is the sum. The portal reads the per-variant range from the
-  pricing context.
-- Title, description, and image describe the family. A variant may override any field it
-  inherits (a color with its own image). Inside the family's details each variant is a
-  compact row: id, option values, price, stock, and only the fields that differ.
-- Only the variants listed exist. If the king/blush row is absent, the product is not sold in
-  king/blush; the agent says so and offers the nearest listed variant.
+- 商店价格是最低在售变体的价格（"起"价）；只要任一变体在售，族就在售。
+- 后台价格是最低变体的价格，无论是否在售，因此某个尺寸售罄时目录不会显示变动；库存是总和。后台从定价 context 读取按变体的区间。
+- 标题、描述和图片描述族。变体可以覆盖它继承的任何字段（某个颜色有自己的图片）。在族的详情中，每个变体是一条紧凑行：id、选项值、价格、库存，以及只有不同的字段。
+- 只有列出的变体存在。若 king/blush 行缺失，则该商品不以 king/blush 出售；Agent 会说明并提供最接近的已列变体。
 
-**How many variants.** Details return every variant of a family inside one fenced result,
-capped at `max_fenced_chars` (12,000 characters by default). A compact row is 70 to 120
-characters, so a family holds up to about sixty variants. Serve a larger matrix as one
-family per leading option: a shoe in eight colors and fourteen sizes becomes eight families
-of fourteen. Past the cap the result is cut short with no error, so check your largest
-family against it.
+**多少个变体。** 详情在一个 fence 结果中返回族的所有变体，截断到 `max_fenced_chars`（默认 12,000 字符）。一条紧凑行约 70 到 120 字符，因此一个族最多可容纳约六十个变体。更大的矩阵按首个选项拆成每族：一款八色十四码的鞋变成八个各含十四项的族。超出上限时结果会被静默截断，请用最大的族核对。
 
-**Out of stock.** When `add_to_cart` names a variant that exists but cannot be bought, raise
-`Unavailable` with a message of ids only: what is out, and which sibling variants are in
-stock. The executor relays it and nothing is written. The retail and telecom examples do
-this. Use `NotOffered` and the `enable_*` switches for things the store does not sell at all.
+**缺货。** 当 `add_to_cart` 指名一个存在但不可购买的变体时，抛出 `Unavailable`，消息只包含 id：什么缺货，以及哪些兄弟变体在售。执行器转达它，不写入任何内容。retail 和 telecom 示例这样做。对商店根本不卖的东西使用 `NotOffered` 和 `enable_*` 开关。
 
-## Step 5: Apply merchant writes to families
+## 第 5 步：将商家写操作应用到族
 
-| Write | Names | On the family id |
+| 写操作 | 指名 | 在族 id 上 |
 |---|---|---|
-| Price update | A variant | Held by the executor, which points at the variant ids; "all sizes up 5%" is one item per variant |
-| Restock | A variant | Held the same way |
-| Pause or activate | Either | Takes every variant off sale or back on |
-| Promotion | Either | Expands to one line per variant, each with its own before and after; each counts toward the items-per-change limit |
-| Content edit | Either | Edits shared content; a backend whose variants share the family's content fields refuses those fields on a variant, as the retail example does |
+| 价格更新 | 一个变体 | 被执行器拦下，指向变体 id；"所有尺寸涨 5%" 是每个变体一个条目 |
+| 补货 | 一个变体 | 同样被拦下 |
+| 暂停或激活 | 二者之一 | 让所有变体下架或重新上架 |
+| 促销 | 二者之一 | 展开为每个变体一行，各有自己的前后值；每行都计入每次变更的条目上限 |
+| 内容编辑 | 二者之一 | 编辑共享内容；变体共享族内容字段的 backend 会拒绝在变体上携带这些字段，如 retail 示例 |
 
-If your domain prices under another field name (a nightly rate, a fare), add it to
-`price_bearing_fields` on the merchant config, or the price cap is not checked.
+如果你的领域用另一个字段名表示价格（每晚房价、票价），请将其加入商家配置的 `price_bearing_fields`，否则价格上限不会被检查。
 
-## Step 6: Return `None` for figures your platform cannot supply
+## 第 6 步：对你的平台无法提供的数字返回 `None`
 
-Never return a stand-in zero. Return `None` and say why in a short note.
+绝不要返回占位零。返回 `None`，并用一句简短说明原因。
 
-| Where | What to return |
+| 位置 | 返回什么 |
 |---|---|
-| Business snapshot | `None` for traffic, conversion rate, or average order value it lacks; the note says which |
-| Metric series | An empty series with a note saying why |
-| Campaign | `None` for spend or revenue the channel does not report |
-| Pricing context | `min_price_basis`: whether the floor is the item's cost or a store rule |
-| Inventory alerts, order issues | Alerts and issues derived from stock and orders when the platform has no such object; only the kinds you can compute |
-| Merchant context | A `limitations` list (source and one clause each) for store-wide gaps, such as a short order history |
+| 经营概览 | 对缺失的流量、转化率或平均订单金额返回 `None`；说明中指出是哪一项 |
+| 指标序列 | 空序列，附一句说明原因 |
+| 活动 | 对渠道不上报的花费或收入返回 `None` |
+| 定价 context | `min_price_basis`：下限是商品成本还是门店规则 |
+| 库存预警、订单问题 | 平台没有此类对象时，从库存和订单派生预警与问题；只给出你能计算的种类 |
+| 商家 context | 针对全局缺口（如订单历史较短）的 `limitations` 列表（每项含来源和一句话） |
 
-The retail merchant example returns two limitations: a 90-day order history and an email
-channel that reports no revenue.
+retail 商家示例返回两条限制：90 天订单历史和不报告收入的邮件渠道。
 
-## Where to see it in the examples
+## 在示例中查看
 
-- Retail catalog: a mattress by size (one size out of stock, prices that step), a pillowcase
-  set by size and color (one combination out of stock), a tinted moisturizer in six shades
-  at one price, and a weighted blanket whose description states the rule for choosing a
-  weight.
-- Telecom catalog: a phone by storage and color, with an installment per variant.
-- Fixtures author variants compactly under their family; the shared loader fills in the rest
-  and derives the options. The wire shape is what the details tool returns.
-- Retail and telecom `merchant_inventory.json` hold the matching variant rows; the retail
-  merchant context shows `limitations`; the entertainment example shows a fixed-order flow.
+- retail 目录：按尺寸的床垫（一个尺寸缺货、阶梯价格）、按尺寸和颜色的枕套套装（一个组合缺货）、六种色号同一价格的润色面霜，以及描述中说明选重规则的重力毯。
+- telecom 目录：按存储和颜色的手机，每个变体有分期付款。
+- fixture 在族下紧凑地编写变体；共享加载器填充其余部分并派生 options。线上的形态即详情工具返回的内容。
+- retail 和 telecom 的 `merchant_inventory.json` 保存对应的变体行；retail 商家 context 显示 `limitations`；entertainment 示例展示固定顺序的流程。

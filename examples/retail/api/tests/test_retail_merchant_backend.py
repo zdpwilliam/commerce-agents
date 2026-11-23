@@ -128,7 +128,7 @@ async def test_listing_update_apply_fixes_content_quality(merchant, backend, ope
 
 async def test_merchant_context_reports_alert_counts(merchant, operator_session):
     context = await merchant.get_merchant_context(operator_session)
-    assert context["store"] == "ACME Dental"
+    assert context["store"] == "ACME 牙科"
     assert context["alerts"]["low_stock"] >= 2
 
 
@@ -201,19 +201,19 @@ async def test_a_family_listing_reads_as_from_price_summed_stock_and_variant_row
 ):
     families = [
         x
-        for x in await merchant.search_listings(operator_session, "implant kit")
+        for x in await merchant.search_listings(operator_session, "种植套件")
         if x.listing_id == "DEN-1050"
     ]
     assert len(families) == 1
     family = families[0]
-    assert family.options == {"configuration": ["basic", "with graft", "full kit"]}
+    assert family.options == {"configuration": ["基础配置", "含骨粉", "全套"]}
     details = await merchant.get_listing(operator_session, "DEN-1050")
     by_id = {v.listing_id: v for v in details.variants}
     assert set(by_id) == {"DEN-1050-BASIC", "DEN-1050-GRAFT", "DEN-1050-FULL"}
     assert family.price == min(v.price for v in details.variants if v.status == "active")
     assert family.stock == sum(v.stock for v in details.variants)
     assert by_id["DEN-1050-GRAFT"].status == "out_of_stock" and by_id["DEN-1050-GRAFT"].stock == 0
-    assert by_id["DEN-1050-GRAFT"].option_values == {"configuration": "with graft"}
+    assert by_id["DEN-1050-GRAFT"].option_values == {"configuration": "含骨粉"}
     assert all(v.variant_of == "DEN-1050" for v in details.variants)
     variant = await merchant.get_listing(operator_session, "den-1050-full")
     assert (
@@ -235,7 +235,7 @@ async def test_pricing_context_prices_a_family_per_variant(merchant, operator_se
     full = next(v for v in family.variants if v.listing_id == "DEN-1050-FULL")
     assert full.current_price == 29800.0 and full.unit_cost == 16390.0 and full.margin_pct
     alone = await merchant.get_pricing_context(operator_session, "DEN-1050-FULL")
-    assert alone.option_values == {"configuration": "full kit"} and alone.variants == []
+    assert alone.option_values == {"configuration": "全套"} and alone.variants == []
 
 
 async def test_price_and_restock_writes_name_a_variant_and_refresh_the_family(
@@ -314,7 +314,7 @@ async def test_a_promotion_on_a_family_is_a_promotion_on_each_variant(merchant, 
 async def test_variant_alerts_say_which_variant(merchant, operator_session):
     alerts = await merchant.get_inventory_alerts(operator_session)
     graft = next(a for a in alerts if a.listing_id == "DEN-1050-GRAFT")
-    assert graft.option_values == {"configuration": "with graft"}
+    assert graft.option_values == {"configuration": "含骨粉"}
     assert not any(a.listing_id == "DEN-1050" for a in alerts)  # the family itself never alerts
 
 

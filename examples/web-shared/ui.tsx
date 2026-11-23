@@ -388,7 +388,7 @@ export function Sheet({
   onClose,
   footer,
   children,
-  closeLabel = "Close",
+  closeLabel = "关闭",
 }: {
   title: ReactNode;
   detail?: ReactNode;

@@ -33,7 +33,7 @@ export function ActivityLine({ item }: { item: AssistantChatItem }) {
   }
   if (item.segments.length) return null;
   return (
-    <div role="status" aria-label="Working" className="flex flex-col gap-2">
+    <div role="status" aria-label="处理中" className="flex flex-col gap-2">
       <div className="ac-skeleton h-4 w-3/5 rounded" />
       <div className="ac-skeleton h-4 w-2/5 rounded" />
     </div>

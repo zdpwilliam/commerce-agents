@@ -67,7 +67,7 @@ export default function CartPanel({ cart, checkoutStaged = false }: { cart: Cart
 
   return (
     <BagPanel
-      title="Cart"
+      title="购物车"
       count={plural(count, "item")}
       isEmpty={items.length === 0}
       empty={
@@ -80,11 +80,11 @@ export default function CartPanel({ cart, checkoutStaged = false }: { cart: Cart
       footer={
         <>
           {items.length ? <FreeShippingMeter subtotal={cart?.subtotal ?? 0} /> : null}
-          <TotalRow label={count ? `Subtotal · ${plural(count, "item")}` : "Subtotal"} value={formatMoney(cart?.subtotal ?? 0, cart?.currency)} />
-          <CheckoutButton staged={checkoutStaged} disabled={items.length === 0} prompt="Check out my cart." />
+          <TotalRow label={count ? `Subtotal · ${plural(count, "item")}` : "小计"} value={formatMoney(cart?.subtotal ?? 0, cart?.currency)} />
+          <CheckoutButton staged={checkoutStaged} disabled={items.length === 0} prompt="查看我的购物车。" />
           {items.length ? (
             <div className="mt-2.5 flex justify-center">
-              <AskLink label="Ask about this cart" prompt="Look over my cart: anything missing or worth swapping?" />
+              <AskLink label="询问此购物车" prompt="Look over my cart: anything missing or worth swapping?" />
             </div>
           ) : null}
         </>

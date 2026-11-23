@@ -1,1109 +1,1110 @@
 {
- "store_name": "ACME Dental",
- "products": [
-  {
-   "product_id": "DEN-1001",
-   "title": "NSK Pana-Max2 M4 High-Speed Turbine Handpiece",
-   "brand": "NSK",
-   "model": "Pana-Max2 M4",
-   "price": 860.0,
-   "currency": "CNY",
-   "rating": 4.3,
-   "review_count": 1097,
-   "category": "handpieces",
-   "labels": [],
-   "attributes": {
-    "speed": "400,000 rpm",
-    "connection": "4-hole",
-    "head": "standard",
-    "sterilization": "autoclavable"
-   },
-   "in_stock": true,
-   "short_description": "Fast, quiet turbine with a compact head for routine cavity prep; ceramic bearings and a clean-air system.",
-   "long_description": "Fast, quiet turbine with a compact head for routine cavity prep; ceramic bearings and a clean-air system. Supplied sterile and backed by clinical support for dental professionals."
-  },
-  {
-   "product_id": "DEN-1002",
-   "title": "NSK Ti-Max X95L High-Speed Handpiece",
-   "brand": "NSK",
-   "model": "Ti-Max X95L",
-   "price": 1480.0,
-   "currency": "CNY",
-   "rating": 4.4,
-   "review_count": 1134,
-   "category": "handpieces",
-   "labels": [
-    "bestseller"
-   ],
-   "attributes": {
-    "speed": "400,000 rpm",
-    "connection": "6-hole",
-    "head": "miniature",
-    "light": "LED"
-   },
-   "in_stock": false,
-   "short_description": "Titanium miniature head with LED for posterior access; ceramic bearings and a strong, steady cut.",
-   "long_description": "Titanium miniature head with LED for posterior access; ceramic bearings and a strong, steady cut. Supplied sterile and backed by clinical support for dental professionals."
-  },
-  {
-   "product_id": "DEN-1003",
-   "title": "Foshan Jingmei J1Plus-004 High-Speed Handpiece",
-   "brand": "Foshan Jingmei",
-   "model": "J1Plus-004",
-   "price": 450.0,
-   "currency": "CNY",
-   "rating": 4.5,
-   "review_count": 1171,
-   "category": "handpieces",
-   "labels": [],
-   "attributes": {
-    "speed": "350,000 rpm",
-    "connection": "4-hole",
-    "head": "standard",
-    "sterilization": "autoclavable"
-   },
-   "in_stock": true,
-   "short_description": "Durable turbine handpiece built for daily clinic use; dependable speed at a value price.",
-   "long_description": "Durable turbine handpiece built for daily clinic use; dependable speed at a value price. Supplied sterile and backed by clinical support for dental professionals."
-  },
-  {
-   "product_id": "DEN-1004",
-   "title": "Foshan Jingmei J45-204 Angle High-Speed Handpiece",
-   "brand": "Foshan Jingmei",
-   "model": "J45-204",
-   "price": 950.0,
-   "currency": "CNY",
-   "rating": 4.6,
-   "review_count": 1208,
-   "category": "handpieces",
-   "labels": [],
-   "attributes": {
-    "speed": "350,000 rpm",
-    "connection": "4-hole",
-    "head": "angle",
-    "angle": "45 degrees"
-   },
-   "in_stock": true,
-   "short_description": "45-degree angled head reaches the back teeth comfortably without sacrificing cutting power.",
-   "long_description": "45-degree angled head reaches the back teeth comfortably without sacrificing cutting power. Supplied sterile and backed by clinical support for dental professionals."
-  },
-  {
-   "product_id": "DEN-1005",
-   "title": "Foshan Jingmei L Low-Speed Handpiece",
-   "brand": "Foshan Jingmei",
-   "model": "L",
-   "price": 350.0,
-   "currency": "CNY",
-   "rating": 4.7,
-   "review_count": 1245,
-   "category": "handpieces",
-   "labels": [
-    "new"
-   ],
-   "attributes": {
-    "speed": "20,000 rpm",
-    "connection": "4-hole",
-    "type": "low-speed",
-    "sterilization": "autoclavable"
-   },
-   "in_stock": true,
-   "short_description": "Low-speed handpiece for polishing, finishing and slow-speed preparation.",
-   "long_description": "Low-speed handpiece for polishing, finishing and slow-speed preparation. Supplied sterile and backed by clinical support for dental professionals."
-  },
-  {
-   "product_id": "DEN-1006",
-   "title": "Woodpecker CX235C7 Extraction Angle",
-   "brand": "Woodpecker",
-   "model": "CX235C7",
-   "price": 2150.0,
-   "currency": "CNY",
-   "rating": 4.8,
-   "review_count": 1282,
-   "category": "handpieces",
-   "labels": [],
-   "attributes": {
-    "type": "surgical angle",
-    "connection": "ISO",
-    "use": "extraction",
-    "sterilization": "autoclavable"
-   },
-   "in_stock": true,
-   "short_description": "Surgical angle for atraumatic extraction; strong, steady torque in a slim profile.",
-   "long_description": "Surgical angle for atraumatic extraction; strong, steady torque in a slim profile. Supplied sterile and backed by clinical support for dental professionals."
-  },
-  {
-   "product_id": "DEN-1007",
-   "title": "Woodpecker CX235C6 Implant Handpiece",
-   "brand": "Woodpecker",
-   "model": "CX235C6",
-   "price": 2100.0,
-   "currency": "CNY",
-   "rating": 4.9,
-   "review_count": 1319,
-   "category": "handpieces",
-   "labels": [],
-   "attributes": {
-    "type": "implant handpiece",
-    "connection": "ISO",
-    "use": "implant",
-    "sterilization": "autoclavable"
-   },
-   "in_stock": true,
-   "short_description": "Implant handpiece with controlled torque for a steadyosteotomy and precise placement.",
-   "long_description": "Implant handpiece with controlled torque for a steadyosteotomy and precise placement. Supplied sterile and backed by clinical support for dental professionals."
-  },
-  {
-   "product_id": "DEN-1008",
-   "title": "NSK WP-1L Implant Handpiece",
-   "brand": "NSK",
-   "model": "WP-1L",
-   "price": 5000.0,
-   "currency": "CNY",
-   "rating": 4.2,
-   "review_count": 1356,
-   "category": "handpieces",
-   "labels": [
-    "bestseller"
-   ],
-   "attributes": {
-    "type": "implant handpiece",
-    "connection": "ISO",
-    "light": "LED",
-    "use": "implant"
-   },
-   "in_stock": true,
-   "short_description": "LED implant handpiece for guided surgery; smooth low-speed control and reliable illumination.",
-   "long_description": "LED implant handpiece for guided surgery; smooth low-speed control and reliable illumination. Supplied sterile and backed by clinical support for dental professionals."
-  },
-  {
-   "product_id": "DEN-1009",
-   "title": "Woodpecker Endo Radar Pro Root Canal Motor",
-   "brand": "Woodpecker",
-   "model": "Endo Radar Pro",
-   "price": 5000.0,
-   "currency": "CNY",
-   "rating": 4.3,
-   "review_count": 1393,
-   "category": "endodontics",
-   "labels": [],
-   "attributes": {
-    "type": "endodontic motor",
-    "torque": "0.5-4 Ncm",
-    "speed": "100-1000 rpm",
-    "light": "LED"
-   },
-   "in_stock": true,
-   "short_description": "Cordless endodontic motor with a built-in apex locator for accurate, adaptive shaping.",
-   "long_description": "Cordless endodontic motor with a built-in apex locator for accurate, adaptive shaping. Supplied sterile and backed by clinical support for dental professionals."
-  },
-  {
-   "product_id": "DEN-1010",
-   "title": "Dentsply X-SMART Plus Root Canal Motor",
-   "brand": "Dentsply Sirona",
-   "model": "X-SMART Plus",
-   "price": 24000.0,
-   "currency": "CNY",
-   "rating": 4.4,
-   "review_count": 1430,
-   "category": "endodontics",
-   "labels": [],
-   "attributes": {
-    "type": "endodontic motor",
-    "torque": "adjustable",
-    "recall": "yes",
-    "light": "LED"
-   },
-   "in_stock": true,
-   "short_description": "Endodontic motor with a programmable program memory and a bright operating light.",
-   "long_description": "Endodontic motor with a programmable program memory and a bright operating light. Supplied sterile and backed by clinical support for dental professionals."
-  },
-  {
-   "product_id": "DEN-1011",
-   "title": "Woodpecker Ai-Pex Apex Locator",
-   "brand": "Woodpecker",
-   "model": "Ai-Pex",
-   "price": 2590.0,
-   "currency": "CNY",
-   "rating": 4.5,
-   "review_count": 1467,
-   "category": "endodontics",
-   "labels": [
-    "bestseller"
-   ],
-   "attributes": {
-    "type": "apex locator",
-    "display": "LCD",
-    "accuracy": "±0.1 mm",
-    "power": "battery"
-   },
-   "in_stock": true,
-   "short_description": "Apex locator with a bright display and stable readings even in a wet canal.",
-   "long_description": "Apex locator with a bright display and stable readings even in a wet canal. Supplied sterile and backed by clinical support for dental professionals."
-  },
-  {
-   "product_id": "DEN-1012",
-   "title": "Dentsply PROPEX PIXI Apex Locator",
-   "brand": "Dentsply Sirona",
-   "model": "PROPEX PIXI",
-   "price": 9800.0,
-   "currency": "CNY",
-   "rating": 4.6,
-   "review_count": 1504,
-   "category": "endodontics",
-   "labels": [],
-   "attributes": {
-    "type": "apex locator",
-    "display": "LCD touch",
-    "accuracy": "±0.1 mm",
-    "power": "battery"
-   },
-   "in_stock": true,
-   "short_description": "Compact apex locator with crisp visual guidance and automatic calibration.",
-   "long_description": "Compact apex locator with crisp visual guidance and automatic calibration. Supplied sterile and backed by clinical support for dental professionals."
-  },
-  {
-   "product_id": "DEN-1013",
-   "title": "Woodpecker Fi-E / Fi-P Gutta-Percha Filler",
-   "brand": "Woodpecker",
-   "model": "Fi-E / Fi-P",
-   "price": 8050.0,
-   "currency": "CNY",
-   "rating": 4.7,
-   "review_count": 1541,
-   "category": "endodontics",
-   "labels": [],
-   "attributes": {
-    "type": "gutta-percha filler",
-    "temperature": "200 C",
-    "tips": "multiple",
-    "power": "battery"
-   },
-   "in_stock": true,
-   "short_description": "Warm gutta-percha filling system with interchangeable tips for a dense, three-dimensional fill.",
-   "long_description": "Warm gutta-percha filling system with interchangeable tips for a dense, three-dimensional fill. Supplied sterile and backed by clinical support for dental professionals."
-  },
-  {
-   "product_id": "DEN-1014",
-   "title": "Woodpecker Fi-P Heat Carrier",
-   "brand": "Woodpecker",
-   "model": "Fi-P",
-   "price": 8000.0,
-   "currency": "CNY",
-   "rating": 4.8,
-   "review_count": 1578,
-   "category": "endodontics",
-   "labels": [
-    "bestseller"
-   ],
-   "attributes": {
-    "type": "heat carrier",
-    "temperature": "200 C",
-    "use": "downpack",
-    "power": "battery"
-   },
-   "in_stock": true,
-   "short_description": "Downpack heat carrier that softens and condenses gutta-percha to the apical seal.",
-   "long_description": "Downpack heat carrier that softens and condenses gutta-percha to the apical seal. Supplied sterile and backed by clinical support for dental professionals."
-  },
-  {
-   "product_id": "DEN-1015",
-   "title": "Yusen C-FILL X Gutta-Percha Filler",
-   "brand": "Yusen",
-   "model": "C-FILL X",
-   "price": 13000.0,
-   "currency": "CNY",
-   "rating": 4.9,
-   "review_count": 1615,
-   "category": "endodontics",
-   "labels": [],
-   "attributes": {
-    "type": "gutta-percha filler",
-    "temperature": "adjustable",
-    "tips": "multiple",
-    "power": "battery"
-   },
-   "in_stock": true,
-   "short_description": "Cordless obturation system with precise temperature control for consistent fills.",
-   "long_description": "Cordless obturation system with precise temperature control for consistent fills. Supplied sterile and backed by clinical support for dental professionals."
-  },
-  {
-   "product_id": "DEN-1016",
-   "title": "Woodpecker D600 LED Ultrasonic Endo Unit",
-   "brand": "Woodpecker",
-   "model": "D600 LED",
-   "price": 5800.0,
-   "currency": "CNY",
-   "rating": 4.2,
-   "review_count": 1652,
-   "category": "endodontics",
-   "labels": [],
-   "attributes": {
-    "type": "ultrasonic endo unit",
-    "light": "LED",
-    "power": "ultrasonic",
-    "use": "irrigation"
-   },
-   "in_stock": true,
-   "short_description": "Ultrasonic endodontic unit for irrigation and activation with an integrated LED.",
-   "long_description": "Ultrasonic endodontic unit for irrigation and activation with an integrated LED. Supplied sterile and backed by clinical support for dental professionals."
-  },
-  {
-   "product_id": "DEN-1017",
-   "title": "Woodpecker i Led Curing Light",
-   "brand": "Woodpecker",
-   "model": "i Led",
-   "price": 1500.0,
-   "currency": "CNY",
-   "rating": 4.3,
-   "review_count": 1689,
-   "category": "restorative",
-   "labels": [
-    "bestseller"
-   ],
-   "attributes": {
-    "type": "curing light",
-    "wavelength": "420-480 nm",
-    "power": "1200 mW/cm2",
-    "light": "LED"
-   },
-   "in_stock": true,
-   "short_description": "LED curing light with a broad spectrum and a quick, even cure across composite shades.",
-   "long_description": "LED curing light with a broad spectrum and a quick, even cure across composite shades. Supplied sterile and backed by clinical support for dental professionals."
-  },
-  {
-   "product_id": "DEN-1018",
-   "title": "Woodpecker LED.G Curing Light",
-   "brand": "Woodpecker",
-   "model": "LED.G",
-   "price": 3000.0,
-   "currency": "CNY",
-   "rating": 4.4,
-   "review_count": 1726,
-   "category": "restorative",
-   "labels": [],
-   "attributes": {
-    "type": "curing light",
-    "wavelength": "420-480 nm",
-    "modes": "3",
-    "light": "LED"
-   },
-   "in_stock": true,
-   "short_description": "Curing light with multiple modes and a slim light guide for tight contact areas.",
-   "long_description": "Curing light with multiple modes and a slim light guide for tight contact areas. Supplied sterile and backed by clinical support for dental professionals."
-  },
-  {
-   "product_id": "DEN-1019",
-   "title": "Woodpecker O-Star Curing Light",
-   "brand": "Woodpecker",
-   "model": "O-Star",
-   "price": 2400.0,
-   "currency": "CNY",
-   "rating": 4.5,
-   "review_count": 1763,
-   "category": "restorative",
-   "labels": [],
-   "attributes": {
-    "type": "curing light",
-    "wavelength": "385-515 nm",
-    "power": "1500 mW/cm2",
-    "light": "LED"
-   },
-   "in_stock": false,
-   "short_description": "Wide-spectrum curing light that cures bulk-fill and conventional composites quickly.",
-   "long_description": "Wide-spectrum curing light that cures bulk-fill and conventional composites quickly. Supplied sterile and backed by clinical support for dental professionals."
-  },
-  {
-   "product_id": "DEN-1020",
-   "title": "Eighteeth CuringPen Curing Light",
-   "brand": "Eighteeth",
-   "model": "CuringPen",
-   "price": 1680.0,
-   "currency": "CNY",
-   "rating": 4.6,
-   "review_count": 1800,
-   "category": "restorative",
-   "labels": [
-    "new"
-   ],
-   "attributes": {
-    "type": "curing light",
-    "wavelength": "420-480 nm",
-    "modes": "5",
-    "light": "LED"
-   },
-   "in_stock": true,
-   "short_description": "Pen-style curing light with several programs and a comfortable, balanced grip.",
-   "long_description": "Pen-style curing light with several programs and a comfortable, balanced grip. Supplied sterile and backed by clinical support for dental professionals."
-  },
-  {
-   "product_id": "DEN-1021",
-   "title": "Dentsply Demiplus Curing Light",
-   "brand": "Dentsply Sirona",
-   "model": "Demiplus",
-   "price": 6150.0,
-   "currency": "CNY",
-   "rating": 4.7,
-   "review_count": 1837,
-   "category": "restorative",
-   "labels": [],
-   "attributes": {
-    "type": "curing light",
-    "wavelength": "450-470 nm",
-    "power": "1100 mW/cm2",
-    "light": "LED"
-   },
-   "in_stock": true,
-   "short_description": "Curing light with a broad, even beam and an long-life battery for a full clinic day.",
-   "long_description": "Curing light with a broad, even beam and an long-life battery for a full clinic day. Supplied sterile and backed by clinical support for dental professionals."
-  },
-  {
-   "product_id": "DEN-1022",
-   "title": "Weirun VAFU Curing Light",
-   "brand": "Weirun",
-   "model": "VAFU",
-   "price": 13500.0,
-   "currency": "CNY",
-   "rating": 4.8,
-   "review_count": 1874,
-   "category": "restorative",
-   "labels": [],
-   "attributes": {
-    "type": "curing light",
-    "wavelength": "380-515 nm",
-    "power": "high",
-    "light": "LED"
-   },
-   "in_stock": true,
-   "short_description": "High-output curing light covering a wide spectrum for fast, reliable polymerization.",
-   "long_description": "High-output curing light covering a wide spectrum for fast, reliable polymerization. Supplied sterile and backed by clinical support for dental professionals."
-  },
-  {
-   "product_id": "DEN-1023",
-   "title": "Woodpecker PT-A Air Polisher",
-   "brand": "Woodpecker",
-   "model": "PT-A",
-   "price": 19500.0,
-   "currency": "CNY",
-   "rating": 4.9,
-   "review_count": 1911,
-   "category": "periodontics",
-   "labels": [
-    "bestseller"
-   ],
-   "attributes": {
-    "type": "air polisher",
-    "powder": "supragingival",
-    "water": "yes",
-    "light": "LED"
-   },
-   "in_stock": true,
-   "short_description": "Air polishing unit for comfortable, effective supragingival biofilm and stain removal.",
-   "long_description": "Air polishing unit for comfortable, effective supragingival biofilm and stain removal. Supplied sterile and backed by clinical support for dental professionals."
-  },
-  {
-   "product_id": "DEN-1024",
-   "title": "Woodpecker PT-B Air Polisher",
-   "brand": "Woodpecker",
-   "model": "PT-B",
-   "price": 19000.0,
-   "currency": "CNY",
-   "rating": 4.2,
-   "review_count": 1948,
-   "category": "periodontics",
-   "labels": [],
-   "attributes": {
-    "type": "air polisher",
-    "powder": "subgingival",
-    "water": "yes",
-    "light": "LED"
-   },
-   "in_stock": true,
-   "short_description": "Subgingival air polisher with a slim nozzle for periodontal and peri-implant maintenance.",
-   "long_description": "Subgingival air polisher with a slim nozzle for periodontal and peri-implant maintenance. Supplied sterile and backed by clinical support for dental professionals."
-  },
-  {
-   "product_id": "DEN-1025",
-   "title": "Woodpecker DA-20 Ultrasonic Scaler",
-   "brand": "Woodpecker",
-   "model": "DA-20",
-   "price": 1500.0,
-   "currency": "CNY",
-   "rating": 4.3,
-   "review_count": 1985,
-   "category": "periodontics",
-   "labels": [],
-   "attributes": {
-    "type": "ultrasonic scaler",
-    "frequency": "30 kHz",
-    "tips": "compatible",
-    "water": "yes"
-   },
-   "in_stock": false,
-   "short_description": "Ultrasonic scaler with a steady water spray and broad tip compatibility for daily scaling.",
-   "long_description": "Ultrasonic scaler with a steady water spray and broad tip compatibility for daily scaling. Supplied sterile and backed by clinical support for dental professionals."
-  },
-  {
-   "product_id": "DEN-1026",
-   "title": "Woodpecker UDS-N2 Ultrasonic Scaler",
-   "brand": "Woodpecker",
-   "model": "UDS-N2",
-   "price": 8800.0,
-   "currency": "CNY",
-   "rating": 4.4,
-   "review_count": 2022,
-   "category": "periodontics",
-   "labels": [
-    "bestseller"
-   ],
-   "attributes": {
-    "type": "ultrasonic scaler",
-    "frequency": "30 kHz",
-    "modes": "3",
-    "light": "LED"
-   },
-   "in_stock": false,
-   "short_description": "Ultrasonic scaler with multiple modes and an LED handpiece for precise calculus removal.",
-   "long_description": "Ultrasonic scaler with multiple modes and an LED handpiece for precise calculus removal. Supplied sterile and backed by clinical support for dental professionals."
-  },
-  {
-   "product_id": "DEN-1027",
-   "title": "Woodpecker S6 LED Ultrasonic Scaler",
-   "brand": "Woodpecker",
-   "model": "S6 LED",
-   "price": 3000.0,
-   "currency": "CNY",
-   "rating": 4.5,
-   "review_count": 2059,
-   "category": "periodontics",
-   "labels": [],
-   "attributes": {
-    "type": "ultrasonic scaler",
-    "frequency": "30 kHz",
-    "light": "LED",
-    "water": "yes"
-   },
-   "in_stock": true,
-   "short_description": "LED ultrasonic scaler with a comfortable grip and efficient scaling action.",
-   "long_description": "LED ultrasonic scaler with a comfortable grip and efficient scaling action. Supplied sterile and backed by clinical support for dental professionals."
-  },
-  {
-   "product_id": "DEN-1028",
-   "title": "EMS AIRFLOW Prophylaxis Master",
-   "brand": "EMS",
-   "model": "AIRFLOW Prophylaxis Master",
-   "price": 175000.0,
-   "currency": "CNY",
-   "rating": 4.6,
-   "review_count": 2096,
-   "category": "periodontics",
-   "labels": [],
-   "attributes": {
-    "type": "prophylaxis unit",
-    "powder": "subgingival",
-    "water": "yes",
-    "light": "LED"
-   },
-   "in_stock": true,
-   "short_description": "Guided biofilm therapy unit combining scaling and air polishing for minimally invasive cleaning.",
-   "long_description": "Guided biofilm therapy unit combining scaling and air polishing for minimally invasive cleaning. Supplied sterile and backed by clinical support for dental professionals."
-  },
-  {
-   "product_id": "DEN-1029",
-   "title": "Shining Aoralscan3 Intraoral Scanner",
-   "brand": "Shining3D",
-   "model": "Aoralscan3",
-   "price": 40000.0,
-   "currency": "CNY",
-   "rating": 4.7,
-   "review_count": 2133,
-   "category": "imaging",
-   "labels": [
-    "bestseller"
-   ],
-   "attributes": {
-    "type": "intraoral scanner",
-    "accuracy": "high",
-    "color": "full-color",
-    "tip": "auto-heating"
-   },
-   "in_stock": true,
-   "short_description": "Intraoral scanner with full-color capture and fast, accurate full-arch scanning.",
-   "long_description": "Intraoral scanner with full-color capture and fast, accurate full-arch scanning. Supplied sterile and backed by clinical support for dental professionals."
-  },
-  {
-   "product_id": "DEN-1030",
-   "title": "3Shape TRIOS 5 Intraoral Scanner",
-   "brand": "3Shape",
-   "model": "TRIOS 5",
-   "price": 190000.0,
-   "currency": "CNY",
-   "rating": 4.8,
-   "review_count": 2170,
-   "category": "imaging",
-   "labels": [],
-   "attributes": {
-    "type": "intraoral scanner",
-    "accuracy": "high",
-    "color": "full-color",
-    "wireless": "yes"
-   },
-   "in_stock": true,
-   "short_description": "Wireless intraoral scanner with real-time color and shade detection for precise restorations.",
-   "long_description": "Wireless intraoral scanner with real-time color and shade detection for precise restorations. Supplied sterile and backed by clinical support for dental professionals."
-  },
-  {
-   "product_id": "DEN-1031",
-   "title": "3Shape S1P-2 Intraoral Scanner",
-   "brand": "3Shape",
-   "model": "S1P-2",
-   "price": 190000.0,
-   "currency": "CNY",
-   "rating": 4.9,
-   "review_count": 2207,
-   "category": "imaging",
-   "labels": [],
-   "attributes": {
-    "type": "intraoral scanner",
-    "accuracy": "high",
-    "color": "full-color",
-    "tip": "heated"
-   },
-   "in_stock": true,
-   "short_description": "Intraoral scanner with a heated tip and reliable capture for full-arch impressions.",
-   "long_description": "Intraoral scanner with a heated tip and reliable capture for full-arch impressions. Supplied sterile and backed by clinical support for dental professionals."
-  },
-  {
-   "product_id": "DEN-1032",
-   "title": "Vatech APSARAS 3D CBCT",
-   "brand": "Vatech",
-   "model": "APSARAS 3D",
-   "price": 264000.0,
-   "currency": "CNY",
-   "rating": 4.2,
-   "review_count": 2244,
-   "category": "imaging",
-   "labels": [
-    "bestseller"
-   ],
-   "attributes": {
-    "type": "CBCT",
-    "field": "large",
-    "detector": "flat panel",
-    "mode": "3D/2D"
-   },
-   "in_stock": true,
-   "short_description": "Cone-beam CT with a large field of view for implant planning and 3D diagnosis.",
-   "long_description": "Cone-beam CT with a large field of view for implant planning and 3D diagnosis. Supplied sterile and backed by clinical support for dental professionals."
-  },
-  {
-   "product_id": "DEN-1033",
-   "title": "BlueX RAY98(M) Dental X-Ray Unit",
-   "brand": "BlueX",
-   "model": "RAY98(M)",
-   "price": 40000.0,
-   "currency": "CNY",
-   "rating": 4.3,
-   "review_count": 2281,
-   "category": "imaging",
-   "labels": [],
-   "attributes": {
-    "type": "intraoral X-ray",
-    "power": "high-frequency",
-    "timer": "digital",
-    "arm": "wall"
-   },
-   "in_stock": true,
-   "short_description": "High-frequency dental X-ray unit with a digital timer for sharp, low-dose radiographs.",
-   "long_description": "High-frequency dental X-ray unit with a digital timer for sharp, low-dose radiographs. Supplied sterile and backed by clinical support for dental professionals."
-  },
-  {
-   "product_id": "DEN-1034",
-   "title": "Hainan JYF-10D Digital Dental X-Ray",
-   "brand": "Hainan",
-   "model": "JYF-10D",
-   "price": 22800.0,
-   "currency": "CNY",
-   "rating": 4.4,
-   "review_count": 2318,
-   "category": "imaging",
-   "labels": [],
-   "attributes": {
-    "type": "intraoral X-ray",
-    "power": "high-frequency",
-    "timer": "digital",
-    "arm": "mobile"
-   },
-   "in_stock": true,
-   "short_description": "Digital dental X-ray unit with a mobile stand for flexible chairside imaging.",
-   "long_description": "Digital dental X-ray unit with a mobile stand for flexible chairside imaging. Supplied sterile and backed by clinical support for dental professionals."
-  },
-  {
-   "product_id": "DEN-1035",
-   "title": "Carestream 3600P Dental X-Ray",
-   "brand": "Carestream",
-   "model": "3600P",
-   "price": 32000.0,
-   "currency": "CNY",
-   "rating": 4.5,
-   "review_count": 2355,
-   "category": "imaging",
-   "labels": [
-    "new"
-   ],
-   "attributes": {
-    "type": "intraoral X-ray",
-    "power": "high-frequency",
-    "timer": "digital",
-    "arm": "wall"
-   },
-   "in_stock": true,
-   "short_description": "Digital panoramic and cephalometric X-ray system for clear, detailed diagnostics.",
-   "long_description": "Digital panoramic and cephalometric X-ray system for clear, detailed diagnostics. Supplied sterile and backed by clinical support for dental professionals."
-  },
-  {
-   "product_id": "DEN-1036",
-   "title": "Xino S2313 Dental Treatment Chair",
-   "brand": "Xino",
-   "model": "S2313",
-   "price": 25000.0,
-   "currency": "CNY",
-   "rating": 4.6,
-   "review_count": 2392,
-   "category": "units",
-   "labels": [],
-   "attributes": {
-    "type": "treatment chair",
-    "dental_light": "LED",
-    "upholstery": "leather",
-    "delivery_type": "cart"
-   },
-   "in_stock": true,
-   "short_description": "Dental treatment chair with an LED light and a smooth, quiet chair adjustment.",
-   "long_description": "Dental treatment chair with an LED light and a smooth, quiet chair adjustment. Supplied sterile and backed by clinical support for dental professionals."
-  },
-  {
-   "product_id": "DEN-1037",
-   "title": "Xino S2313 Implant Treatment Chair",
-   "brand": "Xino",
-   "model": "S2313 (Implant)",
-   "price": 40000.0,
-   "currency": "CNY",
-   "rating": 4.7,
-   "review_count": 2429,
-   "category": "units",
-   "labels": [],
-   "attributes": {
-    "type": "implant chair",
-    "dental_light": "LED",
-    "upholstery": "leather",
-    "delivery_type": "cart"
-   },
-   "in_stock": true,
-   "short_description": "Implant-configured treatment chair with reinforced delivery and a wide recline range.",
-   "long_description": "Implant-configured treatment chair with reinforced delivery and a wide recline range. Supplied sterile and backed by clinical support for dental professionals."
-  },
-  {
-   "product_id": "DEN-1038",
-   "title": "A-dec AJ21 Dental Treatment Chair",
-   "brand": "A-dec",
-   "model": "AJ21",
-   "price": 74500.0,
-   "currency": "CNY",
-   "rating": 4.8,
-   "review_count": 66,
-   "category": "units",
-   "labels": [
-    "bestseller"
-   ],
-   "attributes": {
-    "type": "treatment chair",
-    "dental_light": "LED",
-    "upholstery": "premium",
-    "delivery_type": "unit"
-   },
-   "in_stock": true,
-   "short_description": "Treatment chair with an integrated delivery unit and an ergonomic, durable build.",
-   "long_description": "Treatment chair with an integrated delivery unit and an ergonomic, durable build. Supplied sterile and backed by clinical support for dental professionals."
-  },
-  {
-   "product_id": "DEN-1039",
-   "title": "Belmont CLESTA II Dental Unit",
-   "brand": "Belmont",
-   "model": "CLESTA II",
-   "price": 129500.0,
-   "currency": "CNY",
-   "rating": 4.9,
-   "review_count": 103,
-   "category": "units",
-   "labels": [],
-   "attributes": {
-    "type": "treatment chair",
-    "dental_light": "LED",
-    "upholstery": "premium",
-    "delivery_type": "unit"
-   },
-   "in_stock": true,
-   "short_description": "Dental unit with a self-returning arm and a cushion-contoured chair for long procedures.",
-   "long_description": "Dental unit with a self-returning arm and a cushion-contoured chair for long procedures. Supplied sterile and backed by clinical support for dental professionals."
-  },
-  {
-   "product_id": "DEN-1040",
-   "title": "Zehnder ZA-208B Implant Treatment Chair",
-   "brand": "Zehnder",
-   "model": "ZA-208B",
-   "price": 89600.0,
-   "currency": "CNY",
-   "rating": 4.2,
-   "review_count": 140,
-   "category": "units",
-   "labels": [],
-   "attributes": {
-    "type": "implant chair",
-    "dental_light": "LED",
-    "upholstery": "leather",
-    "delivery_type": "cart"
-   },
-   "in_stock": false,
-   "short_description": "Implant treatment chair with a wide backrest and an adjustable headrest for oral surgery.",
-   "long_description": "Implant treatment chair with a wide backrest and an adjustable headrest for oral surgery. Supplied sterile and backed by clinical support for dental professionals."
-  },
-  {
-   "product_id": "DEN-1041",
-   "title": "Hongke H1 Dental Treatment Chair",
-   "brand": "Hongke",
-   "model": "H1",
-   "price": 51800.0,
-   "currency": "CNY",
-   "rating": 4.3,
-   "review_count": 177,
-   "category": "units",
-   "labels": [
-    "bestseller"
-   ],
-   "attributes": {
-    "type": "treatment chair",
-    "dental_light": "LED",
-    "upholstery": "leather",
-    "delivery_type": "cart"
-   },
-   "in_stock": true,
-   "short_description": "Treatment chair with an ergonomic seat and a reliable delivery system for general dentistry.",
-   "long_description": "Treatment chair with an ergonomic seat and a reliable delivery system for general dentistry. Supplied sterile and backed by clinical support for dental professionals."
-  },
-  {
-   "product_id": "DEN-1042",
-   "title": "Xinhua MOST-T Pressure Steam Sterilizer",
-   "brand": "Xinhua",
-   "model": "MOST-T",
-   "price": 13900.0,
-   "currency": "CNY",
-   "rating": 4.4,
-   "review_count": 214,
-   "category": "sterilization",
-   "labels": [],
-   "attributes": {
-    "type": "autoclave",
-    "capacity": "23 L",
-    "cycle": "standard",
-    "display": "LCD"
-   },
-   "in_stock": true,
-   "short_description": "Benchtop steam sterilizer with a clear cycle display and dependable spore-safe cycles.",
-   "long_description": "Benchtop steam sterilizer with a clear cycle display and dependable spore-safe cycles. Supplied sterile and backed by clinical support for dental professionals."
-  },
-  {
-   "product_id": "DEN-1043",
-   "title": "Xinhua TQX-200BH Ultrasonic Cleaner",
-   "brand": "Xinhua",
-   "model": "TQX-200BH",
-   "price": 8100.0,
-   "currency": "CNY",
-   "rating": 4.5,
-   "review_count": 251,
-   "category": "sterilization",
-   "labels": [],
-   "attributes": {
-    "type": "ultrasonic cleaner",
-    "capacity": "large",
-    "frequency": "40 kHz",
-    "timer": "digital"
-   },
-   "in_stock": true,
-   "short_description": "Ultrasonic cleaner that removes debris from instruments before sterilization.",
-   "long_description": "Ultrasonic cleaner that removes debris from instruments before sterilization. Supplied sterile and backed by clinical support for dental professionals."
-  },
-  {
-   "product_id": "DEN-1044",
-   "title": "Xinhua XZY-02 Handpiece Oiler",
-   "brand": "Xinhua",
-   "model": "XZY-02",
-   "price": 1600.0,
-   "currency": "CNY",
-   "rating": 4.6,
-   "review_count": 288,
-   "category": "sterilization",
-   "labels": [
-    "bestseller"
-   ],
-   "attributes": {
-    "type": "handpiece oiler",
-    "connection": "ISO",
-    "cycles": "automatic",
-    "power": "electric"
-   },
-   "in_stock": true,
-   "short_description": "Automatic handpiece oiler that lubricates and purges turbines after each cycle.",
-   "long_description": "Automatic handpiece oiler that lubricates and purges turbines after each cycle. Supplied sterile and backed by clinical support for dental professionals."
-  },
-  {
-   "product_id": "DEN-1045",
-   "title": "Xinhua FK-100 Pouch Sealer",
-   "brand": "Xinhua",
-   "model": "FK-100",
-   "price": 2000.0,
-   "currency": "CNY",
-   "rating": 4.7,
-   "review_count": 325,
-   "category": "sterilization",
-   "labels": [],
-   "attributes": {
-    "type": "pouch sealer",
-    "width": "seal",
-    "temperature": "adjustable",
-    "power": "electric"
-   },
-   "in_stock": true,
-   "short_description": "Pouch sealing machine for secure, traceable sterile packaging.",
-   "long_description": "Pouch sealing machine for secure, traceable sterile packaging. Supplied sterile and backed by clinical support for dental professionals."
-  },
-  {
-   "product_id": "DEN-1046",
-   "title": "Hongrun HYT-500 Positive Pressure Unit",
-   "brand": "Hongrun",
-   "model": "HYT-500",
-   "price": 20000.0,
-   "currency": "CNY",
-   "rating": 4.8,
-   "review_count": 362,
-   "category": "sterilization",
-   "labels": [],
-   "attributes": {
-    "type": "positive pressure unit",
-    "output": "clean air",
-    "use": "clinic",
-    "power": "electric"
-   },
-   "in_stock": true,
-   "short_description": "Positive-pressure unit that keeps the clinic air clean and protected.",
-   "long_description": "Positive-pressure unit that keeps the clinic air clean and protected. Supplied sterile and backed by clinical support for dental professionals."
-  },
-  {
-   "product_id": "DEN-1047",
-   "title": "Aojie AJ/DL-B-1000 Air Disinfector",
-   "brand": "Aojie",
-   "model": "AJ/DL-B-1000",
-   "price": 3450.0,
-   "currency": "CNY",
-   "rating": 4.9,
-   "review_count": 399,
-   "category": "sterilization",
-   "labels": [
-    "bestseller"
-   ],
-   "attributes": {
-    "type": "air disinfector",
-    "coverage": "clinic",
-    "mode": "plasma",
-    "power": "electric"
-   },
-   "in_stock": true,
-   "short_description": "Air disinfector with a plasma mode for steady, quiet clinic sanitation.",
-   "long_description": "Air disinfector with a plasma mode for steady, quiet clinic sanitation. Supplied sterile and backed by clinical support for dental professionals."
-  },
-  {
-   "product_id": "DEN-1048",
-   "title": "Woodpecker Dental Burs FG Assorted Kit",
-   "brand": "Woodpecker",
-   "model": "FG Assorted",
-   "price": 220.0,
-   "currency": "CNY",
-   "rating": 4.2,
-   "review_count": 436,
-   "category": "consumables",
-   "labels": [],
-   "attributes": {
-    "type": "burs",
-    "shank": "FG",
-    "grit": "assorted",
-    "sterile": "single-use"
-   },
-   "in_stock": true,
-   "short_description": "Assorted friction-grip burs for cavity preparation and finishing; single-use for a sharp cut.",
-   "long_description": "Assorted friction-grip burs for cavity preparation and finishing; single-use for a sharp cut. Supplied sterile and backed by clinical support for dental professionals."
-  },
-  {
-   "product_id": "DEN-1049",
-   "title": "Eighteeth Gutta-Percha Points 0.06 Taper",
-   "brand": "Eighteeth",
-   "model": "GP 0.06",
-   "price": 125.0,
-   "currency": "CNY",
-   "rating": 4.3,
-   "review_count": 473,
-   "category": "consumables",
-   "labels": [],
-   "attributes": {
-    "type": "gutta-percha points",
-    "taper": "0.06",
-    "sizes": "assorted",
-    "sterile": "yes"
-   },
-   "in_stock": true,
-   "short_description": "Gutta-percha points with a 0.06 taper for a dense, predictable root canal fill.",
-   "long_description": "Gutta-percha points with a 0.06 taper for a dense, predictable root canal fill. Supplied sterile and backed by clinical support for dental professionals."
-  },
-  {
-   "product_id": "DEN-1050",
-   "title": "Woodpecker Implant Kit with Bone Graft Material",
-   "brand": "Woodpecker",
-   "price": 19700.0,
-   "category": "consumables",
-   "labels": [
-    "bestseller"
-   ],
-   "attributes": {
-    "type": "implant kit",
-    "contents": "drills + graft",
-    "sterile": "yes"
-   },
-   "in_stock": true,
-   "short_description": "Implant kit with drills, graft material and membranes; choose a configuration to match the case.",
-   "variants": [
+  "store_name": "ACME 牙科",
+  "products": [
     {
-     "product_id": "DEN-1050-BASIC",
-     "option_values": {
-      "configuration": "basic"
-     },
-     "price": 19700.0
+      "product_id": "DEN-1001",
+      "title": "NSK Pana-Max2 M4 高速涡轮手机",
+      "brand": "NSK",
+      "model": "Pana-Max2 M4",
+      "price": 860.0,
+      "currency": "CNY",
+      "rating": 4.3,
+      "review_count": 1097,
+      "category": "牙科手机",
+      "labels": [],
+      "attributes": {
+        "转速": "400,000 rpm",
+        "接口": "4 孔",
+        "机头": "标准",
+        "灭菌方式": "可高温高压灭菌"
+      },
+      "in_stock": true,
+      "short_description": "紧凑机头，转速平稳安静，适合常规备牙；陶瓷轴承与气路清洁系统。",
+      "long_description": "紧凑机头，转速平稳安静，适合常规备牙；陶瓷轴承与气路清洁系统。 无菌供货，并为牙科专业人员提供临床支持。"
     },
     {
-     "product_id": "DEN-1050-GRAFT",
-     "option_values": {
-      "configuration": "with graft"
-     },
-     "price": 24500.0,
-     "in_stock": false
+      "product_id": "DEN-1002",
+      "title": "NSK Ti-Max X95L 高速手机",
+      "brand": "NSK",
+      "model": "Ti-Max X95L",
+      "price": 1480.0,
+      "currency": "CNY",
+      "rating": 4.4,
+      "review_count": 1134,
+      "category": "牙科手机",
+      "labels": [
+        "热销"
+      ],
+      "attributes": {
+        "转速": "400,000 rpm",
+        "接口": "6 孔",
+        "机头": "迷你",
+        "照明": "LED 照明"
+      },
+      "in_stock": false,
+      "short_description": "钛合金迷你机头配 LED，适合后牙区操作；陶瓷轴承，切削有力稳定。",
+      "long_description": "钛合金迷你机头配 LED，适合后牙区操作；陶瓷轴承，切削有力稳定。 无菌供货，并为牙科专业人员提供临床支持。"
     },
     {
-     "product_id": "DEN-1050-FULL",
-     "option_values": {
-      "configuration": "full kit"
-     },
-     "price": 29800.0
+      "product_id": "DEN-1003",
+      "title": "佛山精美 J1Plus-004 高速手机",
+      "brand": "Foshan Jingmei",
+      "model": "J1Plus-004",
+      "price": 450.0,
+      "currency": "CNY",
+      "rating": 4.5,
+      "review_count": 1171,
+      "category": "牙科手机",
+      "labels": [],
+      "attributes": {
+        "转速": "350,000 rpm",
+        "接口": "4 孔",
+        "机头": "标准",
+        "灭菌方式": "可高温高压灭菌"
+      },
+      "in_stock": true,
+      "short_description": "耐用涡轮手机，适合日常门诊使用；转速可靠，性价比高。",
+      "long_description": "耐用涡轮手机，适合日常门诊使用；转速可靠，性价比高。 无菌供货，并为牙科专业人员提供临床支持。"
+    },
+    {
+      "product_id": "DEN-1004",
+      "title": "佛山精美 J45-204 仰角高速手机",
+      "brand": "Foshan Jingmei",
+      "model": "J45-204",
+      "price": 950.0,
+      "currency": "CNY",
+      "rating": 4.6,
+      "review_count": 1208,
+      "category": "牙科手机",
+      "labels": [],
+      "attributes": {
+        "转速": "350,000 rpm",
+        "接口": "4 孔",
+        "机头": "仰角",
+        "角度": "45 度"
+      },
+      "in_stock": true,
+      "short_description": "45 度仰角机头，舒适到达后牙区，同时保持切削力。",
+      "long_description": "45 度仰角机头，舒适到达后牙区，同时保持切削力。 无菌供货，并为牙科专业人员提供临床支持。"
+    },
+    {
+      "product_id": "DEN-1005",
+      "title": "佛山精美 L 低速手机",
+      "brand": "Foshan Jingmei",
+      "model": "L",
+      "price": 350.0,
+      "currency": "CNY",
+      "rating": 4.7,
+      "review_count": 1245,
+      "category": "牙科手机",
+      "labels": [
+        "新品"
+      ],
+      "attributes": {
+        "转速": "20,000 rpm",
+        "接口": "4 孔",
+        "类型": "低速",
+        "灭菌方式": "可高温高压灭菌"
+      },
+      "in_stock": true,
+      "short_description": "用于抛光、修整和低速备牙的低速手机。",
+      "long_description": "用于抛光、修整和低速备牙的低速手机。 无菌供货，并为牙科专业人员提供临床支持。"
+    },
+    {
+      "product_id": "DEN-1006",
+      "title": "啄木鸟 CX235C7 拔牙弯机",
+      "brand": "Woodpecker",
+      "model": "CX235C7",
+      "price": 2150.0,
+      "currency": "CNY",
+      "rating": 4.8,
+      "review_count": 1282,
+      "category": "牙科手机",
+      "labels": [],
+      "attributes": {
+        "类型": "外科弯机",
+        "接口": "ISO 接口",
+        "用途": "拔牙",
+        "灭菌方式": "可高温高压灭菌"
+      },
+      "in_stock": true,
+      "short_description": "微创拔牙用外科弯机，扭矩强劲，机身纤细。",
+      "long_description": "微创拔牙用外科弯机，扭矩强劲，机身纤细。 无菌供货，并为牙科专业人员提供临床支持。"
+    },
+    {
+      "product_id": "DEN-1007",
+      "title": "啄木鸟 CX235C6 种植手机",
+      "brand": "Woodpecker",
+      "model": "CX235C6",
+      "price": 2100.0,
+      "currency": "CNY",
+      "rating": 4.9,
+      "review_count": 1319,
+      "category": "牙科手机",
+      "labels": [],
+      "attributes": {
+        "类型": "种植手机",
+        "接口": "ISO 接口",
+        "用途": "种植",
+        "灭菌方式": "可高温高压灭菌"
+      },
+      "in_stock": true,
+      "short_description": "种植手机，扭矩可控，备骨与植入精准平稳。",
+      "long_description": "种植手机，扭矩可控，备骨与植入精准平稳。 无菌供货，并为牙科专业人员提供临床支持。"
+    },
+    {
+      "product_id": "DEN-1008",
+      "title": "NSK WP-1L 种植手机",
+      "brand": "NSK",
+      "model": "WP-1L",
+      "price": 5000.0,
+      "currency": "CNY",
+      "rating": 4.2,
+      "review_count": 1356,
+      "category": "牙科手机",
+      "labels": [
+        "热销"
+      ],
+      "attributes": {
+        "类型": "种植手机",
+        "接口": "ISO 接口",
+        "照明": "LED 照明",
+        "用途": "种植"
+      },
+      "in_stock": true,
+      "short_description": "带 LED 的种植手机，导板手术下视野清晰，低速控制平顺。",
+      "long_description": "带 LED 的种植手机，导板手术下视野清晰，低速控制平顺。 无菌供货，并为牙科专业人员提供临床支持。"
+    },
+    {
+      "product_id": "DEN-1009",
+      "title": "啄木鸟 Endo Radar Pro 根管马达",
+      "brand": "Woodpecker",
+      "model": "Endo Radar Pro",
+      "price": 5000.0,
+      "currency": "CNY",
+      "rating": 4.3,
+      "review_count": 1393,
+      "category": "根管治疗",
+      "labels": [],
+      "attributes": {
+        "类型": "根管马达",
+        "扭矩": "0.5-4 Ncm",
+        "转速": "100-1000 rpm",
+        "照明": "LED 照明"
+      },
+      "in_stock": true,
+      "short_description": "无线根管马达，内置根尖定位，成形精准自适应。",
+      "long_description": "无线根管马达，内置根尖定位，成形精准自适应。 无菌供货，并为牙科专业人员提供临床支持。"
+    },
+    {
+      "product_id": "DEN-1010",
+      "title": "登士柏 X-SMART Plus 根管马达",
+      "brand": "Dentsply Sirona",
+      "model": "X-SMART Plus",
+      "price": 24000.0,
+      "currency": "CNY",
+      "rating": 4.4,
+      "review_count": 1430,
+      "category": "根管治疗",
+      "labels": [],
+      "attributes": {
+        "类型": "根管马达",
+        "扭矩": "可调",
+        "记忆功能": "有",
+        "照明": "LED 照明"
+      },
+      "in_stock": true,
+      "short_description": "带程序记忆的根管马达，配操作灯，参数调用方便。",
+      "long_description": "带程序记忆的根管马达，配操作灯，参数调用方便。 无菌供货，并为牙科专业人员提供临床支持。"
+    },
+    {
+      "product_id": "DEN-1011",
+      "title": "啄木鸟 Ai-Pex 根尖定位仪",
+      "brand": "Woodpecker",
+      "model": "Ai-Pex",
+      "price": 2590.0,
+      "currency": "CNY",
+      "rating": 4.5,
+      "review_count": 1467,
+      "category": "根管治疗",
+      "labels": [
+        "热销"
+      ],
+      "attributes": {
+        "类型": "根尖定位仪",
+        "显示屏": "LCD 屏",
+        "精度": "±0.1 mm",
+        "功率": "电池供电"
+      },
+      "in_stock": true,
+      "short_description": "亮屏根尖定位仪，湿性根管内读数依然稳定。",
+      "long_description": "亮屏根尖定位仪，湿性根管内读数依然稳定。 无菌供货，并为牙科专业人员提供临床支持。"
+    },
+    {
+      "product_id": "DEN-1012",
+      "title": "登士柏 PROPEX PIXI 根尖定位仪",
+      "brand": "Dentsply Sirona",
+      "model": "PROPEX PIXI",
+      "price": 9800.0,
+      "currency": "CNY",
+      "rating": 4.6,
+      "review_count": 1504,
+      "category": "根管治疗",
+      "labels": [],
+      "attributes": {
+        "类型": "根尖定位仪",
+        "显示屏": "LCD 触摸屏",
+        "精度": "±0.1 mm",
+        "功率": "电池供电"
+      },
+      "in_stock": true,
+      "short_description": "小巧根尖定位仪，可视化指引清晰，自动校准。",
+      "long_description": "小巧根尖定位仪，可视化指引清晰，自动校准。 无菌供货，并为牙科专业人员提供临床支持。"
+    },
+    {
+      "product_id": "DEN-1013",
+      "title": "啄木鸟 Fi-E / Fi-P 热牙胶充填系统",
+      "brand": "Woodpecker",
+      "model": "Fi-E / Fi-P",
+      "price": 8050.0,
+      "currency": "CNY",
+      "rating": 4.7,
+      "review_count": 1541,
+      "category": "根管治疗",
+      "labels": [],
+      "attributes": {
+        "类型": "热牙胶充填仪",
+        "温度": "200 C",
+        "工作尖": "多种",
+        "功率": "电池供电"
+      },
+      "in_stock": true,
+      "short_description": "热牙胶充填系统，配多种工作尖，实现致密三维充填。",
+      "long_description": "热牙胶充填系统，配多种工作尖，实现致密三维充填。 无菌供货，并为牙科专业人员提供临床支持。"
+    },
+    {
+      "product_id": "DEN-1014",
+      "title": "啄木鸟 Fi-P 携热器",
+      "brand": "Woodpecker",
+      "model": "Fi-P",
+      "price": 8000.0,
+      "currency": "CNY",
+      "rating": 4.8,
+      "review_count": 1578,
+      "category": "根管治疗",
+      "labels": [
+        "热销"
+      ],
+      "attributes": {
+        "类型": "携热器",
+        "温度": "200 C",
+        "用途": "垂直加压",
+        "功率": "电池供电"
+      },
+      "in_stock": true,
+      "short_description": "携热器，软化并压实牙胶至根尖封闭，用于垂直加压。",
+      "long_description": "携热器，软化并压实牙胶至根尖封闭，用于垂直加压。 无菌供货，并为牙科专业人员提供临床支持。"
+    },
+    {
+      "product_id": "DEN-1015",
+      "title": "宇森 C-FILL X 热牙胶充填仪",
+      "brand": "Yusen",
+      "model": "C-FILL X",
+      "price": 13000.0,
+      "currency": "CNY",
+      "rating": 4.9,
+      "review_count": 1615,
+      "category": "根管治疗",
+      "labels": [],
+      "attributes": {
+        "类型": "热牙胶充填仪",
+        "温度": "可调",
+        "工作尖": "多种",
+        "功率": "电池供电"
+      },
+      "in_stock": true,
+      "short_description": "无线充填系统，温度精确可控，充填效果稳定。",
+      "long_description": "无线充填系统，温度精确可控，充填效果稳定。 无菌供货，并为牙科专业人员提供临床支持。"
+    },
+    {
+      "product_id": "DEN-1016",
+      "title": "啄木鸟 D600 LED 超声根管治疗仪",
+      "brand": "Woodpecker",
+      "model": "D600 LED",
+      "price": 5800.0,
+      "currency": "CNY",
+      "rating": 4.2,
+      "review_count": 1652,
+      "category": "根管治疗",
+      "labels": [],
+      "attributes": {
+        "类型": "超声根管治疗仪",
+        "照明": "LED 照明",
+        "功率": "超声",
+        "用途": "冲洗"
+      },
+      "in_stock": true,
+      "short_description": "超声根管治疗仪，带 LED，用于冲洗与根管活化。",
+      "long_description": "超声根管治疗仪，带 LED，用于冲洗与根管活化。 无菌供货，并为牙科专业人员提供临床支持。"
+    },
+    {
+      "product_id": "DEN-1017",
+      "title": "啄木鸟 i Led 光固化机",
+      "brand": "Woodpecker",
+      "model": "i Led",
+      "price": 1500.0,
+      "currency": "CNY",
+      "rating": 4.3,
+      "review_count": 1689,
+      "category": "修复固化",
+      "labels": [
+        "热销"
+      ],
+      "attributes": {
+        "类型": "光固化机",
+        "波长": "420-480 nm",
+        "功率": "1200 mW/cm2",
+        "照明": "LED 照明"
+      },
+      "in_stock": true,
+      "short_description": "LED 光固化机，光谱宽、固化快，各色树脂均匀固化。",
+      "long_description": "LED 光固化机，光谱宽、固化快，各色树脂均匀固化。 无菌供货，并为牙科专业人员提供临床支持。"
+    },
+    {
+      "product_id": "DEN-1018",
+      "title": "啄木鸟 LED.G 光固化机",
+      "brand": "Woodpecker",
+      "model": "LED.G",
+      "price": 3000.0,
+      "currency": "CNY",
+      "rating": 4.4,
+      "review_count": 1726,
+      "category": "修复固化",
+      "labels": [],
+      "attributes": {
+        "类型": "光固化机",
+        "波长": "420-480 nm",
+        "模式": "3",
+        "照明": "LED 照明"
+      },
+      "in_stock": true,
+      "short_description": "多模式光固化机，导光棒纤细，适合邻接面操作。",
+      "long_description": "多模式光固化机，导光棒纤细，适合邻接面操作。 无菌供货，并为牙科专业人员提供临床支持。"
+    },
+    {
+      "product_id": "DEN-1019",
+      "title": "啄木鸟 O-Star 光固化机",
+      "brand": "Woodpecker",
+      "model": "O-Star",
+      "price": 2400.0,
+      "currency": "CNY",
+      "rating": 4.5,
+      "review_count": 1763,
+      "category": "修复固化",
+      "labels": [],
+      "attributes": {
+        "类型": "光固化机",
+        "波长": "385-515 nm",
+        "功率": "1500 mW/cm2",
+        "照明": "LED 照明"
+      },
+      "in_stock": false,
+      "short_description": "宽光谱光固化机，可快速固化大块填充与通用树脂。",
+      "long_description": "宽光谱光固化机，可快速固化大块填充与通用树脂。 无菌供货，并为牙科专业人员提供临床支持。"
+    },
+    {
+      "product_id": "DEN-1020",
+      "title": "八颗牙 CuringPen 光固化机",
+      "brand": "Eighteeth",
+      "model": "CuringPen",
+      "price": 1680.0,
+      "currency": "CNY",
+      "rating": 4.6,
+      "review_count": 1800,
+      "category": "修复固化",
+      "labels": [
+        "新品"
+      ],
+      "attributes": {
+        "类型": "光固化机",
+        "波长": "420-480 nm",
+        "模式": "5",
+        "照明": "LED 照明"
+      },
+      "in_stock": true,
+      "short_description": "笔式光固化机，多档程序，握持舒适平衡。",
+      "long_description": "笔式光固化机，多档程序，握持舒适平衡。 无菌供货，并为牙科专业人员提供临床支持。"
+    },
+    {
+      "product_id": "DEN-1021",
+      "title": "登士柏 Demiplus 光固化机",
+      "brand": "Dentsply Sirona",
+      "model": "Demiplus",
+      "price": 6150.0,
+      "currency": "CNY",
+      "rating": 4.7,
+      "review_count": 1837,
+      "category": "修复固化",
+      "labels": [],
+      "attributes": {
+        "类型": "光固化机",
+        "波长": "450-470 nm",
+        "功率": "1100 mW/cm2",
+        "照明": "LED 照明"
+      },
+      "in_stock": true,
+      "short_description": "光斑均匀、光强稳定的光固化机，电池续航满足全天门诊。",
+      "long_description": "光斑均匀、光强稳定的光固化机，电池续航满足全天门诊。 无菌供货，并为牙科专业人员提供临床支持。"
+    },
+    {
+      "product_id": "DEN-1022",
+      "title": "维润 VAFU 光固化机",
+      "brand": "Weirun",
+      "model": "VAFU",
+      "price": 13500.0,
+      "currency": "CNY",
+      "rating": 4.8,
+      "review_count": 1874,
+      "category": "修复固化",
+      "labels": [],
+      "attributes": {
+        "类型": "光固化机",
+        "波长": "380-515 nm",
+        "功率": "高功率",
+        "照明": "LED 照明"
+      },
+      "in_stock": true,
+      "short_description": "高输出宽光谱光固化机，树脂聚合快速可靠。",
+      "long_description": "高输出宽光谱光固化机，树脂聚合快速可靠。 无菌供货，并为牙科专业人员提供临床支持。"
+    },
+    {
+      "product_id": "DEN-1023",
+      "title": "啄木鸟 PT-A 喷砂机",
+      "brand": "Woodpecker",
+      "model": "PT-A",
+      "price": 19500.0,
+      "currency": "CNY",
+      "rating": 4.9,
+      "review_count": 1911,
+      "category": "牙周洁治",
+      "labels": [
+        "热销"
+      ],
+      "attributes": {
+        "类型": "喷砂机",
+        "喷砂粉": "龈上",
+        "水冷": "有",
+        "照明": "LED 照明"
+      },
+      "in_stock": true,
+      "short_description": "龈上喷砂，舒适高效地去除菌斑与色素。",
+      "long_description": "龈上喷砂，舒适高效地去除菌斑与色素。 无菌供货，并为牙科专业人员提供临床支持。"
+    },
+    {
+      "product_id": "DEN-1024",
+      "title": "啄木鸟 PT-B 喷砂机",
+      "brand": "Woodpecker",
+      "model": "PT-B",
+      "price": 19000.0,
+      "currency": "CNY",
+      "rating": 4.2,
+      "review_count": 1948,
+      "category": "牙周洁治",
+      "labels": [],
+      "attributes": {
+        "类型": "喷砂机",
+        "喷砂粉": "龈下",
+        "水冷": "有",
+        "照明": "LED 照明"
+      },
+      "in_stock": true,
+      "short_description": "龈下喷砂，细喷嘴适合牙周与种植体维护。",
+      "long_description": "龈下喷砂，细喷嘴适合牙周与种植体维护。 无菌供货，并为牙科专业人员提供临床支持。"
+    },
+    {
+      "product_id": "DEN-1025",
+      "title": "啄木鸟 DA-20 超声洁牙机",
+      "brand": "Woodpecker",
+      "model": "DA-20",
+      "price": 1500.0,
+      "currency": "CNY",
+      "rating": 4.3,
+      "review_count": 1985,
+      "category": "牙周洁治",
+      "labels": [],
+      "attributes": {
+        "类型": "超声洁牙机",
+        "频率": "30 kHz",
+        "工作尖": "通用",
+        "水冷": "有"
+      },
+      "in_stock": false,
+      "short_description": "超声洁牙机，水雾稳定、工作尖通用，适合日常洁治。",
+      "long_description": "超声洁牙机，水雾稳定、工作尖通用，适合日常洁治。 无菌供货，并为牙科专业人员提供临床支持。"
+    },
+    {
+      "product_id": "DEN-1026",
+      "title": "啄木鸟 UDS-N2 超声洁牙机",
+      "brand": "Woodpecker",
+      "model": "UDS-N2",
+      "price": 8800.0,
+      "currency": "CNY",
+      "rating": 4.4,
+      "review_count": 2022,
+      "category": "牙周洁治",
+      "labels": [
+        "热销"
+      ],
+      "attributes": {
+        "类型": "超声洁牙机",
+        "频率": "30 kHz",
+        "模式": "3",
+        "照明": "LED 照明"
+      },
+      "in_stock": false,
+      "short_description": "多模式超声洁牙机，LED 手柄，清除牙石精准。",
+      "long_description": "多模式超声洁牙机，LED 手柄，清除牙石精准。 无菌供货，并为牙科专业人员提供临床支持。"
+    },
+    {
+      "product_id": "DEN-1027",
+      "title": "啄木鸟 S6 LED 超声洁牙机",
+      "brand": "Woodpecker",
+      "model": "S6 LED",
+      "price": 3000.0,
+      "currency": "CNY",
+      "rating": 4.5,
+      "review_count": 2059,
+      "category": "牙周洁治",
+      "labels": [],
+      "attributes": {
+        "类型": "超声洁牙机",
+        "频率": "30 kHz",
+        "照明": "LED 照明",
+        "水冷": "有"
+      },
+      "in_stock": true,
+      "short_description": "带 LED 的超声洁牙机，握持舒适，洁治高效。",
+      "long_description": "带 LED 的超声洁牙机，握持舒适，洁治高效。 无菌供货，并为牙科专业人员提供临床支持。"
+    },
+    {
+      "product_id": "DEN-1028",
+      "title": "EMS AIRFLOW Prophylaxis Master",
+      "brand": "EMS",
+      "model": "AIRFLOW Prophylaxis Master",
+      "price": 175000.0,
+      "currency": "CNY",
+      "rating": 4.6,
+      "review_count": 2096,
+      "category": "牙周洁治",
+      "labels": [],
+      "attributes": {
+        "类型": "洁治设备",
+        "喷砂粉": "龈下",
+        "水冷": "有",
+        "照明": "LED 照明"
+      },
+      "in_stock": true,
+      "short_description": "菌斑引导治疗设备，集洁治与喷砂于一体，微创清洁。",
+      "long_description": "菌斑引导治疗设备，集洁治与喷砂于一体，微创清洁。 无菌供货，并为牙科专业人员提供临床支持。"
+    },
+    {
+      "product_id": "DEN-1029",
+      "title": "先临 Aoralscan3 口内扫描仪",
+      "brand": "Shining3D",
+      "model": "Aoralscan3",
+      "price": 40000.0,
+      "currency": "CNY",
+      "rating": 4.7,
+      "review_count": 2133,
+      "category": "影像设备",
+      "labels": [
+        "热销"
+      ],
+      "attributes": {
+        "类型": "口内扫描仪",
+        "精度": "高",
+        "色彩": "全彩",
+        "工作尖": "自动加热"
+      },
+      "in_stock": true,
+      "short_description": "口内扫描仪，全彩捕捉，全口扫描快速精准。",
+      "long_description": "口内扫描仪，全彩捕捉，全口扫描快速精准。 无菌供货，并为牙科专业人员提供临床支持。"
+    },
+    {
+      "product_id": "DEN-1030",
+      "title": "3Shape TRIOS 5 口内扫描仪",
+      "brand": "3Shape",
+      "model": "TRIOS 5",
+      "price": 190000.0,
+      "currency": "CNY",
+      "rating": 4.8,
+      "review_count": 2170,
+      "category": "影像设备",
+      "labels": [],
+      "attributes": {
+        "类型": "口内扫描仪",
+        "精度": "高功率",
+        "色彩": "全彩",
+        "无线": "有"
+      },
+      "in_stock": true,
+      "short_description": "无线口内扫描仪，实时色彩与比色，修复体精准。",
+      "long_description": "无线口内扫描仪，实时色彩与比色，修复体精准。 无菌供货，并为牙科专业人员提供临床支持。"
+    },
+    {
+      "product_id": "DEN-1031",
+      "title": "3Shape S1P-2 口内扫描仪",
+      "brand": "3Shape",
+      "model": "S1P-2",
+      "price": 190000.0,
+      "currency": "CNY",
+      "rating": 4.9,
+      "review_count": 2207,
+      "category": "影像设备",
+      "labels": [],
+      "attributes": {
+        "类型": "口内扫描仪",
+        "精度": "高功率",
+        "色彩": "全彩",
+        "工作尖": "加热式"
+      },
+      "in_stock": true,
+      "short_description": "加热工作尖口内扫描仪，取像清晰，全口印模可靠。",
+      "long_description": "加热工作尖口内扫描仪，取像清晰，全口印模可靠。 无菌供货，并为牙科专业人员提供临床支持。"
+    },
+    {
+      "product_id": "DEN-1032",
+      "title": "美亚光电 APSARAS 3D CBCT",
+      "brand": "Vatech",
+      "model": "APSARAS 3D",
+      "price": 264000.0,
+      "currency": "CNY",
+      "rating": 4.2,
+      "review_count": 2244,
+      "category": "影像设备",
+      "labels": [
+        "热销"
+      ],
+      "attributes": {
+        "类型": "锥形束 CT",
+        "视野": "大视野",
+        "探测器": "平板探测器",
+        "模式": "3D/2D"
+      },
+      "in_stock": true,
+      "short_description": "锥形束 CT，大视野，适合种植规划与三维诊断。",
+      "long_description": "锥形束 CT，大视野，适合种植规划与三维诊断。 无菌供货，并为牙科专业人员提供临床支持。"
+    },
+    {
+      "product_id": "DEN-1033",
+      "title": "蓝野 RAY98(M) 牙片机",
+      "brand": "BlueX",
+      "model": "RAY98(M)",
+      "price": 40000.0,
+      "currency": "CNY",
+      "rating": 4.3,
+      "review_count": 2281,
+      "category": "影像设备",
+      "labels": [],
+      "attributes": {
+        "类型": "牙片机",
+        "功率": "高频",
+        "定时器": "数码",
+        "支臂": "壁挂式"
+      },
+      "in_stock": true,
+      "short_description": "高频牙片机，数码定时，影像清晰、剂量低。",
+      "long_description": "高频牙片机，数码定时，影像清晰、剂量低。 无菌供货，并为牙科专业人员提供临床支持。"
+    },
+    {
+      "product_id": "DEN-1034",
+      "title": "海诺 JYF-10D 数码牙片机",
+      "brand": "Hainan",
+      "model": "JYF-10D",
+      "price": 22800.0,
+      "currency": "CNY",
+      "rating": 4.4,
+      "review_count": 2318,
+      "category": "影像设备",
+      "labels": [],
+      "attributes": {
+        "类型": "牙片机",
+        "功率": "高频",
+        "定时器": "数码",
+        "支臂": "移动式"
+      },
+      "in_stock": true,
+      "short_description": "带移动支架的数码牙片机，椅旁拍片灵活方便。",
+      "long_description": "带移动支架的数码牙片机，椅旁拍片灵活方便。 无菌供货，并为牙科专业人员提供临床支持。"
+    },
+    {
+      "product_id": "DEN-1035",
+      "title": "Carestream 3600P 牙科 X 光机",
+      "brand": "Carestream",
+      "model": "3600P",
+      "price": 32000.0,
+      "currency": "CNY",
+      "rating": 4.5,
+      "review_count": 2355,
+      "category": "影像设备",
+      "labels": [
+        "新品"
+      ],
+      "attributes": {
+        "类型": "牙片机",
+        "功率": "高频",
+        "定时器": "数码",
+        "支臂": "壁挂式"
+      },
+      "in_stock": true,
+      "short_description": "数码全景与头颅 X 光系统，影像清晰，诊断细节丰富。",
+      "long_description": "数码全景与头颅 X 光系统，影像清晰，诊断细节丰富。 无菌供货，并为牙科专业人员提供临床支持。"
+    },
+    {
+      "product_id": "DEN-1036",
+      "title": "西诺 S2313 牙科综合治疗椅",
+      "brand": "Xino",
+      "model": "S2313",
+      "price": 25000.0,
+      "currency": "CNY",
+      "rating": 4.6,
+      "review_count": 2392,
+      "category": "综合治疗台",
+      "labels": [],
+      "attributes": {
+        "类型": "综合治疗椅",
+        "牙科灯": "LED 照明",
+        "器械盘": "器械车式",
+        "座垫": "皮革"
+      },
+      "in_stock": true,
+      "short_description": "牙科综合治疗椅，配 LED 灯与器械车，调节平稳安静。",
+      "long_description": "牙科综合治疗椅，配 LED 灯与器械车，调节平稳安静。 无菌供货，并为牙科专业人员提供临床支持。"
+    },
+    {
+      "product_id": "DEN-1037",
+      "title": "西诺 S2313 种植治疗椅",
+      "brand": "Xino",
+      "model": "S2313 (Implant)",
+      "price": 40000.0,
+      "currency": "CNY",
+      "rating": 4.7,
+      "review_count": 2429,
+      "category": "综合治疗台",
+      "labels": [],
+      "attributes": {
+        "类型": "种植治疗椅",
+        "牙科灯": "LED 照明",
+        "器械盘": "器械车式",
+        "座垫": "皮革"
+      },
+      "in_stock": true,
+      "short_description": "种植配置治疗椅，器械盘加强，后仰范围大，适合口腔外科。",
+      "long_description": "种植配置治疗椅，器械盘加强，后仰范围大，适合口腔外科。 无菌供货，并为牙科专业人员提供临床支持。"
+    },
+    {
+      "product_id": "DEN-1038",
+      "title": "艾捷斯 AJ21 牙科综合治疗椅",
+      "brand": "A-dec",
+      "model": "AJ21",
+      "price": 74500.0,
+      "currency": "CNY",
+      "rating": 4.8,
+      "review_count": 66,
+      "category": "综合治疗台",
+      "labels": [
+        "热销"
+      ],
+      "attributes": {
+        "类型": "综合治疗椅",
+        "牙科灯": "LED 照明",
+        "器械盘": "集成式",
+        "座垫": "高级"
+      },
+      "in_stock": true,
+      "short_description": "集成器械盘的牙科治疗椅，人体工学设计，坚固耐用。",
+      "long_description": "集成器械盘的牙科治疗椅，人体工学设计，坚固耐用。 无菌供货，并为牙科专业人员提供临床支持。"
+    },
+    {
+      "product_id": "DEN-1039",
+      "title": "Belmont CLESTA II 牙科治疗机",
+      "brand": "Belmont",
+      "model": "CLESTA II",
+      "price": 129500.0,
+      "currency": "CNY",
+      "rating": 4.9,
+      "review_count": 103,
+      "category": "综合治疗台",
+      "labels": [],
+      "attributes": {
+        "类型": "综合治疗椅",
+        "牙科灯": "LED 照明",
+        "器械盘": "集成式",
+        "座垫": "高级"
+      },
+      "in_stock": true,
+      "short_description": "带自动回位支臂的牙科治疗机，椅面贴合身形，适合长时间操作。",
+      "long_description": "带自动回位支臂的牙科治疗机，椅面贴合身形，适合长时间操作。 无菌供货，并为牙科专业人员提供临床支持。"
+    },
+    {
+      "product_id": "DEN-1040",
+      "title": "Zehnder ZA-208B 种植治疗椅",
+      "brand": "Zehnder",
+      "model": "ZA-208B",
+      "price": 89600.0,
+      "currency": "CNY",
+      "rating": 4.2,
+      "review_count": 140,
+      "category": "综合治疗台",
+      "labels": [],
+      "attributes": {
+        "类型": "种植治疗椅",
+        "牙科灯": "LED 照明",
+        "器械盘": "器械车式",
+        "座垫": "皮革"
+      },
+      "in_stock": false,
+      "short_description": "种植治疗椅，靠背宽大、头枕可调，适合口腔手术。",
+      "long_description": "种植治疗椅，靠背宽大、头枕可调，适合口腔手术。 无菌供货，并为牙科专业人员提供临床支持。"
+    },
+    {
+      "product_id": "DEN-1041",
+      "title": "弘科 H1 牙科综合治疗椅",
+      "brand": "Hongke",
+      "model": "H1",
+      "price": 51800.0,
+      "currency": "CNY",
+      "rating": 4.3,
+      "review_count": 177,
+      "category": "综合治疗台",
+      "labels": [
+        "热销"
+      ],
+      "attributes": {
+        "类型": "综合治疗椅",
+        "牙科灯": "LED 照明",
+        "器械盘": "器械车式",
+        "座垫": "皮革"
+      },
+      "in_stock": true,
+      "short_description": "人体工学座椅与可靠器械盘的牙科治疗椅，适合全科诊疗。",
+      "long_description": "人体工学座椅与可靠器械盘的牙科治疗椅，适合全科诊疗。 无菌供货，并为牙科专业人员提供临床支持。"
+    },
+    {
+      "product_id": "DEN-1042",
+      "title": "新华 MOST-T 压力蒸汽灭菌器",
+      "brand": "Xinhua",
+      "model": "MOST-T",
+      "price": 13900.0,
+      "currency": "CNY",
+      "rating": 4.4,
+      "review_count": 214,
+      "category": "消毒灭菌",
+      "labels": [],
+      "attributes": {
+        "类型": "高压灭菌器",
+        "容量": "23 L",
+        "循环": "标准",
+        "显示屏": "LCD 屏"
+      },
+      "in_stock": true,
+      "short_description": "台式压力蒸汽灭菌器，循环显示清晰，灭菌可靠。",
+      "long_description": "台式压力蒸汽灭菌器，循环显示清晰，灭菌可靠。 无菌供货，并为牙科专业人员提供临床支持。"
+    },
+    {
+      "product_id": "DEN-1043",
+      "title": "新华 TQX-200BH 超声清洗机",
+      "brand": "Xinhua",
+      "model": "TQX-200BH",
+      "price": 8100.0,
+      "currency": "CNY",
+      "rating": 4.5,
+      "review_count": 251,
+      "category": "消毒灭菌",
+      "labels": [],
+      "attributes": {
+        "类型": "超声清洗机",
+        "容量": "大视野",
+        "频率": "40 kHz",
+        "定时器": "数码"
+      },
+      "in_stock": true,
+      "short_description": "超声清洗机，灭菌前有效去除器械上的碎屑。",
+      "long_description": "超声清洗机，灭菌前有效去除器械上的碎屑。 无菌供货，并为牙科专业人员提供临床支持。"
+    },
+    {
+      "product_id": "DEN-1044",
+      "title": "新华 XZY-02 手机注油机",
+      "brand": "Xinhua",
+      "model": "XZY-02",
+      "price": 1600.0,
+      "currency": "CNY",
+      "rating": 4.6,
+      "review_count": 288,
+      "category": "消毒灭菌",
+      "labels": [
+        "热销"
+      ],
+      "attributes": {
+        "类型": "手机注油机",
+        "接口": "ISO 接口",
+        "循环次数": "自动",
+        "功率": "电动"
+      },
+      "in_stock": true,
+      "short_description": "自动手机注油机，每次循环后为涡轮润滑并清洁。",
+      "long_description": "自动手机注油机，每次循环后为涡轮润滑并清洁。 无菌供货，并为牙科专业人员提供临床支持。"
+    },
+    {
+      "product_id": "DEN-1045",
+      "title": "新华 FK-100 封口机",
+      "brand": "Xinhua",
+      "model": "FK-100",
+      "price": 2000.0,
+      "currency": "CNY",
+      "rating": 4.7,
+      "review_count": 325,
+      "category": "消毒灭菌",
+      "labels": [],
+      "attributes": {
+        "类型": "封口机",
+        "封口宽度": "封口",
+        "温度": "可调",
+        "功率": "电动"
+      },
+      "in_stock": true,
+      "short_description": "纸塑封口机，用于安全、可追溯的无菌包装。",
+      "long_description": "纸塑封口机，用于安全、可追溯的无菌包装。 无菌供货，并为牙科专业人员提供临床支持。"
+    },
+    {
+      "product_id": "DEN-1046",
+      "title": "宏润 HYT-500 正压机",
+      "brand": "Hongrun",
+      "model": "HYT-500",
+      "price": 20000.0,
+      "currency": "CNY",
+      "rating": 4.8,
+      "review_count": 362,
+      "category": "消毒灭菌",
+      "labels": [],
+      "attributes": {
+        "类型": "正压装置",
+        "输出": "洁净空气",
+        "用途": "诊所",
+        "功率": "电动"
+      },
+      "in_stock": true,
+      "short_description": "正压装置，保持诊室空气洁净、环境受控。",
+      "long_description": "正压装置，保持诊室空气洁净、环境受控。 无菌供货，并为牙科专业人员提供临床支持。"
+    },
+    {
+      "product_id": "DEN-1047",
+      "title": "奥洁 AJ/DL-B-1000 空气消毒机",
+      "brand": "Aojie",
+      "model": "AJ/DL-B-1000",
+      "price": 3450.0,
+      "currency": "CNY",
+      "rating": 4.9,
+      "review_count": 399,
+      "category": "消毒灭菌",
+      "labels": [
+        "热销"
+      ],
+      "attributes": {
+        "类型": "空气消毒机",
+        "覆盖范围": "诊所",
+        "模式": "等离子",
+        "功率": "电动"
+      },
+      "in_stock": true,
+      "short_description": "等离子空气消毒机，安静稳定，适合诊室日常消毒。",
+      "long_description": "等离子空气消毒机，安静稳定，适合诊室日常消毒。 无菌供货，并为牙科专业人员提供临床支持。"
+    },
+    {
+      "product_id": "DEN-1048",
+      "title": "啄木鸟 FG 车针混合装",
+      "brand": "Woodpecker",
+      "model": "FG Assorted",
+      "price": 220.0,
+      "currency": "CNY",
+      "rating": 4.2,
+      "review_count": 436,
+      "category": "耗材配件",
+      "labels": [],
+      "attributes": {
+        "类型": "车针",
+        "柄型": "FG 柄",
+        "粒度": "混合装",
+        "无菌": "一次性"
+      },
+      "in_stock": true,
+      "short_description": "FG 柄车针混合装，用于备牙与修整，单次使用保持锋利。",
+      "long_description": "FG 柄车针混合装，用于备牙与修整，单次使用保持锋利。 无菌供货，并为牙科专业人员提供临床支持。"
+    },
+    {
+      "product_id": "DEN-1049",
+      "title": "八颗牙 0.06 锥度牙胶尖",
+      "brand": "Eighteeth",
+      "model": "GP 0.06",
+      "price": 125.0,
+      "currency": "CNY",
+      "rating": 4.3,
+      "review_count": 473,
+      "category": "耗材配件",
+      "labels": [],
+      "attributes": {
+        "类型": "牙胶尖",
+        "锥度": "0.06",
+        "规格": "混合装",
+        "无菌": "有"
+      },
+      "in_stock": true,
+      "short_description": "0.06 锥度牙胶尖，多规格混合，根管充填致密可靠。",
+      "long_description": "0.06 锥度牙胶尖，多规格混合，根管充填致密可靠。 无菌供货，并为牙科专业人员提供临床支持。"
+    },
+    {
+      "product_id": "DEN-1050",
+      "title": "啄木鸟种植套件（含骨移植材料）",
+      "brand": "Woodpecker",
+      "price": 19700.0,
+      "category": "耗材配件",
+      "labels": [
+        "热销"
+      ],
+      "attributes": {
+        "类型": "种植套件",
+        "内容物": "钻针 + 骨粉",
+        "无菌": "有"
+      },
+      "in_stock": true,
+      "short_description": "含钻针、骨粉与屏障膜的种植套件；可选择不同配置以匹配病例。",
+      "variants": [
+        {
+          "product_id": "DEN-1050-BASIC",
+          "option_values": {
+            "configuration": "基础配置"
+          },
+          "price": 19700.0
+        },
+        {
+          "product_id": "DEN-1050-GRAFT",
+          "option_values": {
+            "configuration": "含骨粉"
+          },
+          "price": 24500.0,
+          "in_stock": false
+        },
+        {
+          "product_id": "DEN-1050-FULL",
+          "option_values": {
+            "configuration": "全套"
+          },
+          "price": 29800.0
+        }
+      ],
+      "rating": 4.7,
+      "review_count": 180,
+      "long_description": "含钻针、骨粉与屏障膜的种植套件；可选择不同配置以匹配病例。 无菌供货，并为牙科专业人员提供临床支持。"
     }
-   ],
-   "rating": 4.7,
-   "review_count": 180
-  }
- ]
+  ]
 }

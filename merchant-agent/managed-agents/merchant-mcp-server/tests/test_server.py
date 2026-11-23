@@ -24,7 +24,7 @@ def server(config: MerchantAgentConfig | None = None):
 
 async def _stage_decals_price(client: ClientSession, new_price: float) -> str:
     """Searches for provenance, stages a decals price move, and returns the change id."""
-    await client.call_tool("search_listings", {"query": "dental burs"})
+    await client.call_tool("search_listings", {"query": "车针"})
     result = await client.call_tool(
         "stage_price_update", {"items": [{"listing_id": DECALS, "new_price": new_price}]}
     )
@@ -47,10 +47,10 @@ async def test_held_calls_are_plain_results_and_the_default_config_applies_on_th
         assert failed.isError
         # The structured filters argument reaches the executor as sent: the decals hold 3.
         kept = await client.call_tool(
-            "search_listings", {"query": "dental burs", "filters": {"max_stock": 3}}
+            "search_listings", {"query": "车针", "filters": {"max_stock": 3}}
         )
         dropped = await client.call_tool(
-            "search_listings", {"query": "dental burs", "filters": {"max_stock": 2}}
+            "search_listings", {"query": "车针", "filters": {"max_stock": 2}}
         )
         assert DECALS in result_text(kept) and DECALS not in result_text(dropped)
 

@@ -157,7 +157,7 @@ export function CheckoutButton({ staged, disabled, prompt }: { staged: boolean; 
           const cards = document.querySelectorAll("[data-checkout-card]");
           const card = cards[cards.length - 1];
           if (card) card.scrollIntoView({ behavior: "smooth", block: "center" });
-          else ask("Show me the checkout summary again.");
+          else ask("再看一下结算摘要。");
         }}
         className="mt-3 w-full rounded-(--radius) border border-(--line-strong) bg-(--card) py-2.5 text-[14px] font-semibold text-(--ink) transition hover:border-(--accent)"
       >

@@ -143,7 +143,7 @@ interface ChangeSummary {
 export function RecentChanges({ changes, limit = 4 }: { changes: ChangeSummary[]; limit?: number }) {
   if (changes.length === 0) return null;
   return (
-    <Panel title="Recent changes">
+    <Panel title="最近变更">
       <ul className="divide-y divide-(--line) px-[18px] pb-2">
         {changes.slice(0, limit).map((change) => {
           const status = CHANGE_STATUS[change.status];

@@ -108,7 +108,7 @@ export function Markdown({ text }: { text: string }) {
               <p key={i}>{renderInline(line, `q-${at}-${i}`)}</p>
             ))}
           </blockquote>
-          <QuotedAsData subject="Quoted message" className="mt-1 pl-2.5" />
+          <QuotedAsData subject="引用消息" className="mt-1 pl-2.5" />
         </div>,
       );
     }

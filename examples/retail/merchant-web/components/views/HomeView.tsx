@@ -56,7 +56,7 @@ function briefing(data: OverviewResponse): string {
   const orders = needs_attention.order_issues.length;
   const listings = needs_attention.inventory.length;
   const needs = [orders ? plural(orders, "order") : "", listings ? plural(listings, "listing") : ""].filter(Boolean);
-  parts.push(needs.length ? `${needs.join(" and ")} need you today.` : "Nothing needs you today.");
+  parts.push(needs.length ? `${needs.join(" and ")} need you today.` : "今日无需处理。");
   return parts.join(" ");
 }
 
@@ -88,7 +88,7 @@ function IssueRow({ issue, onAskAssistant }: { issue: OrderIssue; onAskAssistant
       title={issue.summary}
       meta={[style.label, `Order ${issue.order_id}`, issue.opened_at ? `opened ${formatDayMonth(issue.opened_at)}` : ""].filter(Boolean).join(" · ")}
       action={{
-        label: issue.kind === "buyer_message" ? "Draft reply" : "Ask",
+        label: issue.kind === "buyer_message" ? "起草回复" : "提问",
         onClick: () => onAskAssistant(`What are my options for order ${issue.order_id}? ${issue.summary}.`),
       }}
     />
@@ -110,7 +110,7 @@ function InventoryRow({ alert, onAskAssistant }: { alert: InventoryAlert; onAskA
       meta={
         <>
           <span className={soldOut ? "font-semibold text-(--danger)" : low ? "font-semibold text-(--warn)" : ""}>
-            {soldOut ? "Sold out" : `${formatNumber(alert.stock)} in stock`}
+            {soldOut ? "售罄" : `${formatNumber(alert.stock)} in stock`}
           </span>
           {[
             "",
@@ -132,7 +132,7 @@ function InventoryRow({ alert, onAskAssistant }: { alert: InventoryAlert; onAskA
         ) : null
       }
       action={{
-        label: low ? "Draft restock" : "Plan markdown",
+        label: low ? "起草补货" : "方案说明",
         onClick: () => onAskAssistant(low ? `Draft a restock plan for ${ref}.` : `Plan a markdown for ${ref}.`),
       }}
     />
@@ -142,7 +142,7 @@ function InventoryRow({ alert, onAskAssistant }: { alert: InventoryAlert; onAskA
 function Insights({ insights, onAskAssistant }: { insights: HomeInsight[]; onAskAssistant: (text: string) => void }) {
   if (insights.length === 0) return null;
   return (
-    <Panel title="From the assistant" icon={<KindIcon icon="spark" tone="accent" size={24} />}>
+    <Panel title="来自助手" icon={<KindIcon icon="spark" tone="accent" size={24} />}>
       <ul className="divide-y divide-(--line)">
         {insights.map((insight) => (
           <li key={insight.insight_id} className="px-[18px] py-2.5">
@@ -224,42 +224,42 @@ export default function HomeView({
 
       <ApprovalsBanner changes={pending} onReview={() => onAskAssistant("Walk me through the changes awaiting my approval and what each one would do.")} />
 
-      <Panel title="This week" subtitle={`${formatPeriodLabel(snapshot.period)}${comparison ? ` · against the ${comparison}` : ""}`} bodyClassName="pb-1">
+      <Panel title="本周" subtitle={`${formatPeriodLabel(snapshot.period)}${comparison ? ` · against the ${comparison}` : ""}`} bodyClassName="pb-1">
         <StatStrip>
           <StatTile
-            label="Sales"
+            label="销售额"
             value={formatMoney(snapshot.sales, currency, { whole: snapshot.sales >= 1000 })}
             changePct={snapshot.sales_change_pct}
             points={values(data.trends?.sales)}
             prior={values(data.trends_prior?.sales)}
-            onClick={() => onAskAssistant(askWhy("Sales", snapshot.sales_change_pct, comparison))}
+            onClick={() => onAskAssistant(askWhy("销售额", snapshot.sales_change_pct, comparison))}
             ariaLabel="Sales: ask the assistant why"
           />
           <StatTile
-            label="Orders"
+            label="订单"
             value={formatNumber(snapshot.orders)}
             changePct={snapshot.orders_change_pct}
             points={values(data.trends?.orders)}
             prior={values(data.trends_prior?.orders)}
-            onClick={() => onAskAssistant(askWhy("Orders", snapshot.orders_change_pct, comparison))}
+            onClick={() => onAskAssistant(askWhy("订单", snapshot.orders_change_pct, comparison))}
             ariaLabel="Orders: ask the assistant why"
           />
           <StatTile
-            label="Conversion"
+            label="转化率"
             value={snapshot.conversion_rate != null ? formatRate(snapshot.conversion_rate) : "—"}
             changePct={snapshot.conversion_change_pct}
             points={values(data.trends?.conversion)}
             prior={values(data.trends_prior?.conversion)}
-            onClick={() => onAskAssistant(askWhy("Conversion", snapshot.conversion_change_pct, comparison))}
+            onClick={() => onAskAssistant(askWhy("转化率", snapshot.conversion_change_pct, comparison))}
             ariaLabel="Conversion: ask the assistant why"
           />
           <StatTile
-            label="Average order"
+            label="平均订单"
             value={snapshot.average_order_value != null ? formatMoney(snapshot.average_order_value, currency) : "—"}
             changePct={aovChangePct}
             points={values(data.trends?.average_order_value)}
             prior={values(data.trends_prior?.average_order_value)}
-            onClick={() => onAskAssistant(askWhy("Average order value", aovChangePct, comparison))}
+            onClick={() => onAskAssistant(askWhy("平均订单金额", aovChangePct, comparison))}
             ariaLabel="Average order value: ask the assistant why"
           />
         </StatStrip>
@@ -267,17 +267,17 @@ export default function HomeView({
 
       <div className="grid items-start gap-4 xl:grid-cols-[minmax(0,1fr)_300px]">
         <Panel
-          title="Needs you today"
+          title="今日待办"
           action={
             <Segmented<Filter>
-              label="Filter attention items"
+              label="筛选需关注项"
               value={filter}
               onChange={setFilter}
               options={[
-                { id: "all", label: "All", count: counts.orders + counts.stock + counts.slow },
-                { id: "orders", label: "Orders", count: counts.orders },
-                { id: "stock", label: "Low stock", count: counts.stock },
-                { id: "slow", label: "Slow", count: counts.slow },
+                { id: "all", label: "全部", count: counts.orders + counts.stock + counts.slow },
+                { id: "orders", label: "订单", count: counts.orders },
+                { id: "stock", label: "库存偏低", count: counts.stock },
+                { id: "slow", label: "滞销", count: counts.slow },
               ]}
             />
           }
@@ -298,7 +298,7 @@ export default function HomeView({
               <QueueOverflow
                 hidden={queue.length - ROW_CAP}
                 link={{
-                  label: "See all",
+                  label: "查看全部",
                   // The hidden rows are order issues first, so open Orders when any of them is one.
                   onClick: () => onNavigate(queue.slice(ROW_CAP).some((row) => row.kind === "issue") ? "orders" : "inventory"),
                 }}
@@ -309,7 +309,7 @@ export default function HomeView({
 
         <div className="flex flex-col gap-4">
           <Insights insights={data.insights ?? []} onAskAssistant={onAskAssistant} />
-          <Panel title="Recent orders" action={<ViewLink label="All orders" onClick={() => onNavigate("orders")} />}>
+          <Panel title="最近订单" action={<ViewLink label="全部订单" onClick={() => onNavigate("orders")} />}>
             {data.recent_orders.length === 0 ? (
               <p className="px-[18px] pb-4 text-[13px] text-(--ink-soft)">No orders yet.</p>
             ) : (

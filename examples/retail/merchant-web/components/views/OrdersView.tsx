@@ -22,12 +22,12 @@ function IssueRow({ issue, onAskAssistant }: { issue: OrderIssue; onAskAssistant
           <div className="mt-1 rounded-[10px] bg-(--ground) px-3 py-2">
             <blockquote className="text-[13px] leading-snug text-(--ink-2)">&ldquo;{issue.buyer_message_excerpt}&rdquo;</blockquote>
             {/* Some fixture excerpts are injection attempts, so the note sits beside the quote. */}
-            <QuotedAsData subject="Buyer message" className="mt-1.5" />
+            <QuotedAsData subject="买家留言" className="mt-1.5" />
           </div>
         ) : null
       }
       action={{
-        label: issue.kind === "buyer_message" ? "Draft reply" : "Ask",
+        label: issue.kind === "buyer_message" ? "起草回复" : "提问",
         onClick: () => onAskAssistant(`What are my options for order ${issue.order_id}? ${issue.summary}.`),
       }}
     />
@@ -48,7 +48,7 @@ export default function OrdersView({
 
   return (
     <div className="ac-reveal flex flex-col gap-4">
-      <PageHeader title="Orders" subtitle={data ? (issues.length ? plural(issues.length, "open issue") : "No open issues") : undefined} />
+      <PageHeader title="订单" subtitle={data ? (issues.length ? plural(issues.length, "open issue") : "暂无未处理问题") : undefined} />
       {failed && !data ? (
         <Notice>The merchant API isn&apos;t reachable, so order issues can&apos;t load.</Notice>
       ) : !data ? (
@@ -58,7 +58,7 @@ export default function OrdersView({
         </div>
       ) : (
         <div className="grid items-start gap-4 xl:grid-cols-[minmax(0,1fr)_320px]">
-          <Panel title="Open issues" subtitle={issues.length ? String(issues.length) : undefined}>
+          <Panel title="未处理问题" subtitle={issues.length ? String(issues.length) : undefined}>
             {issues.length === 0 ? (
               <p className="px-[18px] pb-4 text-[13.5px] text-(--ink-soft)">No open order issues.</p>
             ) : (
@@ -69,7 +69,7 @@ export default function OrdersView({
               </AttentionList>
             )}
           </Panel>
-          <Panel title="Recent orders">
+          <Panel title="最近订单">
             {!recentOrders ? (
               <Skeleton className="mx-[18px] mb-4 h-40" />
             ) : recentOrders.length === 0 ? (

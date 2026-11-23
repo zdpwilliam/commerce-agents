@@ -54,7 +54,7 @@ def cart_product() -> str:
 @pytest.fixture(scope="session")
 def relevance_probe() -> tuple[str, str, str, set[str]]:
     """Returns (query, non-relevance sort, product that must lead, faint matches that must be cut)."""
-    return ("dental handpiece", "rating", "DEN-1007", {"DEN-1048", "DEN-1026"})
+    return ("手机", "rating", "DEN-1007", {"DEN-1048", "DEN-1026"})
 
 
 @pytest.fixture(scope="session")

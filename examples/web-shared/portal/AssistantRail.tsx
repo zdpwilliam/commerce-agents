@@ -102,7 +102,7 @@ export function AssistantRail({
         <div
           role="separator"
           aria-orientation="vertical"
-          aria-label="Resize assistant panel"
+          aria-label="调整助手面板宽度"
           onPointerDown={beginResize}
           className="absolute inset-y-0 left-0 z-10 hidden w-1.5 cursor-col-resize transition-colors hover:bg-(--line) lg:block"
         />

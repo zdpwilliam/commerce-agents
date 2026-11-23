@@ -7,31 +7,31 @@ import type { KindStyle, Tone } from "web-shared";
 import type { InventoryAlert, ListingStatus, OrderIssue } from "./types";
 
 export const ISSUE_KINDS: Record<OrderIssue["kind"], KindStyle> = {
-  delayed: { label: "Delayed", icon: "truck", tone: "warn" },
-  return_spike: { label: "Return spike", icon: "return", tone: "danger" },
-  buyer_message: { label: "Buyer message", icon: "message", tone: "info" },
-  damaged: { label: "Damaged", icon: "alert", tone: "danger" },
+  delayed: { label: "延误", icon: "truck", tone: "warn" },
+  return_spike: { label: "退货激增", icon: "return", tone: "danger" },
+  buyer_message: { label: "买家留言", icon: "message", tone: "info" },
+  damaged: { label: "破损", icon: "alert", tone: "danger" },
 };
 
 export const INVENTORY_KINDS: Record<InventoryAlert["kind"], KindStyle> = {
-  low_stock: { label: "Low stock", icon: "low", tone: "warn" },
-  slow_mover: { label: "Slow mover", icon: "clock", tone: "muted" },
+  low_stock: { label: "库存偏低", icon: "low", tone: "warn" },
+  slow_mover: { label: "滞销", icon: "clock", tone: "muted" },
 };
 
 export const LISTING_STATUS: Record<ListingStatus, { label: string; tone: Tone }> = {
-  active: { label: "Active", tone: "ok" },
-  paused: { label: "Paused", tone: "muted" },
-  draft: { label: "Draft", tone: "info" },
-  out_of_stock: { label: "Out of stock", tone: "danger" },
+  active: { label: "在售", tone: "ok" },
+  paused: { label: "已暂停", tone: "muted" },
+  draft: { label: "草稿", tone: "info" },
+  out_of_stock: { label: "缺货", tone: "danger" },
 };
 
 export const ORDER_STATUS: Record<string, { label: string; tone: Tone }> = {
-  processing: { label: "Processing", tone: "muted" },
-  shipped: { label: "Shipped", tone: "info" },
-  out_for_delivery: { label: "Out for delivery", tone: "info" },
-  delivered: { label: "Delivered", tone: "ok" },
-  delayed: { label: "Delayed", tone: "warn" },
-  cancelled: { label: "Cancelled", tone: "muted" },
-  return_initiated: { label: "Return requested", tone: "violet" },
-  refunded: { label: "Refunded", tone: "ok" },
+  processing: { label: "处理中", tone: "muted" },
+  shipped: { label: "已发货", tone: "info" },
+  out_for_delivery: { label: "派送中", tone: "info" },
+  delivered: { label: "已送达", tone: "ok" },
+  delayed: { label: "延误", tone: "warn" },
+  cancelled: { label: "已取消", tone: "muted" },
+  return_initiated: { label: "已申请退货", tone: "violet" },
+  refunded: { label: "已退款", tone: "ok" },
 };

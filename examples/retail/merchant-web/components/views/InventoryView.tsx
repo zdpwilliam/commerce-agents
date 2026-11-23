@@ -46,7 +46,7 @@ function AlertRow({ alert, onAskAssistant }: { alert: InventoryAlert; onAskAssis
           {alert.days_of_cover != null && !soldOut ? <span>{coverLabel(alert.days_of_cover)}</span> : soldOut ? <span>sold out</span> : null}
         </div>
       </div>
-      <AskButton label={low ? "Draft restock" : "Plan markdown"} onClick={() => onAskAssistant(prompt)} />
+      <AskButton label={low ? "起草补货" : "方案说明"} onClick={() => onAskAssistant(prompt)} />
     </li>
   );
 }
@@ -63,7 +63,7 @@ export default function InventoryView({ refreshKey, onAskAssistant }: { refreshK
   return (
     <div className="ac-reveal @container flex flex-col gap-4">
       <PageHeader
-        title="Inventory"
+        title="库存"
         subtitle={data ? `${lowStock.length} low or out of stock · ${plural(slowMovers.length, "slow mover")}${tiedUp ? ` with ${formatNumber(tiedUp)} units tied up` : ""}` : undefined}
       />
       {failed && !data ? (
@@ -75,7 +75,7 @@ export default function InventoryView({ refreshKey, onAskAssistant }: { refreshK
         </div>
       ) : (
         <div className="grid items-start gap-4 @4xl:grid-cols-2">
-          <Panel title="Low stock" subtitle="soonest to run out first">
+          <Panel title="库存偏低" subtitle="soonest to run out first">
             {lowStock.length === 0 ? (
               <p className="px-[18px] pb-4 text-[13.5px] text-(--ink-soft)">No low-stock listings.</p>
             ) : (
@@ -86,7 +86,7 @@ export default function InventoryView({ refreshKey, onAskAssistant }: { refreshK
               </ul>
             )}
           </Panel>
-          <Panel title="Slow movers" subtitle="stock well above the last 30 days of sales">
+          <Panel title="滞销商品" subtitle="stock well above the last 30 days of sales">
             {slowMovers.length === 0 ? (
               <p className="px-[18px] pb-4 text-[13.5px] text-(--ink-soft)">No slow movers.</p>
             ) : (

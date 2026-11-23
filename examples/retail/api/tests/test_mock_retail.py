@@ -17,20 +17,20 @@ from shopping_agent import SearchFilters
 
 def test_catalog_loads_and_validates(backend):
     assert len(backend.products) >= 50
-    assert backend.store_name == "ACME Dental"
+    assert backend.store_name == "ACME 牙科"
     sample = backend.products["DEN-1003"]
     assert sample.brand == "Foshan Jingmei"
     assert sample.long_description  # hero products carry a long description
 
 
 async def test_search_relevance(backend, session):
-    tents = await backend.search_products(session, "high-speed handpiece")
+    tents = await backend.search_products(session, "高速手机")
     assert tents and tents[0].product_id in {"DEN-1003", "DEN-1004"}
 
-    gift_toys = await backend.search_products(session, "curing light")
+    gift_toys = await backend.search_products(session, "光固化")
     assert gift_toys and gift_toys[0].product_id == "DEN-1022"
 
-    luggage = await backend.search_products(session, "intraoral scanner")
+    luggage = await backend.search_products(session, "扫描仪")
     assert any(p.product_id == "DEN-1030" for p in luggage[:3])
 
     nothing = await backend.search_products(session, "zzzqqq")
@@ -38,7 +38,7 @@ async def test_search_relevance(backend, session):
 
 
 async def test_out_of_stock_items_are_searchable(backend, session):
-    packs = await backend.search_products(session, "high-speed handpiece")
+    packs = await backend.search_products(session, "高速手机")
     assert any(p.product_id == "DEN-1002" and p.in_stock is False for p in packs)
 
 
@@ -46,7 +46,7 @@ async def test_delivery_promises_stamped(backend):
     for product in backend.products.values():
         promise = product.attributes.get("delivery")
         if product.in_stock:
-            assert promise is not None and promise.startswith("Get it by ")
+            assert promise is not None and promise.startswith("预计")
         else:
             assert promise is None
 
@@ -67,14 +67,14 @@ def test_memory_seed_is_schema_valid():
 
 
 async def test_search_filters_and_sort(backend, session):
-    cheap_coffee = await backend.search_products(session, "handpiece", SearchFilters(max_price=100))
+    cheap_coffee = await backend.search_products(session, "高速手机", SearchFilters(max_price=100))
     assert all(p.price <= 100 for p in cheap_coffee)
     assert all(p.product_id != "DEN-1002" for p in cheap_coffee)
 
     outdoor_only = await backend.search_products(
-        session, "handpiece", SearchFilters(category="handpieces"), limit=20
+        session, "高速手机", SearchFilters(category="牙科手机"), limit=20
     )
-    assert outdoor_only and all(p.category == "handpieces" for p in outdoor_only)
+    assert outdoor_only and all(p.category == "牙科手机" for p in outdoor_only)
 
     by_price = await backend.search_products(
         session, "restorative", SearchFilters(sort="price_asc"), limit=20
@@ -106,11 +106,11 @@ async def test_fulfillment_options_follow_the_shipping_policy(backend, session):
     shipping = next(p for p in backend._policies if p.policy_id == "shipping").content
     for term in (
         f"¥{STANDARD_SHIPPING.fee:.0f}",
-        f"free over ¥{FREE_SHIPPING_OVER}",
-        standard.eta.split(" (")[0],
-        express.eta.split(" (")[0],
+        f"满 ¥{FREE_SHIPPING_OVER} 免运费",
+        "3-5 个工作日",
+        "2 个工作日",
         f"¥{express.fee:.0f}",
-        "freight",
+        "货运",
     ):
         assert term in shipping, term
 
@@ -118,14 +118,14 @@ async def test_fulfillment_options_follow_the_shipping_policy(backend, session):
 def test_pickup_eta_stays_inside_store_hours():
     eta = MockRetail._pickup_eta
     # Two hours of prep, rounded up to the hour.
-    assert eta(datetime(2026, 7, 14, 13, 0)) == "today by 3 PM"
-    assert eta(datetime(2026, 7, 14, 13, 20)) == "today by 4 PM"
+    assert eta(datetime(2026, 7, 14, 13, 0)) == "今天 下午 3 点前"
+    assert eta(datetime(2026, 7, 14, 13, 20)) == "今天 下午 4 点前"
     # Before opening, the two hours count from the 9 AM open.
-    assert eta(datetime(2026, 7, 14, 6, 30)) == "today by 11 AM"
+    assert eta(datetime(2026, 7, 14, 6, 30)) == "今天 上午 11 点前"
     # 19:00 plus two hours lands on the 9 PM close.
-    assert eta(datetime(2026, 7, 14, 19, 0)) == "today by 9 PM"
-    assert eta(datetime(2026, 7, 14, 19, 30)) == "tomorrow morning"
-    assert eta(datetime(2026, 7, 14, 23, 0)) == "tomorrow morning"
+    assert eta(datetime(2026, 7, 14, 19, 0)) == "今天 下午 9 点前"
+    assert eta(datetime(2026, 7, 14, 19, 30)) == "明早"
+    assert eta(datetime(2026, 7, 14, 23, 0)) == "明早"
 
 
 async def test_a_family_is_found_by_its_option_values_and_its_variants_stay_out_of_listings(
@@ -133,9 +133,9 @@ async def test_a_family_is_found_by_its_option_values_and_its_variants_stay_out_
 ):
     assert "DEN-1050" in backend.products and "DEN-1050-FULL" not in backend.products
     assert backend.variants["DEN-1050-FULL"].variant_of == "DEN-1050"
-    hits = await backend.search_products(session, "implant kit")
+    hits = await backend.search_products(session, "种植套件")
     assert hits and hits[0].product_id == "DEN-1050"
-    assert hits[0].options == {"configuration": ["basic", "with graft", "full kit"]}
+    assert hits[0].options == {"configuration": ["基础配置", "含骨粉", "全套"]}
     assert all(hit.variant_of is None for hit in hits)
 
 
@@ -154,5 +154,5 @@ async def test_an_order_line_for_a_variant_names_its_choice(backend, session):
     orders = await backend.get_orders(session)
     lines = [item for order in orders for item in order.items if item.variant_of]
     assert [(i.product_id, i.option_values, i.variant_of) for i in lines] == [
-        ("DEN-1050-GRAFT", {"configuration": "with graft"}, "DEN-1050")
+        ("DEN-1050-GRAFT", {"configuration": "含骨粉"}, "DEN-1050")
     ]

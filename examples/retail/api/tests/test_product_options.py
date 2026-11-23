@@ -24,11 +24,11 @@ def add(client, shopper):
 
 
 def test_listings_carry_the_family_and_none_of_its_variants(client):
-    products = client.get("/api/products?category=consumables").json()["products"]
+    products = client.get("/api/products", params={"category": "耗材配件"}).json()["products"]
     ids = {product["product_id"] for product in products}
     assert "DEN-1050" in ids and not {pid for pid in ids if pid.startswith("DEN-1050-")}
     family = next(product for product in products if product["product_id"] == "DEN-1050")
-    assert family["options"] == {"configuration": ["basic", "with graft", "full kit"]}
+    assert family["options"] == {"configuration": ["基础配置", "含骨粉", "全套"]}
     assert "variants" not in family
 
 
@@ -57,9 +57,7 @@ def test_the_add_button_on_a_seen_variant_writes_a_line_with_its_choice(add):
     assert response.status_code == 200
     [line] = response.json()["cart"]["items"]
     assert line["product_id"] == "DEN-1050-FULL"
-    assert (
-        line["option_values"] == {"configuration": "full kit"} and line["variant_of"] == "DEN-1050"
-    )
+    assert line["option_values"] == {"configuration": "全套"} and line["variant_of"] == "DEN-1050"
     assert "DEN-1050-FULL" in record.pending_app_events[0]
 
 

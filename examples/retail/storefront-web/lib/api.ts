@@ -12,10 +12,8 @@ export const UNREACHABLE =
   "Couldn't reach the retail API on port 8000. Start it with " +
   "`uvicorn retail.api.main:app --app-dir examples --port 8000` and try again.";
 
-export async function fetchProducts(language?: string): Promise<Product[] | null> {
-  const params: Record<string, string> = { limit: "100" };
-  if (language) params.language = language;
-  const data = await api.get<{ products: Product[] }>("/products", params);
+export async function fetchProducts(): Promise<Product[] | null> {
+  const data = await api.get<{ products: Product[] }>("/products", { limit: "100" });
   return data?.products ?? null;
 }
 

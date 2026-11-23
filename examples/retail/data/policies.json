@@ -2,69 +2,69 @@
   "policies": [
     {
       "policy_id": "returns",
-      "title": "Returns & refunds",
+      "title": "退货与退款",
       "category": "returns",
-      "content": "Unopened, sterile-sealed instruments can be returned within 30 days of delivery for a full refund to the original payment method. Installed or used devices, custom items, and opened consumables cannot be returned unless faulty. Refunds post within 5 business days of the return reaching our warehouse. ACME Dental members get free return pickup for devices; otherwise use the prepaid label in your order page."
+      "content": "未开封、无菌密封的器械可在送达后 30 天内退货，全额退还至原支付方式。已安装或使用过的设备、定制商品及已开封的耗材，除质量问题外不可退货。退款在退回器械到达仓库后 5 个工作日内到账。ACME 牙科会员可免费上门取件；其他客户请使用订单页的预付面单。"
     },
     {
       "policy_id": "shipping",
-      "title": "Shipping options & timelines",
+      "title": "配送方式与时效",
       "category": "shipping",
-      "content": "Standard shipping is ¥60, free over ¥500, and arrives in 3-5 business days. Express arrives in 2 business days and is free for ACME Dental members on orders over ¥500, otherwise ¥120. Same-day delivery is available on eligible consumables in select areas when ordered before 2pm. Large equipment such as treatment chairs and imaging units ships freight and includes a scheduled delivery window."
+      "content": "标准配送 ¥60，订单满 ¥500 免运费，3-5 个工作日送达。加急配送 2 个工作日送达，ACME 牙科会员订单满 ¥500 免加急费，否则 ¥120。部分地区符合条件的耗材支持当日达，需在下午 2 点前下单。大型设备（如治疗椅、影像设备）走货运，并含预约配送时段。"
     },
     {
       "policy_id": "price-match",
-      "title": "Price match promise",
+      "title": "价格匹配承诺",
       "category": "pricing",
-      "content": "If you find an identical, in-stock instrument at a lower price from an authorised dealer within 14 days of purchase, we will match it and refund the difference. Auctions, clearance, and marketplace sellers are excluded. Contact support with a link to the competing listing."
+      "content": "若您在购买后 14 天内于授权经销商处发现同款在售商品低价，我们将匹配差价并退还差额。拍卖、清仓及第三方卖家价格不适用。请联系客服并提供竞争商品链接。"
     },
     {
       "policy_id": "warranty",
-      "title": "Warranties & protection plans",
+      "title": "保修与保障计划",
       "category": "warranty",
-      "content": "Manufacturer warranties apply to all devices; the duration is listed on the product page under specs. ACME Care plans extend coverage to 3 years and include annual calibration checks on handpieces and motors. Claims are handled in-app and most replacements ship within 2 business days of approval."
+      "content": "所有设备均享厂商保修，保修期见商品页规格。ACME 关怀计划将保障延长至 3 年，并含手机与马达的年度校准服务。理赔在应用内处理，多数替换品在批准后 2 个工作日内发出。"
     },
     {
       "policy_id": "membership",
-      "title": "ACME Dental membership",
+      "title": "ACME 牙科会员",
       "category": "membership",
-      "content": "ACME Dental membership costs ¥790/year and includes free express shipping over ¥500, free device return pickup, early access to seasonal promotions, and 2% back in store credit on consumables. You can cancel anytime and we will prorate the unused portion. There is a 14-day free trial for new members."
+      "content": "ACME 牙科会员年费 ¥790，含满 ¥500 免加急配送、设备免费上门取件、促销提前购，以及耗材消费 2% 返 store credit。可随时取消，未使用部分按比例退还。新会员享 14 天免费试用。"
     },
     {
       "policy_id": "gift-cards",
-      "title": "Gift cards",
+      "title": "礼品卡",
       "category": "payments",
-      "content": "Digital gift cards are delivered by email within minutes and never expire. Physical gift cards ship free. Gift cards cannot be redeemed for cash except where required by law, and cannot be used to buy other gift cards. Check your balance any time in the app under Payments."
+      "content": "电子礼品卡数分钟内通过邮件发送，永不过期。实体礼品卡免运费。除法律要求外，礼品卡不可兑换现金，也不可购买其他礼品卡。可随时在应用的支付页面查询余额。"
     },
     {
       "policy_id": "order-changes",
-      "title": "Changing or cancelling an order",
+      "title": "修改或取消订单",
       "category": "orders",
-      "content": "Orders can be modified or cancelled within 30 minutes of being placed from the order page. After that, items that have not entered the packing process can still be cancelled — contact support. Once an order has shipped, use the return process instead. Delivery-address changes after shipping are handled by the carrier and are not guaranteed."
+      "content": "订单可在下单后 30 分钟内于订单页修改或取消。此后，未进入打包流程的商品仍可取消——请联系客服。订单发出后请使用退货流程。发货后的地址变更由承运商处理，不保证成功。"
     },
     {
       "policy_id": "damaged-items",
-      "title": "Damaged or missing items",
+      "title": "破损或缺件",
       "category": "returns",
-      "content": "If an item arrives damaged or an order is missing items, report it within 7 days from the order page with a photo. We will send a replacement or refund the affected items — no need to return the damaged product unless we send a pickup label. Claims are reviewed case by case after the carrier confirms delivery."
+      "content": "若商品破损或订单缺件，请在 7 天内于订单页附照片上报。我们将补发或退款——除非我们寄送取件面单，否则无需退回破损商品。门廊失窃索赔在承运商确认送达后逐案处理。"
     },
     {
       "policy_id": "guide-handpieces",
-      "title": "Buying guide: choosing a dental handpiece",
+      "title": "选购指南：如何选择牙科手机",
       "category": "guide",
-      "content": "Start with the procedure mix. A high-speed turbine handles cavity preparation and crown reduction; look at rpm (around 400,000 is standard), head size for posterior access, and whether it is autoclavable. A low-speed handpiece covers polishing, finishing and slow preparation, usually with a 4-hole or ISO connection — match it to your unit. LED lighting helps in deep cavities. For surgery or implant work choose a dedicated surgical or implant angle with the right connection and torque range. Autoclavability and bearing type matter more than brand for daily reliability."
+      "content": "先从诊疗项目入手。高速涡轮手机用于备牙和牙冠预备；关注转速（约 40 万转/分钟为标准）、后牙操作所需的机头尺寸，以及是否可高温高压灭菌。低速手机用于抛光、修整和低速备牙，通常为 4 孔或 ISO 接口——需与您的牙椅匹配。LED 照明有助于深龋操作。外科或种植工作需选择专用外科/种植弯机，并配好接口与扭矩范围。对日常可靠性而言，可灭菌性与轴承类型比品牌更重要。"
     },
     {
       "policy_id": "guide-curing",
-      "title": "Buying guide: choosing a curing light",
+      "title": "选购指南：如何选择光固化机",
       "category": "guide",
-      "content": "Match the wavelength to your composites: most materials cure in the 420-480 nm band, while bulk-fill and some universal composites need a wider range such as 385-515 nm. Output power around 1000-1500 mW/cm2 with an even beam shortens cure time and reduces the risk of an under-cured restoration. Check the number of presets, the light-guide diameter, and battery life for a full clinic day. A narrow guide reaches tight contact areas; a broad guide cures large surfaces faster."
+      "content": "波长需与树脂匹配：多数材料在 420-480 nm 波段固化，而大块填充和部分通用树脂需要 385-515 nm 的更宽范围。1000-1500 mW/cm² 左右、光斑均匀的输出可缩短固化时间并降低固化不全风险。查看预设数量、导光棒直径和满足全天门诊的电池续航。细导光棒适合邻接面，宽导光棒固化大面积更快。"
     },
     {
       "policy_id": "guide-imaging",
-      "title": "Buying guide: intraoral scanners and imaging",
+      "title": "选购指南：口内扫描与影像",
       "category": "guide",
-      "content": "For an intraoral scanner, accuracy and full-colour capture matter most for crowns and aligners; a heated tip keeps the field clear, and wireless freedom helps around the chair. For radiography, a high-frequency DC unit gives sharper, lower-dose images than an AC unit. CBCT is for implant planning and 3D diagnosis: choose the field of view to match your cases rather than buying the largest, and check whether the unit offers a 2D panoramic mode."
+      "content": "口内扫描仪方面，精度与全彩采集对牙冠和矫治器最重要；加热工作尖可保持视野清晰，无线设计在牙椅旁更灵活。X 光方面，高频直流机比交流机成像更清晰、剂量更低。CBCT 用于种植规划与三维诊断：视野应按病例选择，而非一味求大，并确认设备是否提供二维全景模式。"
     }
   ]
 }

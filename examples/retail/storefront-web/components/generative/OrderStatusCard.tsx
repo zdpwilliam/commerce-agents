@@ -14,7 +14,7 @@ const RAIL_PROGRESS: Record<string, number> = {
   delivered: 4,
 };
 
-const RAIL_STAGES = ["Ordered", "Packed", "Shipped", "Delivered"] as const;
+const RAIL_STAGES = ["已下单", "已打包", "已发货", "已送达"] as const;
 
 function shortDay(iso: string): string {
   const match = /^(\d{4})-(\d{2})-(\d{2})/.exec(iso);
@@ -58,7 +58,7 @@ function DeliveryRail({ order }: { order: NonNullable<OrderStatusPayload["order"
                   {isDelaySegment ? (
                     <span
                       className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap rounded-full bg-(--warn-soft) px-2 py-0.5 text-[11px] font-semibold text-(--warn)"
-                      title="The original delivery estimate was missed"
+                      title="未达成原定送达时间"
                     >
                       delayed
                     </span>

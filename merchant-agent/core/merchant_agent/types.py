@@ -450,7 +450,6 @@ class MerchantSessionContext(ClockContext):
     session_id: str
     merchant_id: str
     operator: str
-    language: str = "en"
 
 
 class MerchantSessionState(BaseModel):

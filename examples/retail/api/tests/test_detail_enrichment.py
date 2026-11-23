@@ -64,7 +64,7 @@ def test_price_intelligence_is_deterministic_and_in_range(backend):
     assert first["high"] == max(first["series"])
     assert first["days"] == 90
     assert first["position"] in {"low", "typical", "high"}
-    assert f"${price:.2f}" in first["verdict"]
+    assert f"¥{price:.2f}" in first["verdict"]
 
 
 def test_price_intelligence_verdict_matches_position(backend):
@@ -72,9 +72,9 @@ def test_price_intelligence_verdict_matches_position(backend):
         intel = backend.price_intelligence(product_id)
         assert intel is not None
         wording = {
-            "low": "near this item's 90-day low",
-            "typical": "typical price",
-            "high": "above this item's typical price",
+            "low": "90 天最低价",
+            "typical": "常见价位",
+            "high": "高于该商品的常见价位",
         }[intel["position"]]
         assert wording in intel["verdict"]
 

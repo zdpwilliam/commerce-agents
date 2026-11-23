@@ -89,7 +89,7 @@ export function Composer({
       <button
         type="submit"
         disabled={busy || !ready || !draft.trim()}
-        aria-label="Send"
+        aria-label="发送"
         className={`grid shrink-0 place-items-center bg-(--ink) text-(--surface) transition hover:brightness-110 disabled:opacity-35 ${VARIANTS[variant].button}`}
       >
         <Icon name="arrow-up" size={16} />

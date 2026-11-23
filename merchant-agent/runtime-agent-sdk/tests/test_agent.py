@@ -43,7 +43,7 @@ from merchant_agent_sdk import (
     tool_contracts,
 )
 
-HEADPHONES_ID = "DEN-1001"  # returned by a "handpiece" search of the retail fixture
+HEADPHONES_ID = "DEN-1001"  # returned by a "高速手机" search of the retail fixture
 
 CHANGE_TEXT = "Take the noise cancelling headphones from $249 down to $239 for the push."
 
@@ -158,7 +158,7 @@ async def test_held_calls_are_plain_results_and_failures_are_flagged(handlers):
 async def test_search_stage_apply_and_preview_round_trip_through_the_registered_tools(
     handlers, toolset
 ):
-    search = await handlers["search_listings"].handler({"query": "handpiece"})
+    search = await handlers["search_listings"].handler({"query": "高速手机"})
     assert MERCHANT_FENCE.open in result_text(search) and HEADPHONES_ID in result_text(search)
     staged = await handlers["stage_inventory_action"].handler(
         {"items": [{"listing_id": HEADPHONES_ID, "action": "restock", "quantity": 24}]}
@@ -178,7 +178,7 @@ async def test_search_stage_apply_and_preview_round_trip_through_the_registered_
 
 async def test_host_approval_goes_through_the_toolsets_approval_api(handlers, toolset):
     toolset.config.require_host_approval = True
-    await handlers["search_listings"].handler({"query": "handpiece"})
+    await handlers["search_listings"].handler({"query": "高速手机"})
     await handlers["stage_inventory_action"].handler(
         {"items": [{"listing_id": HEADPHONES_ID, "action": "restock", "quantity": 24}]}
     )
@@ -357,7 +357,7 @@ async def test_detector_reads_the_pre_injection_operator_text(toolset):
 async def test_reminded_turn_merges_tool_calls_and_ui(handlers, toolset):
     # On the reminder query the client stages through the real handler, which renders
     # the change's preview card.
-    await handlers["search_listings"].handler({"query": "handpiece"})
+    await handlers["search_listings"].handler({"query": "高速手机"})
 
     class RemindedPassClient(ScriptedClient):
         async def query(self, text: str) -> None:

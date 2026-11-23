@@ -189,8 +189,6 @@ class ShoppingSessionContext(ClockContext):
     session_id: str
     user_id: str
     page: PageContext = Field(default_factory=PageContext)
-    # Response language for this session; "en" keeps the SDK/MCP paths unchanged.
-    language: str = "en"
 
 
 class ShoppingSessionState(BaseModel):

@@ -10,13 +10,13 @@
       "items": [
         {
           "product_id": "DEN-1050",
-          "title": "Woodpecker Implant Kit with Bone Graft Material",
+          "title": "啄木鸟种植套件（含骨移植材料）",
           "quantity": 1,
           "price": 19700.0
         },
         {
           "product_id": "DEN-1050",
-          "title": "Woodpecker Implant Kit with Bone Graft Material",
+          "title": "啄木鸟种植套件（含骨移植材料）",
           "quantity": 1,
           "price": 19700.0
         }
@@ -33,7 +33,7 @@
       "items": [
         {
           "product_id": "DEN-1005",
-          "title": "Foshan Jingmei L Low-Speed Handpiece",
+          "title": "佛山精美 L 低速手机",
           "quantity": 1,
           "price": 350.0
         }
@@ -50,7 +50,7 @@
       "items": [
         {
           "product_id": "DEN-1027",
-          "title": "Woodpecker S6 LED Ultrasonic Scaler",
+          "title": "啄木鸟 S6 LED 超声洁牙机",
           "quantity": 1,
           "price": 3000.0
         },
@@ -73,7 +73,7 @@
       "items": [
         {
           "product_id": "DEN-1024",
-          "title": "Woodpecker PT-B Air Polisher",
+          "title": "啄木鸟 PT-B 喷砂机",
           "quantity": 2,
           "price": 19000.0
         }
@@ -90,17 +90,17 @@
       "items": [
         {
           "product_id": "DEN-1037",
-          "title": "Xino S2313 Implant Treatment Chair",
+          "title": "西诺 S2313 种植治疗椅",
           "quantity": 1,
           "price": 40000.0
         },
         {
           "product_id": "DEN-1050-GRAFT",
-          "title": "Woodpecker Implant Kit with Bone Graft Material",
+          "title": "啄木鸟种植套件（含骨移植材料）",
           "quantity": 1,
           "price": 549.0,
           "option_values": {
-            "configuration": "with graft"
+            "configuration": "含骨粉"
           },
           "variant_of": "DEN-1050"
         }
@@ -117,13 +117,13 @@
       "items": [
         {
           "product_id": "DEN-1042",
-          "title": "Xinhua MOST-T Pressure Steam Sterilizer",
+          "title": "新华 MOST-T 压力蒸汽灭菌器",
           "quantity": 1,
           "price": 13900.0
         },
         {
           "product_id": "DEN-1043",
-          "title": "Xinhua TQX-200BH Ultrasonic Cleaner",
+          "title": "新华 TQX-200BH 超声清洗机",
           "quantity": 1,
           "price": 19.0
         }

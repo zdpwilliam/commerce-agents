@@ -17,14 +17,14 @@ import { MoreLink } from "./home";
 import { StorePage } from "./Shell";
 
 const STATUS: Record<string, { label: string; tone: Tone }> = {
-  processing: { label: "Processing", tone: "muted" },
-  shipped: { label: "Shipped", tone: "info" },
-  out_for_delivery: { label: "Out for delivery", tone: "info" },
-  delayed: { label: "Delayed", tone: "warn" },
-  delivered: { label: "Delivered", tone: "ok" },
-  cancelled: { label: "Cancelled", tone: "muted" },
-  return_initiated: { label: "Return requested", tone: "violet" },
-  refunded: { label: "Refunded", tone: "ok" },
+  processing: { label: "处理中", tone: "muted" },
+  shipped: { label: "已发货", tone: "info" },
+  out_for_delivery: { label: "派送中", tone: "info" },
+  delayed: { label: "延误", tone: "warn" },
+  delivered: { label: "已送达", tone: "ok" },
+  cancelled: { label: "已取消", tone: "muted" },
+  return_initiated: { label: "已申请退货", tone: "violet" },
+  refunded: { label: "已退款", tone: "ok" },
 };
 
 const OPEN = new Set(["processing", "shipped", "out_for_delivery", "delayed"]);
@@ -53,7 +53,7 @@ export function estimateOf(order: Order): { date: string; note: string | null } 
   };
 }
 
-/** The label for a status, the vertical's own word first ("return_initiated" → "Return requested"). */
+/** The label for a status, the vertical's own word first ("return_initiated" → "已申请退货"). */
 export function orderStatusLabel(status: string, labels?: Record<string, string>): string {
   return labels?.[status] ?? STATUS[status]?.label ?? status.replaceAll("_", " ");
 }
@@ -75,19 +75,19 @@ export interface OrderHandoff {
 export interface OrderNouns {
   /** "order", "trip" */
   one: string;
-  /** The view: "Orders", "Trips" */
+  /** The view: "订单", "Trips" */
   title: string;
-  /** The home card: "Arriving", "Coming up" */
+  /** The home card: "即将送达", "即将送达" */
   cardTitle: string;
-  /** The home card with nothing open: "Nothing on the way" */
+  /** The home card with nothing open: "暂无在途订单" */
   noneOpen: string;
-  /** Before an open order's date: "Arrives", "Starts". */
+  /** Before an open order's date: "送达", "开始". */
   openVerb: string;
   /** The date line of a closed order: delivered, cancelled, or refunded. */
   closedWhen: (order: Order, date: string) => string;
-  /** This vertical's words for the shared statuses ("shipped" → "Confirmed"). */
+  /** This vertical's words for the shared statuses ("shipped" → "已确认"). */
   statusLabels?: Record<string, string>;
-  /** The view's filters after "All". */
+  /** The view's filters after "全部". */
   filters: { id: string; label: string; match: (order: Order) => boolean }[];
   handoff: (order: Order) => OrderHandoff;
 }
@@ -95,22 +95,22 @@ export interface OrderNouns {
 /** Retail's vocabulary; a vertical spreads this and overrides what differs. */
 export const ORDER_NOUNS: OrderNouns = {
   one: "order",
-  title: "Orders",
-  cardTitle: "Arriving",
-  noneOpen: "Nothing on the way",
-  openVerb: "Arrives",
+  title: "订单",
+  cardTitle: "即将送达",
+  noneOpen: "暂无在途订单",
+  openVerb: "送达",
   closedWhen: (order, date) => (order.status === "delivered" ? `Delivered ${date}` : `Placed ${formatDayMonth(order.placed_at)}`),
   filters: [
-    { id: "open", label: "On the way", match: isOpen },
-    { id: "delayed", label: "Delayed", match: (order) => order.status === "delayed" },
-    { id: "closed", label: "Past", match: (order) => !isOpen(order) },
+    { id: "open", label: "配送中", match: isOpen },
+    { id: "delayed", label: "延误", match: (order) => order.status === "delayed" },
+    { id: "closed", label: "历史", match: (order) => !isOpen(order) },
   ],
   handoff(order) {
     const ref = `order ${order.order_id}`;
-    if (order.status === "delayed") return { label: "Ask why", prompt: `Why is ${ref} delayed, and when will it arrive?` };
-    if (order.status === "delivered") return { label: "Ask about a return", prompt: `Can I still return something from ${ref}?` };
-    if (isOpen(order)) return { label: "Ask", prompt: `Where is ${ref} right now?` };
-    return { label: "Ask", prompt: `What's the status of ${ref}?` };
+    if (order.status === "delayed") return { label: "询问原因", prompt: `Why is ${ref} delayed, and when will it arrive?` };
+    if (order.status === "delivered") return { label: "询问退货", prompt: `Can I still return something from ${ref}?` };
+    if (isOpen(order)) return { label: "提问", prompt: `Where is ${ref} right now?` };
+    return { label: "提问", prompt: `What's the status of ${ref}?` };
   },
 };
 
@@ -126,7 +126,7 @@ function When({ order, nouns }: { order: Order; nouns: OrderNouns }) {
   if (!isOpen(order)) return <span>{nouns.closedWhen(order, estimate.date)}</span>;
   return (
     <span className={order.status === "delayed" ? "font-semibold text-(--warn)" : ""} title={estimate.note ?? undefined}>
-      {order.status === "delayed" ? "Expected" : nouns.openVerb} {estimate.date}
+      {order.status === "delayed" ? "预计" : nouns.openVerb} {estimate.date}
     </span>
   );
 }
@@ -219,7 +219,7 @@ export function OrdersView({
           value={filter}
           onChange={setFilter}
           options={[
-            { id: "all", label: "All", count: all.length },
+            { id: "all", label: "全部", count: all.length },
             ...nouns.filters.map((entry) => ({ id: entry.id, label: entry.label, count: all.filter(entry.match).length })),
           ]}
         />

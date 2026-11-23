@@ -74,7 +74,7 @@ export default function CheckoutSummary({ payload }: { payload: CheckoutPayload 
             </span>
           </span>
           <span className={freeShipping ? "font-medium text-(--ok)" : "text-(--ink)"}>
-            {freeShipping ? "Free" : "Calculated at checkout"}
+            {freeShipping ? "Free" : "结算时计算"}
           </span>
         </div>
         {!freeShipping && STORE_POLICY.freeShippingThreshold - cart.subtotal > 0 ? (
@@ -94,7 +94,7 @@ export default function CheckoutSummary({ payload }: { payload: CheckoutPayload 
           <span>{formatMoney(cart.subtotal, cart.currency)}</span>
         </div>
         <p className="text-[11px] leading-snug text-(--ink-soft)">
-          {freeShipping ? "Before tax" : "Before shipping and tax"}; the final total appears at
+          {freeShipping ? "未含税费" : "未含运费与税费"}; the final total appears at
           checkout.
         </p>
       </div>
@@ -111,7 +111,7 @@ export default function CheckoutSummary({ payload }: { payload: CheckoutPayload 
               aria-describedby={handoffNoteId}
               className="w-full rounded-xl bg-(--accent) py-2.5 text-center text-sm font-bold text-(--ink)"
             >
-              {h.label ?? (h.seller ? `Continue to checkout with ${h.seller}` : "Continue to checkout")}
+              {h.label ?? (h.seller ? `Continue to checkout with ${h.seller}` : "继续结算")}
             </a>
           ))}
         </div>
@@ -122,13 +122,13 @@ export default function CheckoutSummary({ payload }: { payload: CheckoutPayload 
           aria-disabled
           aria-describedby={handoffNoteId}
           className="mt-3 w-full cursor-not-allowed rounded-xl bg-(--accent) py-2.5 text-sm font-bold text-(--ink) opacity-90"
-          title="Nothing is charged here. Payment happens when you check out."
+          title="此处不扣款。付款在结算时完成。"
         >
           Continue to checkout
         </button>
       )}
       <p id={handoffNoteId} className="mt-2 text-center text-[11px] text-(--ink-soft)/80">
-        Nothing is charged here. Payment happens when you check out.
+        此处不扣款。付款在结算时完成。
       </p>
     </section>
   );

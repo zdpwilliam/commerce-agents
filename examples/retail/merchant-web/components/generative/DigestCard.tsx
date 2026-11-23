@@ -18,16 +18,16 @@ function triagePrompt(item: DigestEntry): { label: string; prompt: string } | nu
   const listingRef = item.listing ? `${item.listing.title} (${item.listing.listing_id})` : item.ref_id;
   switch (item.kind) {
     case "low_stock":
-      return listingRef ? { label: "Draft restock", prompt: `Draft a restock plan for ${listingRef}.` } : null;
+      return listingRef ? { label: "起草补货", prompt: `Draft a restock plan for ${listingRef}.` } : null;
     case "slow_mover":
-      return listingRef ? { label: "Plan markdown", prompt: `Plan a markdown for ${listingRef}.` } : null;
+      return listingRef ? { label: "方案说明", prompt: `Plan a markdown for ${listingRef}.` } : null;
     case "order_issue":
       return {
-        label: "Draft reply",
+        label: "起草回复",
         prompt: item.ref_id ? `Help me handle order ${item.ref_id}: ${item.headline}` : `Help me handle this order issue: ${item.headline}`,
       };
     case "metric":
-      return { label: "Ask why", prompt: `What's driving this: ${item.headline}?` };
+      return { label: "询问原因", prompt: `What's driving this: ${item.headline}?` };
     default:
       return null;
   }
@@ -55,7 +55,7 @@ export default function DigestCard({ payload, onPrefill }: { payload: DigestPayl
   const items = payload.items ?? [];
   return (
     <GenCard>
-      <GenCardHeader title={payload.title ?? "Needs attention"} aside={plural(items.length, "item")} />
+      <GenCardHeader title={payload.title ?? "需要关注"} aside={plural(items.length, "item")} />
       <DigestList>
         {items.map((item, index) => {
           const triage = onPrefill ? triagePrompt(item) : null;

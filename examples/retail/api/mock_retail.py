@@ -23,7 +23,6 @@ from demo_common.storefront_fixtures import (
     example_data_dir,
     find_order,
     find_product,
-    keyword_score,
     load_catalog,
     load_orders,
     load_policies,
@@ -32,7 +31,6 @@ from demo_common.storefront_fixtures import (
     option_text,
     orders_for,
     preferences_of,
-    rank_products,
     search_help,
     summary_of,
     unavailable_detail,
@@ -52,16 +50,23 @@ from shopping_agent import (
     UserPreferences,
 )
 
-from .i18n import (  # noqa: E402
-    DEFAULT_LANGUAGE,
-    load_translations,
-    localize,
-    localize_cart,
-    localize_products,
-    localized_search_text,
-)
+_CJK = _re.compile(r"[\u4e00-\u9fff]")
+_WORD = _re.compile(r"[a-z0-9]+")
 
-_CJK = _re.compile(r"[\u4e00-\u9fff\u3040-\u30ff\uac00-\ud7af]")
+
+def _text_tokens(text: str) -> set[str]:
+    """ASCII words plus CJK unigrams/bigrams, so Chinese queries match Chinese catalog text."""
+    lowered = text.lower()
+    tokens = set(_WORD.findall(lowered))
+    cjk = "".join(_CJK.findall(lowered))
+    tokens.update(cjk)
+    tokens.update(cjk[i : i + 2] for i in range(len(cjk) - 1))
+    return tokens
+
+
+def _query_tokens(query: str) -> list[str]:
+    return sorted(_text_tokens(query))
+
 
 DATA_DIR = example_data_dir(__file__)
 
@@ -78,51 +83,25 @@ _SEARCH_WEIGHTS = {
     "attributes": 1.5,
     "description": 1.0,
 }
-_SYNONYMS: dict[str, list[str]] = {
-    "luggage": ["spinner", "carry-on", "suitcase"],
-    "suitcase": ["spinner", "carry-on", "luggage"],
-    "headphones": ["headphone", "earphones"],
-    "computer": ["laptop", "monitor"],
-    "workout": ["fitness", "exercise"],
-    "exercise": ["fitness", "workout"],
-    "puppy": ["dog"],
-    "kitten": ["cat"],
-    "kid": ["kids", "children"],
-    "child": ["kids", "children"],
-    "couch": ["sofa"],
-    "present": ["gift"],
-    "camping": ["camp", "tent", "outdoor"],
-    "cook": ["cookware", "kitchen"],
-    "coffee": ["espresso"],
-    "sleep": ["sleeping"],
-    "pack": ["backpack"],
-    "hike": ["hiking"],
-}
-
 # Review-aspect vocabularies per category (invented, like the reviews themselves).
 _ASPECTS_BY_CATEGORY: dict[str, list[str]] = {
-    "toys-games": ["Durability", "Play value", "Age fit", "Easy cleanup"],
-    "kids-room": ["Easy setup", "Looks as pictured", "Durability", "Kid appeal"],
-    "pet-supplies": ["Durability", "Pet comfort", "Easy to clean", "Sizing"],
-    "home-kitchen": ["Build quality", "Easy to clean", "Performance", "Value"],
-    "office-electronics": ["Build quality", "Setup", "Comfort", "Reliability"],
-    "outdoor-camping": ["Weather resistance", "Pack size", "Setup", "Durability"],
-    "fitness": ["Build quality", "Grip", "Sizing", "Value"],
-    "travel": ["Durability", "Packability", "Wheels & handle", "Capacity"],
-    "beauty-personal-care": ["Gentle formula", "Scent", "Results", "Value"],
-    "furniture-bedroom": ["Assembly", "Comfort", "Build quality", "As pictured"],
-    "grocery": ["Freshness", "Taste", "Packaging", "Value"],
+    "牙科手机": ["做工", "转速稳定", "可高温灭菌", "性价比"],
+    "根管治疗": ["定位精准", "操作顺畅", "耐用性", "性价比"],
+    "修复固化": ["固化效果", "光强稳定", "操作便捷", "性价比"],
+    "牙周洁治": ["清洁效果", "舒适度", "耐用性", "性价比"],
+    "影像设备": ["成像清晰", "扫描精度", "操作便捷", "稳定性"],
+    "综合治疗台": ["做工", "舒适度", "调节顺滑", "耐用性"],
+    "消毒灭菌": ["灭菌可靠", "容量", "操作便捷", "稳定性"],
+    "耗材配件": ["品质", "与描述一致", "规格合适", "性价比"],
 }
-_ASPECTS_FALLBACK = ["Quality", "As described", "Value"]
-_FREIGHT_CATEGORIES = {"imaging", "units"}
+_ASPECTS_FALLBACK = ["品质", "与描述一致", "性价比"]
+_FREIGHT_CATEGORIES = {"影像设备", "综合治疗台"}
 _FREIGHT_PRICE_FLOOR = 3000
 # The terms of the shipping entry in policies.json, which is what the agent quotes;
 # test_mock_retail checks that the entry still states each of them. CNY amounts.
 FREE_SHIPPING_OVER = 500
-STANDARD_SHIPPING = FulfillmentOption(
-    method="delivery", eta="3-5 business days (standard)", fee=60.0
-)
-EXPRESS_SHIPPING = FulfillmentOption(method="delivery", eta="2 business days (express)", fee=120.0)
+STANDARD_SHIPPING = FulfillmentOption(method="delivery", eta="3-5 个工作日（标准）", fee=60.0)
+EXPRESS_SHIPPING = FulfillmentOption(method="delivery", eta="2 个工作日（加急）", fee=120.0)
 FREIGHT_SHIPPING = FulfillmentOption(
     method="shipping", eta="5-7 business days (freight)", fee=290.0
 )
@@ -137,7 +116,6 @@ class MockRetail(StorefrontBackend):
         self._orders = load_orders(data_dir)
         self._policies = load_policies(data_dir)
         self._carts = SessionCarts()
-        self._translations = load_translations(data_dir)
         self._stamp_delivery_promises()
         self._stamp_low_stock(data_dir)
 
@@ -152,7 +130,7 @@ class MockRetail(StorefrontBackend):
             promised = boot + timedelta(days=2 + sum(ord(ch) for ch in product.product_id) % 3)
             if promised.weekday() == 6:
                 promised += timedelta(days=1)
-            label = f"Get it by {promised.strftime('%a, %b')} {promised.day}"
+            label = f"预计 {promised.strftime('%m 月 %d 日')} 送达"
             product.attributes[DELIVERY_ATTRIBUTE] = label
             # A family's in-stock variants ship on the family's promise.
             for variant in product.variants:
@@ -197,14 +175,19 @@ class MockRetail(StorefrontBackend):
             + " "
             + option_text(product),
             "description": f"{product.short_description or ''} {product.long_description or ''}",
-            # Localized text lets a query in zh/ja/ko match the same catalog record.
-            "localized": localized_search_text(product, self._translations),
         }
 
     def _score(self, product: ProductDetails, query_tokens: list[str]) -> float:
-        return keyword_score(
-            self._searchable_text(product), _SEARCH_WEIGHTS, query_tokens, _SYNONYMS
-        )
+        # The catalog and queries are Chinese: the shared ASCII tokenizer drops CJK, so
+        # score on character bigrams (plus ASCII words) with the usual field weights.
+        fields = {name: _text_tokens(text) for name, text in self._searchable_text(product).items()}
+        score = 0.0
+        for token in query_tokens:
+            score += max(
+                (weight for name, weight in _SEARCH_WEIGHTS.items() if token in fields[name]),
+                default=0.0,
+            )
+        return score
 
     @staticmethod
     def _soft_filter(product: ProductDetails, filters: SearchFilters) -> bool:
@@ -220,37 +203,36 @@ class MockRetail(StorefrontBackend):
         haystack += f" {product.title.lower()} {option_text(product).lower()}"
         return all(str(value).lower() in haystack for value in filters.attributes.values())
 
-    def _session_language(self, session: ShoppingSessionContext) -> str:
-        # getattr keeps this working before the session carries a language field.
-        return getattr(session, "language", DEFAULT_LANGUAGE) or DEFAULT_LANGUAGE
-
-    def _rank_cjk(
-        self, query: str, filters: SearchFilters | None, limit: int
-    ) -> list[ProductDetails]:
-        """Substring match over English + all-language text for queries the ASCII
-        tokenizer would drop. Filters and ranking mirror ``rank_products``."""
-        needle = query.strip().lower()
-        if not needle:
+    def _rank(self, query: str, filters: SearchFilters | None, limit: int) -> list[ProductDetails]:
+        """Rank the Chinese catalog for a query. Mirrors ``rank_products``: hard filters,
+        a relevance cutoff at half the best score, soft filters, and the requested sort."""
+        query_tokens = _query_tokens(query)
+        if not query_tokens:
             return []
-        matched: list[ProductDetails] = []
-        for product in self.products.values():
-            haystack = " ".join(self._searchable_text(product).values()).lower()
-            if needle in haystack:
-                if filters is not None and not within_price_and_rating(product, filters):
-                    continue
-                matched.append(product)
+        scored = [
+            (self._score(product, query_tokens), product)
+            for product in self.products.values()
+            if filters is None or within_price_and_rating(product, filters)
+        ]
+        scored = [(points, product) for points, product in scored if points > 0]
+        if scored:
+            best = max(points for points, _ in scored)
+            scored = [(points, product) for points, product in scored if points >= best / 2]
         if filters is not None:
-            narrowed = [p for p in matched if self._soft_filter(p, filters)]
-            if narrowed:
-                matched = narrowed
+            narrowed = [
+                (p, product) for p, product in scored if self._soft_filter(product, filters)
+            ]
+            scored = narrowed or scored
         sort = filters.sort if filters else "relevance"
         if sort == "price_asc":
-            matched.sort(key=lambda p: p.price)
+            scored.sort(key=lambda pair: pair[1].price)
         elif sort == "price_desc":
-            matched.sort(key=lambda p: -p.price)
+            scored.sort(key=lambda pair: -pair[1].price)
         elif sort == "rating":
-            matched.sort(key=lambda p: -(p.rating or 0))
-        return matched[:limit]
+            scored.sort(key=lambda pair: -(pair[1].rating or 0))
+        else:
+            scored.sort(key=lambda pair: (-pair[0], -(pair[1].rating or 0)))
+        return [product for _, product in scored[:limit]]
 
     async def search_products(
         self,
@@ -259,22 +241,8 @@ class MockRetail(StorefrontBackend):
         filters: SearchFilters | None = None,
         limit: int = 8,
     ) -> list[Product]:
-        language = self._session_language(session)
-        if _CJK.search(query):
-            ranked = self._rank_cjk(query, filters, limit)
-        else:
-            ranked = rank_products(
-                self.products.values(),
-                query,
-                filters,
-                limit,
-                score=self._score,
-                hard_filter=within_price_and_rating,
-                soft_filter=self._soft_filter,
-            )
-        return localize_products(
-            [summary_of(product) for product in ranked], language, self._translations
-        )
+        del session
+        return [summary_of(product) for product in self._rank(query, filters, limit)]
 
     def product(self, product_id: str) -> ProductDetails | None:
         return find_product(self.products, self.variants, product_id)
@@ -282,11 +250,8 @@ class MockRetail(StorefrontBackend):
     async def get_product_details(
         self, session: ShoppingSessionContext, product_id: str
     ) -> ProductDetails | None:
-        language = self._session_language(session)
-        product = self.product(product_id)
-        if product is None:
-            return None
-        return localize(product, language, self._translations)
+        del session
+        return self.product(product_id)
 
     def price_intelligence(self, product_id: str) -> dict[str, Any] | None:
         """A 90-day price series derived from the product id, ending at today's price,
@@ -313,9 +278,9 @@ class MockRetail(StorefrontBackend):
             ratio = (product.price - low) / (high - low)
             position = "low" if ratio <= 0.25 else "high" if ratio >= 0.75 else "typical"
         verdict = {
-            "low": f"${product.price:.2f} is near this item's 90-day low",
-            "typical": f"${product.price:.2f} is this item's typical price",
-            "high": f"${product.price:.2f} is above this item's typical price",
+            "low": f"¥{product.price:.2f} 接近该商品 90 天最低价",
+            "typical": f"¥{product.price:.2f} 处于该商品的常见价位",
+            "high": f"¥{product.price:.2f} 高于该商品的常见价位",
         }[position]
         return {
             "days": 90,
@@ -323,7 +288,7 @@ class MockRetail(StorefrontBackend):
             "low": low,
             "high": high,
             "position": position,
-            "verdict": f"{verdict} (90-day range ${low:.0f}–${high:.0f})",
+            "verdict": f"{verdict}（90 天区间 ¥{low:.0f}–¥{high:.0f}）",
         }
 
     def review_aspects(self, product_id: str) -> dict[str, Any] | None:
@@ -353,7 +318,6 @@ class MockRetail(StorefrontBackend):
 
     async def get_cart(self, session: ShoppingSessionContext) -> Cart:
         cart = self._carts.cart(session.session_id)
-        cart = localize_cart(cart, self._session_language(session), self._translations)
         # The catalog is priced in CNY; the shared SessionCarts type defaults to USD.
         catalog_currency = next((p.currency for p in self.products.values() if p.currency), "CNY")
         return cart.model_copy(update={"currency": catalog_currency})
@@ -412,15 +376,16 @@ class MockRetail(StorefrontBackend):
         if ready.minute or ready.second or ready.microsecond:
             ready = ready.replace(minute=0, second=0, microsecond=0) + timedelta(hours=1)
         if ready.date() != now.date() or ready.hour > _STORE_CLOSES:
-            return "tomorrow morning"
+            return "明早"
+        period = "上午" if ready.hour < 12 else "下午"
         hour12 = ready.hour % 12 or 12
-        return f"today by {hour12} {'AM' if ready.hour < 12 else 'PM'}"
+        return f"今天 {period} {hour12} 点前"
 
     async def get_fulfillment_options(
         self, session: ShoppingSessionContext, product_ids: list[str]
     ) -> list[FulfillmentOption]:
         prefs = await self.get_preferences(session)
-        location = prefs.default_location or "your area"
+        location = prefs.default_location or "您所在地区"
         quoted = [product for pid in product_ids if (product := self.product(pid))]
         standard = STANDARD_SHIPPING
         if sum(product.price for product in quoted) > FREE_SHIPPING_OVER:
@@ -432,7 +397,7 @@ class MockRetail(StorefrontBackend):
                 method="pickup",
                 eta=self._pickup_eta(datetime.now()),
                 fee=0.0,
-                location=f"ACME {location}",
+                location=f"ACME {location} 自提点",
             ),
         ]
         if any(

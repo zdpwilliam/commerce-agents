@@ -6,16 +6,10 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   AssistantRail,
-  asLang,
-  I18nProvider,
   Inspector,
-  LanguageSwitcher,
-  type Lang,
   type PortalNavItem,
   PortalShell,
   type Prefill,
-  storeLanguage,
-  translate,
   useMerchantChat,
   useResource,
   useSession,
@@ -41,14 +35,13 @@ function StoreMark() {
   );
 }
 
-function Portal() {
+export default function PortalPage() {
   const session = useSession(api);
-  const [language, setLanguage] = useState<Lang>(asLang(session.language));
-  const t = useCallback((key: string) => translate(language, key), [language]);
   const [view, setView] = useState<PortalView>("home");
   const [assistantOpen, setAssistantOpen] = useState(false);
   const [activityOpen, setActivityOpen] = useState(false);
   const [prefill, setPrefill] = useState<Prefill | null>(null);
+  // Bumped whenever a staged change moves, so every widget re-reads the store the agent wrote.
   const [refreshKey, setRefreshKey] = useState(0);
   const refreshPortal = useCallback(() => setRefreshKey((value) => value + 1), []);
 
@@ -58,15 +51,12 @@ function Portal() {
     onPortalRefresh: refreshPortal,
   });
 
-  const { data: overview, failed: overviewFailed } = useResource(session.sessionId ? fetchOverview : null, [session.sessionId, refreshKey, language]);
+  // The overview feeds the home page and the sidebar counts, so it loads here.
+  const { data: overview, failed: overviewFailed } = useResource(session.sessionId ? fetchOverview : null, [session.sessionId, refreshKey]);
 
+  // The rail is part of the default layout on wide screens; narrow screens open it on demand.
   useEffect(() => {
     setAssistantOpen(window.innerWidth >= 1024);
-  }, []);
-
-  const onLanguageChange = useCallback((next: Lang) => {
-    storeLanguage(next);
-    setLanguage(next);
   }, []);
 
   const askAssistant = useCallback((text: string) => {
@@ -77,30 +67,29 @@ function Portal() {
   const nav = useMemo<PortalNavItem<PortalView>[]>(() => {
     const alerts = overview?.snapshot.alerts;
     return [
-      { id: "home", label: t("Home"), icon: "home" },
-      { id: "catalog", label: t("Catalog"), icon: "tag" },
-      { id: "orders", label: t("Orders"), icon: "inbox", attention: alerts?.order_issues || null },
+      { id: "home", label: "首页", icon: "home" },
+      { id: "catalog", label: "商品目录", icon: "tag" },
+      { id: "orders", label: "订单", icon: "inbox", attention: alerts?.order_issues || null },
       {
         id: "inventory",
-        label: t("Inventory"),
+        label: "库存",
         icon: "box",
         count: alerts ? (alerts.low_stock ?? 0) + (alerts.slow_movers ?? 0) : null,
       },
     ];
-  }, [overview, t]);
+  }, [overview]);
 
   return (
-    <I18nProvider api={api} language={language} onChange={onLanguageChange}>
+    <>
       <PortalShell
-        brand={{ mark: <StoreMark />, name: "ACME Dental", detail: t("Merchant workspace") }}
+        brand={{ mark: <StoreMark />, name: "ACME 牙科", detail: "商家工作台" }}
         nav={nav}
         view={view}
         onViewChange={setView}
-        operator={{ name: session.operator ?? t("Operator"), role: t("Store manager") }}
+        operator={{ name: session.operator ?? "操作员", role: "店长" }}
         assistantOpen={assistantOpen}
         assistantBusy={chat.busy}
         onToggleAssistant={() => setAssistantOpen((open) => !open)}
-        headerExtra={<LanguageSwitcher />}
         rail={
           <AssistantRail
             open={assistantOpen}
@@ -146,14 +135,10 @@ function Portal() {
           trace={chat.trace}
           memory={chat.memory}
           newMemoryKeys={chat.newMemoryKeys}
-          memoryTitle={t("Business memory")}
+          memoryTitle="业务记忆"
           onClose={() => setActivityOpen(false)}
         />
       ) : null}
-    </I18nProvider>
+    </>
   );
-}
-
-export default function PortalPage() {
-  return <Portal />;
 }

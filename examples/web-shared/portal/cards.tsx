@@ -81,9 +81,9 @@ interface ChangeLike {
 }
 
 export const CHANGE_STATUS: Record<ChangeLike["status"], { tone: Tone; label: string }> = {
-  staged: { tone: "violet", label: "Awaiting approval" },
-  applied: { tone: "ok", label: "Approved" },
-  discarded: { tone: "muted", label: "Dismissed" },
+  staged: { tone: "violet", label: "待审批" },
+  applied: { tone: "ok", label: "已批准" },
+  discarded: { tone: "muted", label: "已忽略" },
 };
 
 export function ChangeStatusPill({ status }: { status: ChangeLike["status"] }) {
@@ -142,10 +142,10 @@ export function ApproveBar({
       {change.status === "staged" ? (
         <div className="flex flex-wrap items-center gap-2">
           <Button variant="accent" size="sm" icon="check" onClick={() => onAct("apply")} disabled={busy !== null || !canAct}>
-            {busy === "apply" ? "Applying…" : "Approve"}
+            {busy === "apply" ? "Applying…" : "批准"}
           </Button>
           <Button variant="secondary" size="sm" onClick={() => onAct("discard")} disabled={busy !== null || !canAct}>
-            {busy === "discard" ? "Dismissing…" : "Dismiss"}
+            {busy === "discard" ? "Dismissing…" : "忽略"}
           </Button>
           <span className="text-[11.5px] leading-tight text-(--ink-soft)">Nothing applies until you approve.</span>
         </div>
@@ -245,7 +245,7 @@ export function MarginHeadroom({
   costLabel,
 }: {
   change: ChangeLike & { items: DiffItem[]; margin_before_pct?: number | null; margin_after_pct?: number | null };
-  /** "Unit cost", "Nightly cost", "Per-ticket cost". */
+  /** "单位成本", "每晚费用", "Per-ticket cost". */
   costLabel: string;
 }) {
   const item = change.items.length === 1 ? change.items[0] : null;

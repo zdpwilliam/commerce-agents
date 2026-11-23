@@ -1,56 +1,48 @@
 # commerce-agents
 
-For agents working in this repo, commerce-builder plugin users included. The public
-reference for commerce agents on Claude: a shopping agent and a merchant agent on three
-paths each, four vertical examples, and a Claude Code plugin.
+面向在本仓库工作的 Agent（包括 commerce-builder 插件用户）。这是 Claude 上商务 Agent 的公开参考实现：一个购物 Agent 和一个商家 Agent，各有三条运行路径，四个垂直行业示例，以及一个 Claude Code 插件。当前为纯中文项目，商店数据为牙科器械。
 
-## Layout
+## 目录结构
 
-- `commerce-common/commerce_common/`: what both roles share; its `__init__` lists the modules.
-- `shopping-agent/core/shopping_agent/`: types, `StorefrontBackend`, config, prompt, `tools/`, gates, enrichment, executor.
-- `merchant-agent/core/merchant_agent/`: the merchant equivalents, plus `changes.py` and `analysis.py`.
-- `*/skills/`: five flows per role, one `SKILL.md` each.
-- `*/runtime-messages-api/`: `ShoppingAgent`, `MerchantAgent`, the merchant analysis delegate.
-- `*/runtime-agent-sdk/`: each agent as `ClaudeAgentOptions`, with a console.
-- `*/managed-agents/`: the manifest directory (with the derived `system.md`) and the role's MCP server.
-- `examples/demo_common/` and `examples/web-shared/`: what the verticals' APIs and web apps share; `examples/` is the npm workspace.
-- `examples/<vertical>/`: `api/`, `data/`, `storefront-web/`, `merchant-web/`; ports 8000-8003, 3000-3003, 3100-3103.
-- `plugins/commerce-builder/`: six skills, four commands; `.claude-plugin/marketplace.json` points at it.
-- `docs/`: `safety.md`, `backends.md`, `deployment.md`. `scripts/`: install, demo, smoke, screenshots, check, deploy, verify.
-- `tests/`: the suites that span packages (both roles on all three paths); each package keeps its own `tests/`.
+- `commerce-common/commerce_common/`：两个角色共享的部分；其 `__init__` 列出各模块。
+- `shopping-agent/core/shopping_agent/`：类型、`StorefrontBackend`、配置、提示词、`tools/`、门禁、enrichment、执行器。
+- `merchant-agent/core/merchant_agent/`：商家的对应部分，外加 `changes.py` 和 `analysis.py`。
+- `*/skills/`：每个角色五个流程，各有一个 `SKILL.md`。
+- `*/runtime-messages-api/`：`ShoppingAgent`、`MerchantAgent`、商家分析代理。
+- `*/runtime-agent-sdk/`：以 `ClaudeAgentOptions` 形式呈现的每个 Agent，带控制台。
+- `*/managed-agents/`：清单目录（含派生的 `system.md`）和角色的 MCP server。
+- `examples/demo_common/` 与 `examples/web-shared/`：垂直行业的 API 与 web 应用共享的部分；`examples/` 是 npm 工作区。
+- `examples/<vertical>/`：`api/`、`data/`、`storefront-web/`、`merchant-web/`；端口 8000-8003、3000-3003、3100-3103。
+- `plugins/commerce-builder/`：六个 skills、四个命令；`.claude-plugin/marketplace.json` 指向它。
+- `docs/`：`safety.md`、`backends.md`、`deployment.md`。`scripts/`：install、demo、smoke、screenshots、check、deploy、verify。
+- `tests/`：跨包套件（两个角色的全部三条路径）；每个包保留自己的 `tests/`。
 
-`requirements.txt` installs the seven packages and their pinned dependencies (`requirements-dev.txt`
-adds pytest and ruff); `scripts/install.sh` runs it.
+`requirements.txt` 安装七个包及其固定依赖（`requirements-dev.txt` 增加 pytest 和 ruff）；`scripts/install.sh` 运行它。
 
-## Design rules
+## 设计规则
 
-- One model owns the conversation; a rule goes in a tool description, the prompt, or a skill by how often it applies.
-- The static prompt and `tools[]` are the same bytes on every turn; per-request data goes in the fenced block after the breakpoint.
-- UI is presentation tool calls, validated and filled in on the server, streamed as `ui` events.
-- Third-party content is fenced data; writes are provenance-gated and capped in code; `checkout` charges nothing; merchant writes apply only through host approval.
-- Core is domain-neutral; a vertical adds UI through `PresentationExtension` and keeps the rest to itself.
-- Each mechanism is defined once, in `commerce_common` or a role core, and shared by all three paths.
+- 一个模型负责对话；规则按适用频率放在工具描述、提示词或 skill 中。
+- 静态提示词和 `tools[]` 每轮字节相同；每请求数据放在断点之后的 fence 块中。
+- UI 是 presentation 工具调用，在服务端校验并填充，以 `ui` 事件流式输出。
+- 第三方内容是 fence 中的数据；写操作有 provenance 门禁且在上限内；`checkout` 不扣款；商家写操作仅通过宿主批准后生效。
+- Core 与领域无关；垂直行业通过 `PresentationExtension` 添加 UI，其余部分自行维护。
+- 每个机制只定义一次，位于 `commerce_common` 或某个角色 core 中，由三条路径共享。
 
-## Fictional and original
+## 虚构与原创
 
-No real company, brand, product, or person appears: the only company is ACME and its
-lines; every brand, prompt, schema, and figure is invented here. Two exceptions:
-deployment and integration targets (the README's "MCP connectors" section; platform and
-SDK names in `docs/deployment.md`, the README's deploying section, and the platform tests),
-and CC0 category photos listed in the `IMAGE-CREDITS.md` beside them. When in doubt,
-redesign rather than rename.
+不出现真实的公司、品牌、商品或人物：唯一的公司是 ACME 及其产品线；每个品牌、提示词、schema 和数字都是在此原创的。两处例外：部署与集成目标（README 的「MCP 连接器」部分；`docs/deployment.md`、README 部署部分和平台测试中的平台与 SDK 名称），以及旁边 `IMAGE-CREDITS.md` 中列出的 CC0 类目图片。拿不准时，重新设计而非改名。
 
-## Conventions
+## 约定
 
-- Python 3.11+, `ruff` (root `ruff.toml`), `pytest` (root `pytest.ini`), type hints, `pydantic` schemas; web apps are Next.js and TypeScript.
-- Skill descriptions name the request class, without sample utterances; tool descriptions say when the tool applies; examples stay schematic.
-- A change to prompt text, a tool description, a skill, or a fence notice re-derives `system.md`; `scripts/check.py` compares them.
-- Prose: plain declarative sentences; one term per thing; each fact once, naming its module; each role in its own terms; a README says what a thing is, how to run it, and where its interfaces are; no history, dates, or process narrative; cut before restyling.
-- A new module updates this file and its README.
+- Python 3.11+，`ruff`（根目录 `ruff.toml`），`pytest`（根目录 `pytest.ini`），类型提示，`pydantic` schema；web 应用使用 Next.js 和 TypeScript。
+- Skill 描述命名请求类别，不含示例话语；工具描述说明工具何时适用；示例保持示意性。
+- 修改提示词文本、工具描述、skill 或 fence 提示会重新派生 `system.md`；`scripts/check.py` 对比它们。
+- 行文：平实的陈述句；一个事物一个术语；每个事实只说一次并点明其模块；每个角色用各自的术语；README 说明某物是什么、如何运行、接口在哪；不写历史、日期或过程叙述；先删减再改风格。
+- 新增模块要更新本文件及其 README。
 
-## Verify
+## 验证
 
 ```bash
 ruff check . && ruff format --check . && pytest && python scripts/check.py
-python scripts/verify_all.py          # adds deploy dry runs and web builds
+python scripts/verify_all.py          # 额外包含部署 dry run 与 web 构建
 ```

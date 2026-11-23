@@ -8,15 +8,15 @@ import type { StagedChange } from "@/lib/types";
 import GenerativeBlock from "./generative";
 
 const COPY = {
-  title: "Merchant assistant",
-  intro: "Ask about performance, inventory, pricing, or campaigns.",
+  title: "商家助手",
+  intro: "咨询经营表现、库存、定价或活动。",
   starters: [
     "What needs my attention this morning?",
     "How did sales do this week compared to last?",
     "Which listings are running low on stock?",
     "Which slow movers should we mark down?",
   ],
-  label: "Message the merchant assistant",
+  label: "向商家助手提问",
   placeholder: "Ask about sales, stock, pricing…",
 };
 

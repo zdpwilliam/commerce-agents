@@ -68,7 +68,7 @@ export function HomeSection({ title, subtitle, children }: { title: string; subt
   );
 }
 
-/** "All orders" style link for a card header. */
+/** "全部订单" style link for a card header. */
 export function MoreLink({ label, onClick }: { label: string; onClick: () => void }) {
   return (
     <button
@@ -83,7 +83,7 @@ export function MoreLink({ label, onClick }: { label: string; onClick: () => voi
 }
 
 /** How a fact's category reads to the shopper. */
-const CATEGORY_LABELS: Record<string, string> = { preference: "Preference", constraint: "Rule", context: "About you" };
+const CATEGORY_LABELS: Record<string, string> = { preference: "偏好", constraint: "规则", context: "关于您" };
 
 function FactRow({
   fact,
@@ -147,7 +147,7 @@ function FactRow({
             }}
             rows={2}
             maxLength={200}
-            aria-label="Correct this"
+            aria-label="纠正此条"
             autoFocus
             className="w-full resize-none rounded-[10px] border border-(--accent) bg-(--card) px-3 py-2 text-[14px] leading-snug text-(--ink) shadow-[0_0_0_3px_var(--accent-soft)] outline-none"
           />
