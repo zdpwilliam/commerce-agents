@@ -2,25 +2,25 @@
   "users": [
     {
       "user_id": "demo-user",
-      "display_name": "Priya",
-      "loyalty_tier": "ACME Subscription member",
+      "display_name": "Dr. Priya Nair",
+      "loyalty_tier": "ACME Dental member",
       "default_location": "Maple Heights",
       "preferences": {
-        "spending": "usually keeps to the mid-range options",
-        "home": "two-bedroom apartment, no outdoor storage",
-        "household": "partner and a 6-year-old",
-        "pet": "golden retriever named Biscuit",
-        "style": "minimal, neutral colors"
+        "spending": "keeps to mid-range clinical options",
+        "clinic": "general practice, two chairs",
+        "focus": "restorative and endodontics",
+        "team": "one associate and a hygienist",
+        "style": "reliable, autoclavable instruments"
       }
     },
     {
       "user_id": "demo-user-2",
-      "display_name": "Sam",
+      "display_name": "Dr. Sam Lee",
       "loyalty_tier": "Guest",
       "default_location": "Springfield",
       "preferences": {
         "budget": "value-focused",
-        "interests": "trail running, weekend camping"
+        "focus": "implant and surgical cases"
       }
     }
   ]

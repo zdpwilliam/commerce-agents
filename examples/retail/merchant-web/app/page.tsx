@@ -6,10 +6,16 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   AssistantRail,
+  asLang,
+  I18nProvider,
   Inspector,
+  LanguageSwitcher,
+  type Lang,
   type PortalNavItem,
   PortalShell,
   type Prefill,
+  storeLanguage,
+  translate,
   useMerchantChat,
   useResource,
   useSession,
@@ -35,13 +41,14 @@ function StoreMark() {
   );
 }
 
-export default function PortalPage() {
+function Portal() {
   const session = useSession(api);
+  const [language, setLanguage] = useState<Lang>(asLang(session.language));
+  const t = useCallback((key: string) => translate(language, key), [language]);
   const [view, setView] = useState<PortalView>("home");
   const [assistantOpen, setAssistantOpen] = useState(false);
   const [activityOpen, setActivityOpen] = useState(false);
   const [prefill, setPrefill] = useState<Prefill | null>(null);
-  // Bumped whenever a staged change moves, so every widget re-reads the store the agent wrote.
   const [refreshKey, setRefreshKey] = useState(0);
   const refreshPortal = useCallback(() => setRefreshKey((value) => value + 1), []);
 
@@ -51,12 +58,15 @@ export default function PortalPage() {
     onPortalRefresh: refreshPortal,
   });
 
-  // The overview feeds the home page and the sidebar counts, so it loads here.
-  const { data: overview, failed: overviewFailed } = useResource(session.sessionId ? fetchOverview : null, [session.sessionId, refreshKey]);
+  const { data: overview, failed: overviewFailed } = useResource(session.sessionId ? fetchOverview : null, [session.sessionId, refreshKey, language]);
 
-  // The rail is part of the default layout on wide screens; narrow screens open it on demand.
   useEffect(() => {
     setAssistantOpen(window.innerWidth >= 1024);
+  }, []);
+
+  const onLanguageChange = useCallback((next: Lang) => {
+    storeLanguage(next);
+    setLanguage(next);
   }, []);
 
   const askAssistant = useCallback((text: string) => {
@@ -67,29 +77,30 @@ export default function PortalPage() {
   const nav = useMemo<PortalNavItem<PortalView>[]>(() => {
     const alerts = overview?.snapshot.alerts;
     return [
-      { id: "home", label: "Home", icon: "home" },
-      { id: "catalog", label: "Catalog", icon: "tag" },
-      { id: "orders", label: "Orders", icon: "inbox", attention: alerts?.order_issues || null },
+      { id: "home", label: t("Home"), icon: "home" },
+      { id: "catalog", label: t("Catalog"), icon: "tag" },
+      { id: "orders", label: t("Orders"), icon: "inbox", attention: alerts?.order_issues || null },
       {
         id: "inventory",
-        label: "Inventory",
+        label: t("Inventory"),
         icon: "box",
         count: alerts ? (alerts.low_stock ?? 0) + (alerts.slow_movers ?? 0) : null,
       },
     ];
-  }, [overview]);
+  }, [overview, t]);
 
   return (
-    <>
+    <I18nProvider api={api} language={language} onChange={onLanguageChange}>
       <PortalShell
-        brand={{ mark: <StoreMark />, name: "ACME", detail: "Merchant workspace" }}
+        brand={{ mark: <StoreMark />, name: "ACME Dental", detail: t("Merchant workspace") }}
         nav={nav}
         view={view}
         onViewChange={setView}
-        operator={{ name: session.operator ?? "Operator", role: "Store manager" }}
+        operator={{ name: session.operator ?? t("Operator"), role: t("Store manager") }}
         assistantOpen={assistantOpen}
         assistantBusy={chat.busy}
         onToggleAssistant={() => setAssistantOpen((open) => !open)}
+        headerExtra={<LanguageSwitcher />}
         rail={
           <AssistantRail
             open={assistantOpen}
@@ -135,10 +146,14 @@ export default function PortalPage() {
           trace={chat.trace}
           memory={chat.memory}
           newMemoryKeys={chat.newMemoryKeys}
-          memoryTitle="Business memory"
+          memoryTitle={t("Business memory")}
           onClose={() => setActivityOpen(false)}
         />
       ) : null}
-    </>
+    </I18nProvider>
   );
+}
+
+export default function PortalPage() {
+  return <Portal />;
 }

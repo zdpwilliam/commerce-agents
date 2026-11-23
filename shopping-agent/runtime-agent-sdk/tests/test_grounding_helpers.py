@@ -8,9 +8,9 @@ from __future__ import annotations
 from shopping_agent.fencing import STOREFRONT_FENCE
 from shopping_agent_sdk import ground_message
 
-HEADPHONES_ID = "AR-1105"
-PAST_ORDER_ID = "AR-78214"
-PAST_ORDER_ITEM_ID = "AR-1104"
+HEADPHONES_ID = "DEN-1001"
+PAST_ORDER_ID = "DN-78214"
+PAST_ORDER_ITEM_ID = "DEN-1050"
 
 
 async def test_an_id_reference_is_grounded_and_unlocks_the_cart_gate(handlers, toolset):

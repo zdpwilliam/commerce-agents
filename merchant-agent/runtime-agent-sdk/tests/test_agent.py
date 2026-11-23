@@ -43,7 +43,7 @@ from merchant_agent_sdk import (
     tool_contracts,
 )
 
-HEADPHONES_ID = "AR-1105"  # returned by a "headphones" search of the retail fixture
+HEADPHONES_ID = "DEN-1001"  # returned by a "handpiece" search of the retail fixture
 
 CHANGE_TEXT = "Take the noise cancelling headphones from $249 down to $239 for the push."
 
@@ -121,7 +121,7 @@ def test_default_surface_has_no_subagents_and_closes_on_the_chips_round():
 
 
 def test_analysis_maps_onto_a_read_only_subagent():
-    config = MerchantAgentConfig(brand_name="ACME", enable_analysis=True)
+    config = MerchantAgentConfig(brand_name="ACME Dental", enable_analysis=True)
     options, _ = make_options(config=config)
     assert options.tools == ["Skill", "Task"]
     assert set(options.agents) == {ANALYSIS_AGENT_NAME}
@@ -151,14 +151,14 @@ async def test_held_calls_are_plain_results_and_failures_are_flagged(handlers):
         result_text(held)
         == check_listing_provenance(MerchantSessionState(), [HEADPHONES_ID]).result_text
     )
-    failed = await handlers["get_listing"].handler({"listing_id": "AR-00000"})
+    failed = await handlers["get_listing"].handler({"listing_id": "DEN-00000"})
     assert failed["is_error"] is True
 
 
 async def test_search_stage_apply_and_preview_round_trip_through_the_registered_tools(
     handlers, toolset
 ):
-    search = await handlers["search_listings"].handler({"query": "headphones"})
+    search = await handlers["search_listings"].handler({"query": "handpiece"})
     assert MERCHANT_FENCE.open in result_text(search) and HEADPHONES_ID in result_text(search)
     staged = await handlers["stage_inventory_action"].handler(
         {"items": [{"listing_id": HEADPHONES_ID, "action": "restock", "quantity": 24}]}
@@ -178,7 +178,7 @@ async def test_search_stage_apply_and_preview_round_trip_through_the_registered_
 
 async def test_host_approval_goes_through_the_toolsets_approval_api(handlers, toolset):
     toolset.config.require_host_approval = True
-    await handlers["search_listings"].handler({"query": "headphones"})
+    await handlers["search_listings"].handler({"query": "handpiece"})
     await handlers["stage_inventory_action"].handler(
         {"items": [{"listing_id": HEADPHONES_ID, "action": "restock", "quantity": 24}]}
     )
@@ -243,7 +243,7 @@ async def test_reminder_suppressed_when_a_stage_tool_ran(toolset):
                     ToolUseBlock(
                         id="t1",
                         name=mcp_tool_name("stage_price_update"),
-                        input={"items": [{"listing_id": HEADPHONES_ID, "new_price": 239.0}]},
+                        input={"items": [{"listing_id": HEADPHONES_ID, "new_price": 800.0}]},
                     ),
                     TextBlock("Staged — review the preview to apply it."),
                 ),
@@ -357,7 +357,7 @@ async def test_detector_reads_the_pre_injection_operator_text(toolset):
 async def test_reminded_turn_merges_tool_calls_and_ui(handlers, toolset):
     # On the reminder query the client stages through the real handler, which renders
     # the change's preview card.
-    await handlers["search_listings"].handler({"query": "headphones"})
+    await handlers["search_listings"].handler({"query": "handpiece"})
 
     class RemindedPassClient(ScriptedClient):
         async def query(self, text: str) -> None:
@@ -365,7 +365,7 @@ async def test_reminded_turn_merges_tool_calls_and_ui(handlers, toolset):
             if text != STAGING_FOLLOWTHROUGH_REMINDER:
                 return
             await handlers["stage_price_update"].handler(
-                {"items": [{"listing_id": HEADPHONES_ID, "new_price": 239.0}]}
+                {"items": [{"listing_id": HEADPHONES_ID, "new_price": 800.0}]}
             )
 
     client = RemindedPassClient(
@@ -386,7 +386,7 @@ async def test_reminded_turn_merges_tool_calls_and_ui(handlers, toolset):
                     ToolUseBlock(
                         id="t2",
                         name=mcp_tool_name("stage_price_update"),
-                        input={"items": [{"listing_id": HEADPHONES_ID, "new_price": 239.0}]},
+                        input={"items": [{"listing_id": HEADPHONES_ID, "new_price": 800.0}]},
                     ),
                     TextBlock("Staged — review the preview to apply it."),
                 ),

@@ -17,29 +17,29 @@ from shopping_agent import SearchFilters
 
 def test_catalog_loads_and_validates(backend):
     assert len(backend.products) >= 50
-    assert backend.store_name == "ACME"
-    sample = backend.products["AR-1201"]
-    assert sample.brand == "ACME Basecamp"
+    assert backend.store_name == "ACME Dental"
+    sample = backend.products["DEN-1003"]
+    assert sample.brand == "Foshan Jingmei"
     assert sample.long_description  # hero products carry a long description
 
 
 async def test_search_relevance(backend, session):
-    tents = await backend.search_products(session, "tent for two people")
-    assert tents and tents[0].product_id in {"AR-1201", "AR-1202"}
+    tents = await backend.search_products(session, "high-speed handpiece")
+    assert tents and tents[0].product_id in {"DEN-1003", "DEN-1004"}
 
-    gift_toys = await backend.search_products(session, "wooden block set for a 9 year old")
-    assert gift_toys and gift_toys[0].product_id == "AR-1401"
+    gift_toys = await backend.search_products(session, "curing light")
+    assert gift_toys and gift_toys[0].product_id == "DEN-1022"
 
-    luggage = await backend.search_products(session, "carry-on luggage")
-    assert any(p.product_id == "AR-1801" for p in luggage[:3])
+    luggage = await backend.search_products(session, "intraoral scanner")
+    assert any(p.product_id == "DEN-1030" for p in luggage[:3])
 
     nothing = await backend.search_products(session, "zzzqqq")
     assert nothing == []
 
 
 async def test_out_of_stock_items_are_searchable(backend, session):
-    packs = await backend.search_products(session, "hiking backpack for overnight trips")
-    assert any(p.product_id == "AR-1207" and p.in_stock is False for p in packs)
+    packs = await backend.search_products(session, "high-speed handpiece")
+    assert any(p.product_id == "DEN-1002" and p.in_stock is False for p in packs)
 
 
 async def test_delivery_promises_stamped(backend):
@@ -67,17 +67,17 @@ def test_memory_seed_is_schema_valid():
 
 
 async def test_search_filters_and_sort(backend, session):
-    cheap_coffee = await backend.search_products(session, "coffee", SearchFilters(max_price=100))
+    cheap_coffee = await backend.search_products(session, "handpiece", SearchFilters(max_price=100))
     assert all(p.price <= 100 for p in cheap_coffee)
-    assert all(p.product_id != "AR-1002" for p in cheap_coffee)
+    assert all(p.product_id != "DEN-1002" for p in cheap_coffee)
 
     outdoor_only = await backend.search_products(
-        session, "tent stove cooler", SearchFilters(category="outdoor-camping"), limit=20
+        session, "handpiece", SearchFilters(category="handpieces"), limit=20
     )
-    assert outdoor_only and all(p.category == "outdoor-camping" for p in outdoor_only)
+    assert outdoor_only and all(p.category == "handpieces" for p in outdoor_only)
 
     by_price = await backend.search_products(
-        session, "fitness", SearchFilters(sort="price_asc"), limit=20
+        session, "restorative", SearchFilters(sort="price_asc"), limit=20
     )
     prices = [p.price for p in by_price]
     assert prices == sorted(prices)
@@ -92,24 +92,24 @@ async def test_policy_search(backend, session):
 
 
 async def test_fulfillment_options_follow_the_shipping_policy(backend, session):
-    options = await backend.get_fulfillment_options(session, ["AR-1201"])
+    options = await backend.get_fulfillment_options(session, ["DEN-1001"])
     assert [o.method for o in options] == ["delivery", "delivery", "pickup"]
     standard, express, _pickup = options
-    assert backend.products["AR-1201"].price > FREE_SHIPPING_OVER and standard.fee == 0.0
+    assert backend.products["DEN-1001"].price > FREE_SHIPPING_OVER and standard.fee == 0.0
     cheapest = min(backend.products.values(), key=lambda p: p.price)
     (paid, *_rest) = await backend.get_fulfillment_options(session, [cheapest.product_id])
     assert paid.fee == STANDARD_SHIPPING.fee
 
-    freight = await backend.get_fulfillment_options(session, ["AR-1307"])
+    freight = await backend.get_fulfillment_options(session, ["DEN-1032"])
     assert freight[-1] == FREIGHT_SHIPPING
 
     shipping = next(p for p in backend._policies if p.policy_id == "shipping").content
     for term in (
-        f"${STANDARD_SHIPPING.fee}",
-        f"free over ${FREE_SHIPPING_OVER}",
+        f"¥{STANDARD_SHIPPING.fee:.0f}",
+        f"free over ¥{FREE_SHIPPING_OVER}",
         standard.eta.split(" (")[0],
         express.eta.split(" (")[0],
-        f"${express.fee}",
+        f"¥{express.fee:.0f}",
         "freight",
     ):
         assert term in shipping, term
@@ -131,28 +131,28 @@ def test_pickup_eta_stays_inside_store_hours():
 async def test_a_family_is_found_by_its_option_values_and_its_variants_stay_out_of_listings(
     backend, session
 ):
-    assert "AR-1902" in backend.products and "AR-1902-KING" not in backend.products
-    assert backend.variants["AR-1902-KING"].variant_of == "AR-1902"
-    hits = await backend.search_products(session, "king mattress")
-    assert hits and hits[0].product_id == "AR-1902"
-    assert hits[0].options == {"size": ["twin", "full", "queen", "king"]}
+    assert "DEN-1050" in backend.products and "DEN-1050-FULL" not in backend.products
+    assert backend.variants["DEN-1050-FULL"].variant_of == "DEN-1050"
+    hits = await backend.search_products(session, "implant kit")
+    assert hits and hits[0].product_id == "DEN-1050"
+    assert hits[0].options == {"configuration": ["basic", "with graft", "full kit"]}
     assert all(hit.variant_of is None for hit in hits)
 
 
 async def test_details_resolve_a_family_and_a_variant(backend, session):
-    family = await backend.get_product_details(session, "AR-1606")
-    assert family is not None and set(family.options) == {"size", "color"}
-    assert len(family.variants) == 8
-    assert all(set(v.option_values) == {"size", "color"} for v in family.variants)
-    variant = await backend.get_product_details(session, "ar-1606-king-blush")
-    assert variant is not None and variant.variant_of == "AR-1606"
-    assert variant.in_stock is False and variant.price == 37.0
-    assert backend.listing_of("AR-1606-KING-BLUSH") is family
+    family = await backend.get_product_details(session, "DEN-1050")
+    assert family is not None and set(family.options) == {"configuration"}
+    assert len(family.variants) == 3
+    assert all(set(v.option_values) == {"configuration"} for v in family.variants)
+    variant = await backend.get_product_details(session, "DEN-1050-FULL")
+    assert variant is not None and variant.variant_of == "DEN-1050"
+    assert variant.in_stock is True and variant.price == 29800.0
+    assert backend.listing_of("DEN-1050-FULL") is family
 
 
 async def test_an_order_line_for_a_variant_names_its_choice(backend, session):
     orders = await backend.get_orders(session)
     lines = [item for order in orders for item in order.items if item.variant_of]
     assert [(i.product_id, i.option_values, i.variant_of) for i in lines] == [
-        ("AR-1902-QUEEN", {"size": "queen"}, "AR-1902")
+        ("DEN-1050-GRAFT", {"configuration": "with graft"}, "DEN-1050")
     ]

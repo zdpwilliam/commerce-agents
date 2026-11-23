@@ -13,6 +13,27 @@ export interface Session {
   operator?: string;
   /** The signed-in shopper, on storefront sessions. */
   shopper?: { name: string; tier?: string };
+  /** The chosen response language ("en" | "zh" | "ja" | "ko"). */
+  language?: string;
+}
+
+const LANGUAGE_KEY = "acme-language";
+
+/** The language persisted across reloads, defaulting to English. */
+export function storedLanguage(): string {
+  try {
+    return localStorage.getItem(LANGUAGE_KEY) ?? "en";
+  } catch {
+    return "en";
+  }
+}
+
+export function storeLanguage(language: string): void {
+  try {
+    localStorage.setItem(LANGUAGE_KEY, language);
+  } catch {
+    // Storage may be unavailable; the session still carries the choice.
+  }
 }
 
 const generations = new WeakMap<AgentApi, number>();
@@ -33,10 +54,11 @@ export function useSession(
     generations.set(api, generation);
     const current = () => generations.get(api) === generation;
     void (async () => {
-      const started = await api.startSession(profile ? { user_id: profile } : undefined);
+      const language = storedLanguage();
+      const started = await api.startSession({ ...(profile ? { user_id: profile } : {}), language });
       if (!current()) return;
       api.session = started?.sessionId ?? null;
-      setSession({ sessionId: started?.sessionId ?? null, operator: started?.operator, shopper: started?.shopper });
+      setSession({ sessionId: started?.sessionId ?? null, operator: started?.operator, shopper: started?.shopper, language: started?.language ?? language });
     })();
     return () => {
       generations.set(api, (generations.get(api) ?? 0) + 1);

@@ -57,6 +57,7 @@ export function StoreShell<V extends string>({
   onPanelOpenChange,
   placeholder,
   banner,
+  headerExtra,
   children,
 }: {
   brand: ReactNode;
@@ -79,6 +80,8 @@ export function StoreShell<V extends string>({
   placeholder: string;
   /** A strip between the app bar and the page. */
   banner?: ReactNode;
+  /** Extra controls in the app bar, such as a language switcher. */
+  headerExtra?: ReactNode;
   children: ReactNode;
 }) {
   const [activityOpen, setActivityOpen] = useState(false);
@@ -149,6 +152,7 @@ export function StoreShell<V extends string>({
             })}
           </nav>
           <div className="ml-auto flex items-center gap-2">
+            {headerExtra}
             <ActivityButton
               streaming={chat.streaming}
               newMemoryCount={chat.newMemoryKeys.size}

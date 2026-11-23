@@ -23,7 +23,7 @@ def make_storefront():
 
 @pytest.fixture
 def merchant(backend) -> MockRetailMerchant:
-    return MockRetailMerchant(backend, build_merchant_config("ACME"))
+    return MockRetailMerchant(backend, build_merchant_config("ACME Dental"))
 
 
 @pytest.fixture(scope="session")
@@ -43,18 +43,18 @@ def extra_public_routes() -> set[str]:
 
 @pytest.fixture(scope="session")
 def restockable_listing() -> str:
-    return "AR-1601"
+    return "DEN-1020"
 
 
 @pytest.fixture(scope="session")
 def cart_product() -> str:
-    return "AR-1301"
+    return "DEN-1017"
 
 
 @pytest.fixture(scope="session")
 def relevance_probe() -> tuple[str, str, str, set[str]]:
     """Returns (query, non-relevance sort, product that must lead, faint matches that must be cut)."""
-    return ("sleeping bag camping", "rating", "AR-1203", {"AR-2003", "AR-1507"})
+    return ("dental handpiece", "rating", "DEN-1007", {"DEN-1048", "DEN-1026"})
 
 
 @pytest.fixture(scope="session")

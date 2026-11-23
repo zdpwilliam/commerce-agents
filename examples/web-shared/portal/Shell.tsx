@@ -40,6 +40,7 @@ export function PortalShell<V extends string>({
   assistantBusy = false,
   onToggleAssistant,
   rail,
+  headerExtra,
   children,
 }: {
   brand: PortalBrand;
@@ -51,6 +52,8 @@ export function PortalShell<V extends string>({
   assistantBusy?: boolean;
   onToggleAssistant: () => void;
   rail: ReactNode;
+  /** Extra controls in the chrome, such as a language switcher. */
+  headerExtra?: ReactNode;
   children: ReactNode;
 }) {
   return (
@@ -116,11 +119,14 @@ export function PortalShell<V extends string>({
             <span className="hidden h-[7px] w-[7px] rounded-full bg-(--accent) shadow-[0_0_0_3px_var(--accent-soft)] xl:block" aria-hidden />
           ) : null}
         </button>
-        <div className="mt-auto flex items-center gap-2.5 border-t border-(--line) px-1 pt-3 xl:px-2">
+        <div className="mt-auto border-t border-(--line) px-1 pt-3 xl:px-2">
+          {headerExtra ? <div className="mb-2 flex justify-center xl:justify-start">{headerExtra}</div> : null}
+          <div className="flex items-center gap-2.5">
           <Avatar name={operator.name} />
           <div className="hidden min-w-0 xl:block">
             <div className="truncate text-[13px] font-semibold leading-tight">{operator.name}</div>
             <div className="truncate text-[11.5px] text-(--ink-soft)">{operator.role}</div>
+          </div>
           </div>
         </div>
       </aside>
@@ -146,6 +152,7 @@ export function PortalShell<V extends string>({
               </button>
             ))}
           </nav>
+          {headerExtra}
           <button
             type="button"
             onClick={onToggleAssistant}

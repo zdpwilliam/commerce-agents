@@ -27,5 +27,5 @@ def test_listings_hide_the_storefront_delivery_promise(client):
 
 
 def test_product_images_are_served_for_the_portal(client):
-    assert client.get("/products/AR-1002.webp").status_code == 200
+    assert client.get("/products/DEN-1002.webp").status_code == 200
     assert client.get("/products/missing.webp").status_code == 404

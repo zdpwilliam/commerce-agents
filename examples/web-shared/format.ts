@@ -1,7 +1,19 @@
 // Copyright 2026 Anthropic PBC
 // SPDX-License-Identifier: Apache-2.0
 
+// Locale for date/number formatting. The i18n provider sets it once per app; a browser
+// tab is one session, so a module-level choice keeps every call site unchanged.
+let currentLocale = "en-US";
 const moneyFormatters = new Map<string, Intl.NumberFormat>();
+let plain = new Intl.NumberFormat(currentLocale);
+
+export function setFormatLocale(locale: string): void {
+  if (locale !== currentLocale) {
+    currentLocale = locale;
+    moneyFormatters.clear();
+    plain = new Intl.NumberFormat(currentLocale);
+  }
+}
 
 export function formatMoney(
   value: number,
@@ -11,7 +23,7 @@ export function formatMoney(
   const key = `${currency}:${options.whole ? 0 : 2}`;
   let formatter = moneyFormatters.get(key);
   if (!formatter) {
-    formatter = new Intl.NumberFormat("en-US", {
+    formatter = new Intl.NumberFormat(currentLocale, {
       style: "currency",
       currency,
       maximumFractionDigits: options.whole ? 0 : 2,
@@ -20,8 +32,6 @@ export function formatMoney(
   }
   return formatter.format(value);
 }
-
-const plain = new Intl.NumberFormat("en-US");
 
 export function formatNumber(value: number): string {
   return plain.format(value);
@@ -46,7 +56,7 @@ const ISO_DAY = /\d{4}-\d{2}-\d{2}/g;
 function dayLabel(value: string): string {
   const date = parseDate(value);
   if (Number.isNaN(date.getTime())) return value;
-  return date.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+  return date.toLocaleDateString(currentLocale, { month: "short", day: "numeric", year: "numeric" });
 }
 
 /** "Jun 24, 2026"; dates inside a trailing note ("(revised from ...)") are formatted too. */
@@ -61,7 +71,7 @@ export function formatDayMonth(value: string | null | undefined): string {
   if (!value) return "";
   const date = parseDate(value);
   if (Number.isNaN(date.getTime())) return value;
-  return date.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+  return date.toLocaleDateString(currentLocale, { month: "short", day: "numeric" });
 }
 
 /** "Fri, Aug 21", or "Fri, Jan 2, 2027" outside the current year. */
@@ -70,7 +80,7 @@ export function formatWeekday(value: string | null | undefined): string {
   const date = parseDate(value);
   if (Number.isNaN(date.getTime())) return value;
   const year = date.getFullYear() === new Date().getFullYear() ? undefined : "numeric";
-  return date.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric", year });
+  return date.toLocaleDateString(currentLocale, { weekday: "short", month: "short", day: "numeric", year });
 }
 
 /** "1 order", "3 orders". */

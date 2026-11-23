@@ -24,9 +24,9 @@ dependency, and mounts a direct add-to-cart button through ``StorefrontHost.dire
 from collections.abc import Awaitable, Callable, Sequence
 from datetime import datetime
 from pathlib import Path
-from typing import Any, cast
+from typing import Any, Literal, cast
 
-from fastapi import Depends, HTTPException
+from fastapi import Depends, Header, HTTPException
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, Field
 
@@ -39,7 +39,13 @@ from shopping_agent_runtime import ShoppingAgent
 
 from .host import DemoStorefront, append_user_turn, build_app, stream_turn
 from .memory import MemoryFactEdit, MemorySeeder, install_memory_routes
-from .sessions import SessionRecord, SessionStore, session_dependency
+from .sessions import (
+    SESSION_HEADER,
+    SessionRecord,
+    SessionStore,
+    UnknownSessionError,
+    session_dependency,
+)
 from .storefront_fixtures import SUMMARY_EXCLUDES
 
 StorefrontRecord = SessionRecord[ShoppingSessionState]
@@ -51,9 +57,14 @@ _HELD_ADD_TEXT = {
 }
 
 
+class SetLanguageRequest(BaseModel):
+    language: Literal["en", "zh", "ja", "ko"]
+
+
 class StartSessionRequest(BaseModel):
     # The demo's stand-in for a credential: a profile from data/users.json.
     user_id: str = Field(default="demo-user", min_length=1, max_length=64)
+    language: Literal["en", "zh", "ja", "ko"] = "en"
 
 
 class ChatRequest(BaseModel):
@@ -95,6 +106,8 @@ class StorefrontHost:
         self.CurrentSession = session_dependency(self.sessions, "/api/session")
         self._env_hint = env_hint
         self._cart_extras = cart_extras or (lambda record: {})
+        # Set by build_storefront_host when the vertical supplies a product localizer.
+        self.product_localizer: Callable[[ProductDetails, str], ProductDetails] | None = None
 
     def context(
         self, record: StorefrontRecord, page: PageContext | None = None
@@ -106,6 +119,7 @@ class StorefrontHost:
             user_id=record.user_id,
             page=page or PageContext(),
             now=datetime.now(),
+            language=record.language,
         )
 
     def chat(self, request: ChatRequest, record: StorefrontRecord) -> StreamingResponse:
@@ -170,11 +184,13 @@ def build_storefront_host(
     product_detail: Callable[[ProductDetails], dict[str, Any]] | None = None,
     cart_extras: Callable[[StorefrontRecord], dict[str, Any]] | None = None,
     before_turn: Callable[[], None] | None = None,
+    product_localizer: Callable[[ProductDetails, str], ProductDetails] | None = None,
 ) -> StorefrontHost:
     """Seed memory, then build the app with the shared routes. ``product_of`` and
     ``product_detail`` let a vertical stamp live state onto catalog reads or enrich the
     detail payload; ``cart_extras`` adds keys to every cart payload; ``before_turn`` runs
-    ahead of each chat turn (a vertical delivering server-side events as app events)."""
+    ahead of each chat turn (a vertical delivering server-side events as app events).
+    ``product_localizer`` localizes a catalog read for the session's language."""
     host = StorefrontHost(
         title=title,
         backend=backend,
@@ -185,39 +201,73 @@ def build_storefront_host(
         on_startup=[lambda: memory_seeder.seed_at_boot(cast(MemoryStore, agent.memory.store))],
     )
     app = host.app
+    host.product_localizer = product_localizer
     read_product = product_of or backend.product
     detail_of = product_detail or (lambda product: product.model_dump())
     CurrentSession = host.CurrentSession
 
     @app.post("/api/session")
     async def start_session(request: StartSessionRequest | None = None) -> dict:
-        record = host.sessions.start((request or StartSessionRequest()).user_id)
+        request = request or StartSessionRequest()
+        record = host.sessions.start(request.user_id)
+        record.language = request.language
+        host.sessions.save(record)
         profile = await backend.get_preferences(host.context(record))
         return {
             "session_id": record.session_id,
             "user_id": record.user_id,
             "name": profile.display_name,
             "tier": profile.loyalty_tier,
+            "language": record.language,
         }
+
+    @app.patch("/api/session")
+    async def set_language(request: SetLanguageRequest, record: CurrentSession) -> dict:
+        # Switch in place: the session id, cart and transcript are untouched.
+        record.language = request.language
+        return {"ok": True, "language": record.language}
 
     # A vertical's before_turn runs ahead of the record's load, so what it queues is in the turn.
     @app.post("/api/chat", dependencies=[Depends(before_turn)] if before_turn else [])
     async def chat(request: ChatRequest, record: CurrentSession) -> StreamingResponse:
         return host.chat(request, record)
 
+    def optional_language(session_id: str | None) -> str:
+        # Product reads are public: an absent or unknown session id simply means English.
+        if not session_id:
+            return "en"
+        try:
+            return host.sessions.require(session_id).language
+        except UnknownSessionError:
+            return "en"
+
     @app.get("/api/products")
-    async def list_products(category: str | None = None, limit: int = 24) -> dict:
+    async def list_products(
+        category: str | None = None,
+        limit: int = 24,
+        session_id: str | None = Header(default=None, alias=SESSION_HEADER),
+    ) -> dict:
+        language = optional_language(session_id)
         products = [product for pid in backend.products if (product := read_product(pid))]
+        products = [
+            host.product_localizer(product, language) if host.product_localizer else product
+            for product in products
+        ]
         if category:
             products = [product for product in products if product.category == category]
         page = products[: max(1, min(limit, 100))]
         return {"products": [product.model_dump(exclude=set(SUMMARY_EXCLUDES)) for product in page]}
 
     @app.get("/api/products/{product_id:path}")  # an id may contain "/"
-    async def get_product(product_id: str) -> dict:
+    async def get_product(
+        product_id: str,
+        session_id: str | None = Header(default=None, alias=SESSION_HEADER),
+    ) -> dict:
         product = read_product(product_id)
         if product is None:
             raise HTTPException(status_code=404, detail="Product not found")
+        if host.product_localizer:
+            product = host.product_localizer(product, optional_language(session_id))
         return detail_of(product)
 
     @app.get("/api/cart")

@@ -24,7 +24,7 @@ import inspect
 from collections.abc import Callable, Mapping
 from dataclasses import dataclass
 from datetime import datetime
-from typing import Any, Protocol, cast
+from typing import Any, Literal, Protocol, cast
 
 from fastapi import APIRouter, HTTPException
 from fastapi.responses import StreamingResponse
@@ -105,6 +105,10 @@ class MerchantResetRequest(BaseModel):
     purge_memory: bool = False
 
 
+class MerchantSetLanguageRequest(BaseModel):
+    language: Literal["en", "zh", "ja", "ko"] = "en"
+
+
 def _dump(model: Any) -> dict[str, Any]:
     return model.model_dump(mode="json", exclude_none=True)
 
@@ -133,16 +137,25 @@ def build_merchant_router(
             merchant_id=identity.merchant_id,
             operator=identity.operator,
             now=datetime.now(),
+            language=record.language,
         )
 
     @router.post("/session")
-    async def start_session() -> dict:
+    async def start_session(request: MerchantSetLanguageRequest | None = None) -> dict:
         record = sessions.start(identity.merchant_id)
+        record.language = (request or MerchantSetLanguageRequest()).language
+        sessions.save(record)
         return {
             "session_id": record.session_id,
             "merchant_id": identity.merchant_id,
             "operator": identity.operator,
+            "language": record.language,
         }
+
+    @router.patch("/session")
+    async def set_language(request: MerchantSetLanguageRequest, record: CurrentSession) -> dict:
+        record.language = request.language
+        return {"ok": True, "language": record.language}
 
     @router.post("/chat")
     async def chat(request: MerchantChatRequest, record: CurrentSession) -> StreamingResponse:

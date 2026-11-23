@@ -15,107 +15,99 @@ import type {
 } from "./types";
 
 const BLOCK_SET: Product = {
-  product_id: "AR-1401",
-  title: "ACME Playroom Stacking Wooden Block Set (54 pc)",
-  brand: "ACME Playroom",
-  price: 34.0,
-  rating: 4.8,
-  review_count: 2940,
-  image_url: "/products/AR-1401.webp",
-  category: "toys-games",
-  labels: ["bestseller"],
-  attributes: {
-    pieces: "54 blocks + 12 idea cards",
-    age_range: "4-10 years",
-    material: "beechwood, water-based paint",
-    storage: "cotton carry sack",
-  },
+  product_id: "DEN-1048",
+  title: "Woodpecker Dental Burs FG Assorted Kit",
+  brand: "Woodpecker",
+  price: 220.0,
+  currency: "CNY",
+  rating: 4.2,
+  review_count: 436,
+  category: "consumables",
+  labels: [],
+  attributes: {type: "burs", shank: "FG", grit: "assorted", sterile: "single-use"},
   in_stock: true,
+  short_description: "Assorted friction-grip burs for cavity preparation and finishing; single-use for a sharp cut.",
+  long_description: "Assorted friction-grip burs for cavity preparation and finishing; single-use for a sharp cut. Supplied sterile and backed by clinical support for dental professionals.",
 };
 
 const PUZZLE: Product = {
-  product_id: "AR-2104",
-  title: "ACME Makers 300-Piece Meadow Puzzle",
-  brand: "ACME Makers",
-  price: 27.0,
-  rating: 4.4,
-  review_count: 1530,
-  image_url: "/products/AR-2104.webp",
-  category: "kids-room",
-  attributes: {
-    pieces: "300",
-    finished_size: "18 x 24 in",
-    art: "original meadow illustration",
-    age_range: "8+",
-  },
+  product_id: "DEN-1017",
+  title: "Woodpecker i Led Curing Light",
+  brand: "Woodpecker",
+  price: 1500.0,
+  currency: "CNY",
+  rating: 4.3,
+  review_count: 1689,
+  category: "restorative",
+  labels: ["bestseller"],
+  attributes: {type: "curing light", wavelength: "420-480 nm", power: "1200 mW/cm2", light: "LED"},
   in_stock: true,
+  short_description: "LED curing light with a broad spectrum and a quick, even cure across composite shades.",
+  long_description: "LED curing light with a broad spectrum and a quick, even cure across composite shades. Supplied sterile and backed by clinical support for dental professionals.",
 };
 
 const POSTER_SET: Product = {
-  product_id: "AR-2108",
-  title: "ACME Playroom Solar System Poster Set (4 pc)",
-  brand: "ACME Playroom",
-  price: 18.0,
-  rating: 4.6,
-  review_count: 980,
-  image_url: "/products/AR-2108.webp",
-  category: "kids-room",
-  attributes: {
-    count: "4 posters",
-    size: "16 x 20 in",
-    finish: "matte, glare-free",
-    theme: "space",
-  },
+  product_id: "DEN-1029",
+  title: "Shining Aoralscan3 Intraoral Scanner",
+  brand: "Shining3D",
+  price: 40000.0,
+  currency: "CNY",
+  rating: 4.7,
+  review_count: 2133,
+  category: "imaging",
+  labels: ["bestseller"],
+  attributes: {type: "intraoral scanner", accuracy: "high", color: "full-color", tip: "auto-heating"},
   in_stock: true,
+  short_description: "Intraoral scanner with full-color capture and fast, accurate full-arch scanning.",
+  long_description: "Intraoral scanner with full-color capture and fast, accurate full-arch scanning. Supplied sterile and backed by clinical support for dental professionals.",
 };
 
 const WALL_DECALS: Product = {
-  product_id: "AR-2102",
-  title: "ACME Kids Peel-and-Stick Ocean Wall Decals (36 pc)",
-  brand: "ACME Kids",
-  price: 24.0,
-  rating: 4.6,
-  review_count: 2440,
-  category: "kids-room",
-  attributes: {
-    count: "36 decals",
-    removable: "yes",
-    largest: "24 in whale",
-    theme: "ocean",
-    // Same count as merchant_inventory.json shows in the portal.
-    low_stock: "3",
-  },
+  product_id: "DEN-1001",
+  title: "NSK Pana-Max2 M4 High-Speed Turbine Handpiece",
+  brand: "NSK",
+  price: 860.0,
+  currency: "CNY",
+  rating: 4.3,
+  review_count: 1097,
+  category: "handpieces",
+  labels: [],
+  attributes: {speed: "400,000 rpm", connection: "4-hole", head: "standard", sterilization: "autoclavable"},
   in_stock: true,
+  short_description: "Fast, quiet turbine with a compact head for routine cavity prep; ceramic bearings and a clean-air system.",
+  long_description: "Fast, quiet turbine with a compact head for routine cavity prep; ceramic bearings and a clean-air system. Supplied sterile and backed by clinical support for dental professionals.",
 };
 
 const STORYBOOK_BEAR: Product = {
-  product_id: "AR-2105",
-  title: "ACME Playroom Storybook Bear (14 in)",
-  brand: "ACME Playroom",
-  price: 32.0,
-  rating: 4.8,
-  review_count: 2110,
-  category: "kids-room",
-  labels: ["bestseller"],
-  attributes: { size: "14 in", material: "plush, embroidered eyes", washable: "machine wash, gentle", age_range: "3+" },
+  product_id: "DEN-1005",
+  title: "Foshan Jingmei L Low-Speed Handpiece",
+  brand: "Foshan Jingmei",
+  price: 350.0,
+  currency: "CNY",
+  rating: 4.7,
+  review_count: 1245,
+  category: "handpieces",
+  labels: ["new"],
+  attributes: {speed: "20,000 rpm", connection: "4-hole", type: "low-speed", sterilization: "autoclavable"},
   in_stock: true,
+  short_description: "Low-speed handpiece for polishing, finishing and slow-speed preparation.",
+  long_description: "Low-speed handpiece for polishing, finishing and slow-speed preparation. Supplied sterile and backed by clinical support for dental professionals.",
 };
 
 const STORAGE_BINS: Product = {
-  product_id: "AR-2106",
-  title: "ACME Kids Toy Storage Bins (Set of 3)",
-  brand: "ACME Kids",
-  price: 29.0,
+  product_id: "DEN-1011",
+  title: "Woodpecker Ai-Pex Apex Locator",
+  brand: "Woodpecker",
+  price: 2590.0,
+  currency: "CNY",
   rating: 4.5,
-  review_count: 720,
-  category: "kids-room",
-  attributes: {
-    count: "3 bins",
-    collapsible: "yes",
-    labels: "beachcombing icons",
-    theme: "ocean",
-  },
+  review_count: 1467,
+  category: "endodontics",
+  labels: ["bestseller"],
+  attributes: {type: "apex locator", display: "LCD", accuracy: "±0.1 mm", power: "battery"},
   in_stock: true,
+  short_description: "Apex locator with a bright display and stable readings even in a wet canal.",
+  long_description: "Apex locator with a bright display and stable readings even in a wet canal. Supplied sterile and backed by clinical support for dental professionals.",
 };
 
 const products: ProductsPayload = {
@@ -145,7 +137,7 @@ const comparison: ComparisonPayload = {
   title: "Block Set vs. Puzzle for a 9-Year-Old",
   entries: [
     {
-      product_id: "AR-1401",
+      product_id: "DEN-1048",
       product: BLOCK_SET,
       best_for: "Active, hands-on building and a kid who rebuilds bigger every time",
       pros: [
@@ -156,7 +148,7 @@ const comparison: ComparisonPayload = {
       cons: ["54 pieces to keep track of", "Carry sack fills fast during cleanup races"],
     },
     {
-      product_id: "AR-2104",
+      product_id: "DEN-1017",
       product: PUZZLE,
       best_for: "Quiet-table focus and a kid who loves finishing things",
       pros: [
@@ -171,7 +163,7 @@ const comparison: ComparisonPayload = {
     },
   ],
   dimensions: ["Sturdiness", "Age appropriateness (9)", "Play engagement", "Price"],
-  recommended_product_id: "AR-1401",
+  recommended_product_id: "DEN-1048",
 };
 
 const plan: PlanPayload = {
@@ -205,17 +197,17 @@ const guide: GuidePayload = {
 };
 
 const order_status: OrderStatusPayload = {
-  order_id: "AR-77903",
+  order_id: "DN-77903",
   summary:
     "The ACME Paws Orthopedic Dog Bed was placed June 10 and is marked delayed — the delivery estimate was revised to June 27 after the original June 21 date was missed.",
   next_step: "Track the package for the latest carrier update, or ask me about your options.",
   order: {
-    order_id: "AR-77903",
+    order_id: "DN-77903",
     status: "delayed",
     placed_at: "2026-06-10",
     items: [
       {
-        product_id: "AR-1501",
+        product_id: "DEN-1005",
         title: "ACME Paws Orthopedic Memory Foam Dog Bed, Large",
         quantity: 1,
         price: 79.0,
@@ -226,7 +218,7 @@ const order_status: OrderStatusPayload = {
     // Same shape as the orders fixture: current estimate first, missed original in the note.
     estimated_delivery:
       "2026-06-27 (updated after a carrier delay; the original 2026-06-21 estimate was missed)",
-    tracking_url: "https://track.example.com/AR-77903",
+    tracking_url: "https://track.example.com/DN-77903",
   },
 };
 
@@ -236,19 +228,19 @@ const checkout: CheckoutPayload = {
   cart: {
     items: [
       {
-        product_id: "AR-1401",
+        product_id: "DEN-1048",
         title: "ACME Playroom Stacking Wooden Block Set (54 pc)",
         price: 34.0,
         quantity: 1,
-        image_url: "/products/AR-1401.webp",
+        image_url: "/products/DEN-1048.webp",
         line_total: 34.0,
       },
       {
-        product_id: "AR-2104",
+        product_id: "DEN-1017",
         title: "ACME Makers 300-Piece Meadow Puzzle",
         price: 27.0,
         quantity: 1,
-        image_url: "/products/AR-2104.webp",
+        image_url: "/products/DEN-1017.webp",
         line_total: 27.0,
       },
     ],
@@ -264,15 +256,15 @@ export const SHOWCASE = { products, comparison, plan, guide, order_status, check
 export const SHOWCASE_CART: CartPayload = {
   items: [
     {
-      product_id: "AR-1401",
+      product_id: "DEN-1048",
       title: "ACME Playroom Stacking Wooden Block Set (54 pc)",
       price: 34.0,
       quantity: 1,
-      image_url: "/products/AR-1401.webp",
+      image_url: "/products/DEN-1048.webp",
       line_total: 34.0,
     },
     {
-      product_id: "AR-2003",
+      product_id: "DEN-1011",
       title: "ACME Pantry Weeknight Stir-Fry Dinner Kit",
       price: 12.0,
       quantity: 1,

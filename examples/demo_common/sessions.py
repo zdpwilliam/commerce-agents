@@ -49,6 +49,9 @@ class SessionRecord(Generic[StateT]):
     session_id: str
     user_id: str
     state: StateT
+    # The response language chosen for this session. Switched in place by the language
+    # control so the cart and transcript survive; persisted with the rest of the record.
+    language: str = "en"
     messages: list[dict[str, Any]] = field(default_factory=list)
     # Actions taken outside the conversation (a button, a server-side event) since the
     # agent's last reply; the next chat turn hands them to the model as a note.
@@ -64,6 +67,7 @@ class SessionRecord(Generic[StateT]):
     def state_document(self) -> dict[str, Any]:
         return {
             "user_id": self.user_id,
+            "language": self.language,
             "state": self.state.model_dump(mode="json"),
             "pending_app_events": list(self.pending_app_events),
         }
@@ -92,8 +96,9 @@ class SessionStore(Generic[StateT]):
             session_id=session_id,
             user_id=document["user_id"],
             state=self._state_type.model_validate(document["state"]),
+            language=document.get("language", "en"),
             messages=messages,
-            pending_app_events=list(document["pending_app_events"]),
+            pending_app_events=list(document.get("pending_app_events", [])),
             version=version,
             stored_state=document,
             stored_messages=len(messages),

@@ -21,6 +21,14 @@ from .config import ShoppingAgentConfig
 from .fencing import STOREFRONT_FENCE
 from .types import Cart, PageContext, UserPreferences
 
+# Names the agent reads in the fenced context to pick its response language.
+_RESPONSE_LANGUAGES = {
+    "en": "English",
+    "zh": "Chinese (Simplified)",
+    "ja": "Japanese",
+    "ko": "Korean",
+}
+
 
 def build_static_system(config: ShoppingAgentConfig, skills: SkillRegistry) -> str:
     """The cached half: identity, the rules that apply on most turns (cart, checkout,
@@ -153,6 +161,7 @@ def build_static_system(config: ShoppingAgentConfig, skills: SkillRegistry) -> s
 - In your text and in every component field, name only neighborhoods, landmarks, and public spaces. Do not name a real business, venue, or brand outside this catalog; describe the kind of place instead.{terms_rules}
 - Say only what happened. Confirm {confirmed_writes}. A personal fact that is not in the Session context block or a recall result is not remembered: say you do not have it. When you run out of room, say which parts are done and which are not.
 - Keep your prose to a sentence or two. Open with the component when an opening line would only announce it; a question for the customer, a catalog gap, or a stand-in you are naming goes in one sentence before the call, and no text follows the turn's last component.
+- Write every reply and every component field in the language named by `response_language` in the Session context block. Keep product identifiers, model numbers, prices and other figures verbatim; translate only your own words. When no `response_language` is given, use English.
 - Do not repeat in text what a component shows. Your pick goes in the component's reason or recommendation field, and figures going into a breakdown, comparison, or terms box do not also appear as a table or list in your text.
 - Recommend what fits the customer's stated needs and budget and name the trade-offs. You are not there to promote.
 
@@ -204,12 +213,14 @@ def build_dynamic_context(
     max_chars: int = 6000,
     account: dict[str, Any] | None = None,
     account_max_chars: int = 2000,
+    language: str = "en",
 ) -> str:
     """The per-request half, appended after the cache breakpoint and wrapped in the data
     fence. ``account`` (StorefrontBackend.get_account_context) has its own size cap so a
     verbose backend cannot crowd out the rest of the block."""
 
     payload: dict[str, Any] = {}
+    payload["response_language"] = _RESPONSE_LANGUAGES.get(language, _RESPONSE_LANGUAGES["en"])
     if preferences is not None:
         payload["customer"] = {
             "name": preferences.display_name,

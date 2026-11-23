@@ -20,7 +20,7 @@ from shopping_agent_sdk import (
     tool_names,
 )
 
-HEADPHONES_ID = "AR-1105"  # returned by a "headphones" search of the retail fixture
+HEADPHONES_ID = "DEN-1001"  # returned by a "handpiece" search of the retail fixture
 
 ONE_SKILL = "---\nname: gift-registry\ndescription: Registry requests.\n---\n\nBody.\n"
 
@@ -58,12 +58,12 @@ async def test_held_calls_are_plain_results_and_failures_are_flagged(handlers):
     held = await handlers["add_to_cart"].handler({"product_id": HEADPHONES_ID, "quantity": 1})
     assert "is_error" not in held
     assert result_text(held) == provenance_error(HEADPHONES_ID)
-    failed = await handlers["get_product_details"].handler({"product_id": "AR-00000"})
+    failed = await handlers["get_product_details"].handler({"product_id": "DEN-00000"})
     assert failed["is_error"] is True
 
 
 async def test_search_add_and_present_round_trip_through_the_registered_tools(handlers, toolset):
-    search = await handlers["search_products"].handler({"query": "headphones"})
+    search = await handlers["search_products"].handler({"query": "handpiece"})
     assert STOREFRONT_FENCE.open in result_text(search) and HEADPHONES_ID in result_text(search)
     added = await handlers["add_to_cart"].handler({"product_id": HEADPHONES_ID, "quantity": 2})
     assert f"Added {HEADPHONES_ID} x2" in result_text(added)
