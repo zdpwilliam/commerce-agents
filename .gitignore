@@ -40,3 +40,7 @@ merchant-agent/managed-agents/merchant-mcp-server/.merchant_memory.json
 .vscode/
 .claude/
 pyrightconfig.json
+
+.codebuddy/
+.mcp.json
+.ua/
