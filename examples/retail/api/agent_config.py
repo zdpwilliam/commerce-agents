@@ -20,6 +20,9 @@ def build_shopping_config() -> ShoppingAgentConfig:
         brand_voice="professional, warm, and brief",
         model=os.environ.get("SHOPPING_MODEL") or "claude-sonnet-5",
         memory_model=os.environ.get("MEMORY_MODEL") or "claude-haiku-4-5-20251001",
+        # max_tokens bounds thinking + reply together. hy4-flash spends much of it on
+        # thinking, so the shared 2048 default truncates the reply; give it headroom.
+        max_tokens=int(os.environ.get("MAX_TOKENS", "8192")),
     )
 
 
@@ -30,6 +33,7 @@ def build_merchant_config(store_name: str) -> MerchantAgentConfig:
         approval_surface="变更预览卡片上的「批准」按钮",
         model=os.environ.get("MERCHANT_MODEL") or "claude-opus-5",
         memory_model=os.environ.get("MEMORY_MODEL") or "claude-haiku-4-5-20251001",
+        max_tokens=int(os.environ.get("MAX_TOKENS", "8192")),
         # This deployment runs the run_analysis delegate over MockRetailMerchant's
         # read-only SQL view of the fixtures. MERCHANT_ANALYSIS_CODE_EXECUTION=1 adds the
         # code-execution sandbox (first-party API only); MERCHANT_ANALYSIS_MODEL overrides
