@@ -216,7 +216,7 @@ export default function HomeView({
   const comparison = formatComparisonLabel(snapshot.period, snapshot.compare_to);
   // The snapshot carries no average-order delta, so derive it from the sales and orders deltas.
   const aovChangePct = ratioChangePct(snapshot.sales_change_pct, snapshot.orders_change_pct);
-  const currency = snapshot.currency ?? "USD";
+  const currency = snapshot.currency ?? "CNY";
 
   return (
     <div className="ac-reveal flex flex-col gap-5">

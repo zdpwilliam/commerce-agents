@@ -14,7 +14,7 @@ function metricLabel(metric: string): string {
 
 function metricValue(entry: MetricEntry): string | null {
   if (entry.value == null) return null;
-  if (CURRENCY_METRICS.has(entry.metric)) return formatMoney(entry.value, entry.currency ?? "USD", { whole: entry.value >= 1000 });
+  if (CURRENCY_METRICS.has(entry.metric)) return formatMoney(entry.value, entry.currency ?? "CNY", { whole: entry.value >= 1000 });
   if (RATE_METRICS.has(entry.metric)) return formatRate(entry.value);
   return formatNumber(entry.value);
 }

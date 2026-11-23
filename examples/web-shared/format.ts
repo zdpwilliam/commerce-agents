@@ -5,7 +5,7 @@ const moneyFormatters = new Map<string, Intl.NumberFormat>();
 
 export function formatMoney(
   value: number,
-  currency = "USD",
+  currency = "CNY",
   options: { whole?: boolean } = {},
 ): string {
   const key = `${currency}:${options.whole ? 0 : 2}`;
@@ -113,10 +113,10 @@ export function optionValuesLabel(item: Pick<OptionFields, "option_values">): st
   return Object.values(item.option_values ?? {}).join(" · ");
 }
 
-/** "From $349" on a family record, whose price is its lowest variant's; the plain price otherwise. */
+/** 组合商品显示「起价 ¥xxx」（价格取最低变体），普通商品显示自身价格。 */
 export function priceLabel(product: OptionFields): string {
   const money = formatMoney(product.price, product.currency);
-  return hasOptions(product) ? `From ${money}` : money;
+  return hasOptions(product) ? `起价 ${money}` : money;
 }
 
 export function titleCase(value: string): string {

@@ -83,7 +83,7 @@ class MockRetailMerchant(MerchantBackend):
         self.merchant_id = merchant_id
         metrics = load_json(data_dir, "merchant_metrics.json")
         self._daily = rebase_daily(metrics["daily"])
-        self._currency: str = metrics.get("currency", "USD")
+        self._currency: str = metrics.get("currency", "CNY")
         inventory = load_json(data_dir, "merchant_inventory.json")
         self._default_stock: int = inventory.get("default_stock", 40)
         self._default_threshold: int = inventory.get("default_threshold", 8)
@@ -289,12 +289,12 @@ class MockRetailMerchant(MerchantBackend):
                     {
                         "insight_id": f"campaign-spread-{best.campaign_id}",
                         "kind": "campaign",
-                        "headline": "Your active campaigns are earning very different returns",
-                        "detail": f"{best.name} returns ${best_roas:.2f} per $1 spent; "
-                        f"{worst_campaign.name} returns ${worst_roas:.2f}.",
-                        "prompt": f"{best.name} is returning ${best_roas:.2f} per $1 vs "
-                        f"${worst_roas:.2f} for {worst_campaign.name}. Should budget "
-                        "move between them?",
+                        "headline": "您正在投放的广告活动回报差异明显",
+                        "detail": f"{best.name} 每投入 ¥1 可带来 ¥{best_roas:.2f}；"
+                        f"{worst_campaign.name} 为 ¥{worst_roas:.2f}。",
+                        "prompt": f"{best.name} 每投入 ¥1 带来 ¥{best_roas:.2f}，"
+                        f"而 {worst_campaign.name} 仅 ¥{worst_roas:.2f}。"
+                        "是否考虑在两者之间调整预算？",
                     }
                 )
 
