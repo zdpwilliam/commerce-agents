@@ -37,6 +37,15 @@ async def test_search_relevance(backend, session):
     assert nothing == []
 
 
+async def test_every_cart_write_carries_the_catalog_currency(backend, session):
+    # A cart write emits cart_update events that the UI renders directly. If a write
+    # returns the SessionCarts default (USD), checkout shows US$ despite a CNY catalog.
+    assert (await backend.get_cart(session)).currency == "CNY"
+    assert (await backend.add_to_cart(session, "DEN-1007", 1)).currency == "CNY"
+    assert (await backend.update_cart_item(session, "DEN-1007", 2)).currency == "CNY"
+    assert (await backend.remove_from_cart(session, "DEN-1007")).currency == "CNY"
+
+
 async def test_out_of_stock_items_are_searchable(backend, session):
     packs = await backend.search_products(session, "高速手机")
     assert any(p.product_id == "DEN-1002" and p.in_stock is False for p in packs)

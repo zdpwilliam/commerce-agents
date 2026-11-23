@@ -316,11 +316,15 @@ class MockRetail(StorefrontBackend):
     # Cart
     # ------------------------------------------------------------------
 
-    async def get_cart(self, session: ShoppingSessionContext) -> Cart:
-        cart = self._carts.cart(session.session_id)
+    def _with_catalog_currency(self, cart: Cart) -> Cart:
         # The catalog is priced in CNY; the shared SessionCarts type defaults to USD.
+        # Every cart read/write must carry the catalog's currency, not just get_cart —
+        # otherwise the cart_update event from an add stages US$ prices in the UI.
         catalog_currency = next((p.currency for p in self.products.values() if p.currency), "CNY")
         return cart.model_copy(update={"currency": catalog_currency})
+
+    async def get_cart(self, session: ShoppingSessionContext) -> Cart:
+        return self._with_catalog_currency(self._carts.cart(session.session_id))
 
     async def add_to_cart(
         self, session: ShoppingSessionContext, product_id: str, quantity: int
@@ -334,15 +338,15 @@ class MockRetail(StorefrontBackend):
             raise Unavailable(unavailable_detail(product, self.listing_of(product_id)))
         existing = self._carts.lines(session.session_id).get(product_id)
         quantity += existing.quantity if existing else 0
-        return self._carts.put(session.session_id, product, quantity)
+        return self._with_catalog_currency(self._carts.put(session.session_id, product, quantity))
 
     async def update_cart_item(
         self, session: ShoppingSessionContext, product_id: str, quantity: int
     ) -> Cart:
-        return self._carts.set_quantity(session.session_id, product_id, quantity)
+        return self._with_catalog_currency(self._carts.set_quantity(session.session_id, product_id, quantity))
 
     async def remove_from_cart(self, session: ShoppingSessionContext, product_id: str) -> Cart:
-        return self._carts.remove(session.session_id, product_id)
+        return self._with_catalog_currency(self._carts.remove(session.session_id, product_id))
 
     def reset_session(self, session_id: str) -> None:
         self._carts.reset(session_id)

@@ -28,7 +28,7 @@ function Wordmark() {
 }
 
 export default function StorefrontPage() {
-  const session = useSession(api);
+  const session = useSession(api, { persistKey: "hx-storefront-session" });
   const [view, setView] = useState<View>("assistant");
   const [cart, setCart] = useState<CartPayload | null>(null);
   // A staged checkout owns the panel's primary action until the cart changes again.

@@ -39,7 +39,7 @@ from shopping_agent_runtime import ShoppingAgent
 
 from .host import DemoStorefront, append_user_turn, build_app, stream_turn
 from .memory import MemoryFactEdit, MemorySeeder, install_memory_routes
-from .sessions import SessionRecord, SessionStore, session_dependency
+from .sessions import SessionRecord, SessionStore, UnknownSessionError, session_dependency
 from .storefront_fixtures import SUMMARY_EXCLUDES
 
 StorefrontRecord = SessionRecord[ShoppingSessionState]
@@ -54,6 +54,9 @@ _HELD_ADD_TEXT = {
 class StartSessionRequest(BaseModel):
     # The demo's stand-in for a credential: a profile from data/users.json.
     user_id: str = Field(default="demo-user", min_length=1, max_length=64)
+    # A storefront may send back a session_id it persisted in localStorage so a reload
+    # resumes the same cart/transcript instead of starting with an empty one.
+    session_id: str | None = None
 
 
 class ChatRequest(BaseModel):
@@ -191,7 +194,17 @@ def build_storefront_host(
 
     @app.post("/api/session")
     async def start_session(request: StartSessionRequest | None = None) -> dict:
-        record = host.sessions.start((request or StartSessionRequest()).user_id)
+        body = request or StartSessionRequest()
+        record = None
+        if body.session_id:
+            try:
+                candidate = host.sessions.require(body.session_id)
+                if candidate.user_id == body.user_id:
+                    record = candidate
+            except UnknownSessionError:
+                pass
+        if record is None:
+            record = host.sessions.start(body.user_id)
         profile = await backend.get_preferences(host.context(record))
         return {
             "session_id": record.session_id,

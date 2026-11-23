@@ -5,6 +5,7 @@
 
 import pytest
 
+from demo_common.sessions import SESSION_HEADER
 from demo_common.tests.fixtures import session_record
 from retail.api import main
 
@@ -67,3 +68,37 @@ def test_a_sold_out_variant_is_refused_with_its_in_stock_siblings_named(add):
     detail = response.json()["detail"]
     assert "DEN-1050-GRAFT 已售罄" in detail and "DEN-1050-FULL" in detail
     assert record.pending_app_events == []
+
+
+def test_session_resumes_when_id_is_sent_back(client):
+    """A page reload sends its persisted session id back; the same session returns."""
+    first = client.post("/api/session", json={"user_id": "demo-user"}).json()["session_id"]
+    resumed = client.post(
+        "/api/session", json={"user_id": "demo-user", "session_id": first}
+    ).json()
+    assert resumed["session_id"] == first
+    # An id from another user or a dead id cannot be adopted.
+    other = client.post(
+        "/api/session", json={"user_id": "demo-user-2", "session_id": first}
+    ).json()
+    assert other["session_id"] != first
+    dead = client.post(
+        "/api/session", json={"user_id": "demo-user", "session_id": "no-such-session"}
+    ).json()
+    assert dead["session_id"] != first
+
+
+def test_cart_survives_a_session_resume(client, shopper):
+    """Reload keeps the cart: adding, then resuming the same session id, keeps the line."""
+    headers = shopper("DEN-1007")
+    added = client.post(
+        "/api/cart/add", json={"product_id": "DEN-1007", "quantity": 1}, headers=headers
+    )
+    assert added.status_code == 200 and added.json()["cart"]["items"]
+    sid = headers[SESSION_HEADER]
+    resumed = client.post(
+        "/api/session", json={"user_id": "demo-user", "session_id": sid}
+    ).json()
+    assert resumed["session_id"] == sid
+    cart = client.get("/api/cart", headers={SESSION_HEADER: sid}).json()
+    assert len(cart["items"]) == 1 and cart["currency"] == "CNY"
