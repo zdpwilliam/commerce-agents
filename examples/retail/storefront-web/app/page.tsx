@@ -14,15 +14,15 @@ import type { CartPayload } from "@/lib/types";
 
 type View = "assistant" | "orders";
 
-const ASSISTANT = "ACME 助手";
+const ASSISTANT = "恒信助手";
 
 function Wordmark() {
   return (
     <span className="flex items-center gap-2.5 pr-1">
-      <span aria-hidden className="grid h-[30px] w-[30px] place-items-center rounded-lg bg-(--ink) text-[15px] font-bold text-(--surface)">
-        A
+      <span aria-hidden className="grid h-[32px] w-[32px] place-items-center rounded-md bg-(--ink) text-[17px] font-bold text-(--accent)">
+        恒
       </span>
-      <span className="text-[17px] font-bold tracking-[-0.02em] text-(--ink)">ACME 牙科</span>
+      <span className="ac-display text-[17px] font-bold tracking-[0.02em] text-(--ink)">恒信牙科医疗器械</span>
     </span>
   );
 }

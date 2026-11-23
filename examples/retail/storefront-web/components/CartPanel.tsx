@@ -52,7 +52,7 @@ function asProduct(item: CartItem, catalog: Record<string, Product>): Product {
   );
 }
 
-/** "the ACME Sleep Hybrid Mattress (queen)": what a message to the assistant calls a line. */
+/** "the 恒信牙科器械 (queen)": what a message to the assistant calls a line. */
 function lineName(item: CartItem): string {
   const chosen = optionValuesLabel(item);
   return chosen ? `${item.title} (${chosen})` : item.title;
@@ -74,7 +74,7 @@ export default function CartPanel({ cart, checkoutStaged = false }: { cart: Cart
         <>
           购物车还是空的。
           <br />
-          店内任何商品都可以咨询 ACME 助手。
+          店内任何商品都可以咨询 恒信助手。
         </>
       }
       footer={

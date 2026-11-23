@@ -63,7 +63,7 @@ async def test_storefront_oos_products_are_not_active_in_the_portal(merchant, op
 
 def test_boot_rejects_a_catalog_vs_overlay_stock_contradiction(backend):
     with pytest.raises(ValueError, match="DEN-1025"):
-        broken = MockRetailMerchant(backend, MerchantAgentConfig(brand_name="ACME Dental"))
+        broken = MockRetailMerchant(backend, MerchantAgentConfig(brand_name="恒信牙科医疗器械"))
         broken._inventory["DEN-1025"].pop("status")
         broken._assert_storefront_consistency()
 
@@ -128,7 +128,7 @@ async def test_listing_update_apply_fixes_content_quality(merchant, backend, ope
 
 async def test_merchant_context_reports_alert_counts(merchant, operator_session):
     context = await merchant.get_merchant_context(operator_session)
-    assert context["store"] == "ACME 牙科"
+    assert context["store"] == "恒信牙科医疗器械"
     assert context["alerts"]["low_stock"] >= 2
 
 

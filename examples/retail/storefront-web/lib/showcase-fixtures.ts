@@ -14,6 +14,7 @@ const BUR_KIT: Product = {
   brand: "Woodpecker",
   price: 220.0,
   currency: "CNY",
+  image_url: "/products/pexels-6627456.jpg",
   rating: 4.2,
   review_count: 436,
   category: "耗材配件",
@@ -29,6 +30,7 @@ const CURING_LIGHT: Product = {
   brand: "Woodpecker",
   price: 1500.0,
   currency: "CNY",
+  image_url: "/products/pexels-31188650.jpg",
   rating: 4.3,
   review_count: 1689,
   category: "修复固化",
@@ -44,6 +46,7 @@ const SCANNER: Product = {
   brand: "Shining3D",
   price: 40000.0,
   currency: "CNY",
+  image_url: "/products/pexels-6501852.jpg",
   rating: 4.7,
   review_count: 2133,
   category: "影像设备",
@@ -59,6 +62,7 @@ const HANDPIECE: Product = {
   brand: "NSK",
   price: 860.0,
   currency: "CNY",
+  image_url: "/products/pexels-6502661.jpg",
   rating: 4.3,
   review_count: 1097,
   category: "牙科手机",
@@ -74,6 +78,7 @@ const LOW_SPEED: Product = {
   brand: "Foshan Jingmei",
   price: 350.0,
   currency: "CNY",
+  image_url: "/products/pexels-6502549.jpg",
   rating: 4.7,
   review_count: 1245,
   category: "牙科手机",
@@ -89,6 +94,7 @@ const APEX_LOCATOR: Product = {
   brand: "Woodpecker",
   price: 2590.0,
   currency: "CNY",
+  image_url: "/products/pexels-6529107.jpg",
   rating: 4.5,
   review_count: 1467,
   category: "根管治疗",
@@ -172,8 +178,8 @@ const checkout: CheckoutPayload = {
   fulfillment_method: "delivery",
   cart: {
     items: [
-      { product_id: "DEN-1048", title: "啄木鸟 FG 车针混合装", price: 220.0, quantity: 1, image_url: "/products/DEN-1048.webp", line_total: 220.0 },
-      { product_id: "DEN-1017", title: "啄木鸟 i Led 光固化机", price: 1500.0, quantity: 1, image_url: "/products/DEN-1017.webp", line_total: 1500.0 },
+      { product_id: "DEN-1048", title: "啄木鸟 FG 车针混合装", price: 220.0, quantity: 1, image_url: "/products/pexels-6627456.jpg", line_total: 220.0 },
+      { product_id: "DEN-1017", title: "啄木鸟 i Led 光固化机", price: 1500.0, quantity: 1, image_url: "/products/pexels-31188650.jpg", line_total: 1500.0 },
     ],
     item_count: 2,
     subtotal: 1720.0,
@@ -186,10 +192,11 @@ export const SHOWCASE = { products, comparison, plan, guide, order_status, check
 /** 略低于免运费门槛。 */
 export const SHOWCASE_CART: CartPayload = {
   items: [
-    { product_id: "DEN-1048", title: "啄木鸟 FG 车针混合装", price: 220.0, quantity: 1, image_url: "/products/DEN-1048.webp", line_total: 220.0 },
+    { product_id: "DEN-1048", title: "啄木鸟 FG 车针混合装", price: 220.0, quantity: 1, image_url: "/products/pexels-6627456.jpg", line_total: 220.0 },
     { product_id: "DEN-1049", title: "八颗牙 0.06 锥度牙胶尖", price: 125.0, quantity: 1, line_total: 125.0 },
   ],
   item_count: 2,
   subtotal: 345.0,
   currency: "CNY",
+  image_url: "/products/pexels-7789653.jpg",
 };

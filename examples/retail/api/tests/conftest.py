@@ -23,7 +23,7 @@ def make_storefront():
 
 @pytest.fixture
 def merchant(backend) -> MockRetailMerchant:
-    return MockRetailMerchant(backend, build_merchant_config("ACME Dental"))
+    return MockRetailMerchant(backend, build_merchant_config("恒信牙科医疗器械"))
 
 
 @pytest.fixture(scope="session")

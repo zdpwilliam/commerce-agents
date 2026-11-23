@@ -1,19 +1,31 @@
-# Product image credits
+# 商品图片来源
 
-Every image in this directory is dedicated to the public domain under [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)
-(or is a public-domain work). Sources are listed for provenance; CC0 requires no attribution.
-Images were curated so that no real brand, logo, or identifiable person appears, and they illustrate
-the *category* of each fictional ACME product — they do not depict the fictional products themselves.
-Products without an image here intentionally fall back to the storefront's built-in emoji tiles.
+本目录中的图片为真实牙科医疗器械相关照片，来源于 Pexels，遵循 [Pexels License](https://www.pexels.com/license/)（可免费用于商业与演示用途，无需署名）。
+图片按品类映射到演示商品，用于 illustrative 目的；不保证与具体品牌型号完全一致。
 
-| File | Fictional product | Source | Creator | License |
-|---|---|---|---|---|
-| `AR-1002.webp` | ACME Signature 15-Bar Espresso Machine with Steam Wand | [flickr](https://www.flickr.com/photos/147875007@N03/32191471803) | Rawpixel Ltd | CC0 1.0 |
-| `AR-1106.webp` | ACME Select 1080p Webcam with Auto-Framing | [rawpixel](https://www.rawpixel.com/image/5907091/photo-image-public-domain-technology-computer) | — | CC0 1.0 |
-| `AR-1108.webp` | ACME Select LED Desk Lamp with Wireless Charger | [flickr](https://www.flickr.com/photos/135396164@N05/42381074432) | freestocks.org | CC0 1.0 |
-| `AR-1401.webp` | ACME Playroom Stacking Wooden Block Set (54 pc) | [rawpixel](https://www.rawpixel.com/image/5949752/free-public-domain-cc0-photo) | — | CC0 1.0 |
-| `AR-1407.webp` | ACME Playroom National Parks 1000-Piece Puzzle | [rawpixel](https://www.rawpixel.com/image/3337958/free-photo-image-puzzle-cc0-creative-commons) | — | CC0 1.0 |
-| `AR-1501.webp` | ACME Paws Orthopedic Memory Foam Dog Bed, Large | [flickr](https://www.flickr.com/photos/36943025@N07/16795551505) | L's pets & stuff | CC0 1.0 |
-| `AR-1508.webp` | ACME Paws 10-Gallon Aquarium Starter Kit | [flickr](https://www.flickr.com/photos/43296902@N00/103922316) | Dennis S. Hurd | CC0 1.0 |
-| `AR-2104.webp` | ACME Makers 300-Piece Meadow Puzzle | [rawpixel](https://www.rawpixel.com/image/5924996/photo-image-public-domain-free-game) | — | CC0 1.0 |
-| `AR-2108.webp` | ACME Playroom Solar System Poster Set (4 pc) | [rawpixel](https://www.rawpixel.com/image/7689067/map-the-solar-system) | libraryofcongress | Public domain (1880s print, Library of Congress) |
+| 文件 | 品类 | 来源 |
+|---|---|---|
+| `pexels-6502661.jpg` | 牙科手机 | [Pexels #6502661](https://www.pexels.com/photo/6502661/) |
+| `pexels-6502549.jpg` | 牙科手机 | [Pexels #6502549](https://www.pexels.com/photo/6502549/) |
+| `pexels-6502344.jpg` | 牙科手机 | [Pexels #6502344](https://www.pexels.com/photo/6502344/) |
+| `pexels-10820368.jpg` | 根管治疗 | [Pexels #10820368](https://www.pexels.com/photo/10820368/) |
+| `pexels-4971514.jpg` | 根管治疗 | [Pexels #4971514](https://www.pexels.com/photo/4971514/) |
+| `pexels-6529107.jpg` | 根管治疗 | [Pexels #6529107](https://www.pexels.com/photo/6529107/) |
+| `pexels-31188650.jpg` | 修复固化 | [Pexels #31188650](https://www.pexels.com/photo/31188650/) |
+| `pexels-5355843.jpg` | 修复固化 | [Pexels #5355843](https://www.pexels.com/photo/5355843/) |
+| `pexels-3952132.jpg` | 修复固化 | [Pexels #3952132](https://www.pexels.com/photo/3952132/) |
+| `pexels-31188653.jpg` | 牙周洁治 | [Pexels #31188653](https://www.pexels.com/photo/31188653/) |
+| `pexels-12374355.jpg` | 牙周洁治 | [Pexels #12374355](https://www.pexels.com/photo/12374355/) |
+| `pexels-9951390.jpg` | 牙周洁治 | [Pexels #9951390](https://www.pexels.com/photo/9951390/) |
+| `pexels-6501852.jpg` | 影像设备 | [Pexels #6501852](https://www.pexels.com/photo/6501852/) |
+| `pexels-6501881.jpg` | 影像设备 | [Pexels #6501881](https://www.pexels.com/photo/6501881/) |
+| `pexels-6502019.jpg` | 影像设备 | [Pexels #6502019](https://www.pexels.com/photo/6502019/) |
+| `pexels-4269265.jpg` | 综合治疗台 | [Pexels #4269265](https://www.pexels.com/photo/4269265/) |
+| `pexels-6812507.jpg` | 综合治疗台 | [Pexels #6812507](https://www.pexels.com/photo/6812507/) |
+| `pexels-9062527.jpg` | 综合治疗台 | [Pexels #9062527](https://www.pexels.com/photo/9062527/) |
+| `pexels-6627665.jpg` | 消毒灭菌 | [Pexels #6627665](https://www.pexels.com/photo/6627665/) |
+| `pexels-9259926.jpg` | 消毒灭菌 | [Pexels #9259926](https://www.pexels.com/photo/9259926/) |
+| `pexels-6627664.jpg` | 消毒灭菌 | [Pexels #6627664](https://www.pexels.com/photo/6627664/) |
+| `pexels-6627456.jpg` | 耗材配件 | [Pexels #6627456](https://www.pexels.com/photo/6627456/) |
+| `pexels-7789653.jpg` | 耗材配件 | [Pexels #7789653](https://www.pexels.com/photo/7789653/) |
+| `pexels-6627733.jpg` | 耗材配件 | [Pexels #6627733](https://www.pexels.com/photo/6627733/) |

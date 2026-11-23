@@ -99,7 +99,7 @@ Fencing、provenance 门禁、上限、记忆校验和商家审批门禁都在�
 
 | 示例 | 商店 | 后台 |
 |---|---|---|
-| [`examples/retail/`](examples/retail/) ACME 牙科 | 基于内置组件的搜索、比较、方案、购物车、结算与记忆 | 摘要、暂存补货与商品修正、基于 SQL 视图的分析代理 |
+| [`examples/retail/`](examples/retail/) 恒信牙科医疗器械 | 基于内置组件的搜索、比较、方案、购物车、结算与记忆 | 摘要、暂存补货与商品修正、基于 SQL 视图的分析代理 |
 | [`examples/travel/`](examples/travel/) ACME Travel | 按日期绑定的库存与 `present_itinerary` 扩展 | 入住率日历与按日期区间的调价 |
 | [`examples/telecom/`](examples/telecom/) ACME Mobile | 账户上下文、套餐矩阵、服务端生成的费用披露 | 套餐结构、注明受影响线路的调价、受监管费用保护 |
 | [`examples/entertainment/`](examples/entertainment/) ACME Tickets | 定时占座、候补名单、转让、场馆地图、全包费用披露 | 活动节奏、释放真正增加容量的占座、保费调价 |

@@ -12,13 +12,17 @@ const instrumentSans = Instrument_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "ACME 商家后台",
-  description: "ACME 商家后台，商家 Agent 示例。",
+  title: "恒信牙科医疗器械 · 商家工作台",
+  description: "恒信牙科医疗器械商家工作台，商家 Agent 示例。",
 };
+
+// 衬线字体栈用系统字体，避免构建时联网下载 Google 字体。
+const displayFont =
+  '"Songti SC", "STSong", "Noto Serif CJK SC", "Source Han Serif SC", Georgia, "Times New Roman", serif';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={instrumentSans.variable}>
+    <html lang="zh-CN" className={instrumentSans.variable} style={{ ["--font-display" as string]: displayFont }}>
       <body>{children}</body>
     </html>
   );

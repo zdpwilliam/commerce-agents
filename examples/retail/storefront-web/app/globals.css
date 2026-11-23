@@ -8,42 +8,43 @@
 @import "../../../web-shared/base.css";
 
 /*
- * ACME retail design system: a cool off-white ground with white cards, navy ink and structure,
- * terracotta for the assistant and primary actions, red for sale tags and errors, gold stars.
+ * 恒信牙科医疗器械设计系统：严肃、专业、高信誉。
+ * 深藏青为主色，纯白卡片，香槟金作点缀；克制的圆角、细线分隔与衬线标题，
+ * 整体观感接近医疗器械企业官网与正规采购平台。
  */
 
 :root {
-  --ground: #f4f6fa; /* page */
-  --surface: #ffffff; /* text on ink */
-  --card: #ffffff; /* cards, panel, app bar */
-  --chrome: #ffffff; /* app bar */
-  --well: #eef1f5; /* chips, thumbs, hover ground */
-  --ink: #1e2c4f; /* navy: text and structure */
-  --ink-2: #3b4763; /* secondary text that still reads as content */
-  --ink-soft: #5a6679; /* labels and metadata */
-  --ink-faint: #9aa2b5; /* hints and placeholders */
-  --line: rgba(30, 44, 79, 0.12);
-  --line-strong: rgba(30, 44, 79, 0.18); /* control borders */
-  --accent: #d97f5f; /* terracotta: the assistant's mark, primary actions, focus */
-  --accent-strong: #c4643f; /* filled buttons */
-  --accent-soft: #f9e8e0;
-  --accent-ink: #8a3f22; /* text on accent-soft */
+  --ground: #eef1f6; /* 页面：冷调浅灰蓝 */
+  --surface: #ffffff; /* 深底上的文字 */
+  --card: #ffffff; /* 卡片、面板、应用栏 */
+  --chrome: #ffffff; /* 应用栏 */
+  --well: #e7ecf3; /* 标签、缩略图、悬停底色 */
+  --ink: #0f2744; /* 深藏青：文字与结构主色 */
+  --ink-2: #28415f; /* 次级正文 */
+  --ink-soft: #556881; /* 标签与元信息 */
+  --ink-faint: #94a1b3; /* 提示与占位符 */
+  --line: rgba(15, 39, 68, 0.14);
+  --line-strong: rgba(15, 39, 68, 0.24); /* 控件边框 */
+  --accent: #a8842f; /* 香槟金：助手标识、主操作、焦点 */
+  --accent-strong: #8a6a1e; /* 实心按钮 */
+  --accent-soft: #f6f0df;
+  --accent-ink: #6b5216; /* 金底上的文字 */
   --on-accent: #ffffff;
-  --ok: #1f8f5f; /* delivery promises, delivered */
-  --ok-soft: #e3f4ec;
-  --warn: #b06a00; /* low stock, delays, results held by a safety gate */
-  --warn-soft: #fdf1da;
-  --danger: #c9252d; /* sale tags and errors */
-  --danger-soft: #fdecec;
-  --info: #2c6fa8; /* shipped */
-  --info-soft: #e5f0fa;
-  --violet: #6b4fd6; /* returns in progress */
-  --violet-soft: #eeeafd;
-  --star: #f0a500; /* rating stars */
-  --shadow-sm: 0 1px 2px rgba(30, 44, 79, 0.06), 0 1px 1px rgba(30, 44, 79, 0.04);
-  --shadow: 0 1px 2px rgba(30, 44, 79, 0.06), 0 4px 14px -6px rgba(30, 44, 79, 0.14);
-  --shadow-lg: 0 12px 40px -12px rgba(30, 44, 79, 0.28), 0 2px 6px rgba(30, 44, 79, 0.08);
-  --radius: 12px;
+  --ok: #1c7a52; /* 履约承诺、已送达 */
+  --ok-soft: #e4f2ec;
+  --warn: #9a6400; /* 低库存、延误、安全门禁拦截 */
+  --warn-soft: #fbf1dc;
+  --danger: #b3242c; /* 促销标签与错误 */
+  --danger-soft: #fbeaea;
+  --info: #215a8a; /* 已发货 */
+  --info-soft: #e4eef7;
+  --violet: #54409e; /* 退货处理中 */
+  --violet-soft: #ece9f8;
+  --star: #a8842f; /* 评分星，与金色统一 */
+  --shadow-sm: 0 1px 2px rgba(15, 39, 68, 0.08);
+  --shadow: 0 1px 2px rgba(15, 39, 68, 0.08), 0 4px 12px -6px rgba(15, 39, 68, 0.18);
+  --shadow-lg: 0 12px 36px -12px rgba(15, 39, 68, 0.3), 0 2px 6px rgba(15, 39, 68, 0.1);
+  --radius: 6px; /* 克制的圆角 */
 }
 
 body {
@@ -54,15 +55,22 @@ body {
   text-rendering: geometricPrecision;
 }
 
-/* Conversation chrome the shared components render. */
+/* 衬线标题：营造专业、稳重的观感 */
+h1, h2, h3, .ac-display {
+  font-family: var(--font-display), "Songti SC", "STSong", "Noto Serif CJK SC", Georgia,
+    "Times New Roman", serif;
+  letter-spacing: 0.01em;
+}
+
+/* 会话界面 */
 .user-bubble {
-  border-radius: 16px 16px 5px 16px;
+  border-radius: 10px 10px 3px 10px;
   background: var(--ink);
   color: var(--surface);
   box-shadow: var(--shadow-sm);
 }
 .chip {
-  border-radius: 999px;
+  border-radius: 5px;
   border: 1px solid var(--line-strong);
   background: var(--card);
   padding: 6px 13px;

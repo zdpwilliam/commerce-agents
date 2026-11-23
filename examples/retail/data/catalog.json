@@ -1,5 +1,5 @@
 {
-  "store_name": "ACME 牙科",
+  "store_name": "恒信牙科医疗器械",
   "products": [
     {
       "product_id": "DEN-1001",
@@ -20,7 +20,8 @@
       },
       "in_stock": true,
       "short_description": "紧凑机头，转速平稳安静，适合常规备牙；陶瓷轴承与气路清洁系统。",
-      "long_description": "紧凑机头，转速平稳安静，适合常规备牙；陶瓷轴承与气路清洁系统。 无菌供货，并为牙科专业人员提供临床支持。"
+      "long_description": "紧凑机头，转速平稳安静，适合常规备牙；陶瓷轴承与气路清洁系统。 无菌供货，并为牙科专业人员提供临床支持。",
+      "image_url": "/products/pexels-6502661.jpg"
     },
     {
       "product_id": "DEN-1002",
@@ -43,7 +44,8 @@
       },
       "in_stock": false,
       "short_description": "钛合金迷你机头配 LED，适合后牙区操作；陶瓷轴承，切削有力稳定。",
-      "long_description": "钛合金迷你机头配 LED，适合后牙区操作；陶瓷轴承，切削有力稳定。 无菌供货，并为牙科专业人员提供临床支持。"
+      "long_description": "钛合金迷你机头配 LED，适合后牙区操作；陶瓷轴承，切削有力稳定。 无菌供货，并为牙科专业人员提供临床支持。",
+      "image_url": "/products/pexels-6502549.jpg"
     },
     {
       "product_id": "DEN-1003",
@@ -64,7 +66,8 @@
       },
       "in_stock": true,
       "short_description": "耐用涡轮手机，适合日常门诊使用；转速可靠，性价比高。",
-      "long_description": "耐用涡轮手机，适合日常门诊使用；转速可靠，性价比高。 无菌供货，并为牙科专业人员提供临床支持。"
+      "long_description": "耐用涡轮手机，适合日常门诊使用；转速可靠，性价比高。 无菌供货，并为牙科专业人员提供临床支持。",
+      "image_url": "/products/pexels-6502344.jpg"
     },
     {
       "product_id": "DEN-1004",
@@ -85,7 +88,8 @@
       },
       "in_stock": true,
       "short_description": "45 度仰角机头，舒适到达后牙区，同时保持切削力。",
-      "long_description": "45 度仰角机头，舒适到达后牙区，同时保持切削力。 无菌供货，并为牙科专业人员提供临床支持。"
+      "long_description": "45 度仰角机头，舒适到达后牙区，同时保持切削力。 无菌供货，并为牙科专业人员提供临床支持。",
+      "image_url": "/products/pexels-6502661.jpg"
     },
     {
       "product_id": "DEN-1005",
@@ -108,7 +112,8 @@
       },
       "in_stock": true,
       "short_description": "用于抛光、修整和低速备牙的低速手机。",
-      "long_description": "用于抛光、修整和低速备牙的低速手机。 无菌供货，并为牙科专业人员提供临床支持。"
+      "long_description": "用于抛光、修整和低速备牙的低速手机。 无菌供货，并为牙科专业人员提供临床支持。",
+      "image_url": "/products/pexels-6502549.jpg"
     },
     {
       "product_id": "DEN-1006",
@@ -129,7 +134,8 @@
       },
       "in_stock": true,
       "short_description": "微创拔牙用外科弯机，扭矩强劲，机身纤细。",
-      "long_description": "微创拔牙用外科弯机，扭矩强劲，机身纤细。 无菌供货，并为牙科专业人员提供临床支持。"
+      "long_description": "微创拔牙用外科弯机，扭矩强劲，机身纤细。 无菌供货，并为牙科专业人员提供临床支持。",
+      "image_url": "/products/pexels-6502344.jpg"
     },
     {
       "product_id": "DEN-1007",
@@ -150,7 +156,8 @@
       },
       "in_stock": true,
       "short_description": "种植手机，扭矩可控，备骨与植入精准平稳。",
-      "long_description": "种植手机，扭矩可控，备骨与植入精准平稳。 无菌供货，并为牙科专业人员提供临床支持。"
+      "long_description": "种植手机，扭矩可控，备骨与植入精准平稳。 无菌供货，并为牙科专业人员提供临床支持。",
+      "image_url": "/products/pexels-6502661.jpg"
     },
     {
       "product_id": "DEN-1008",
@@ -173,7 +180,8 @@
       },
       "in_stock": true,
       "short_description": "带 LED 的种植手机，导板手术下视野清晰，低速控制平顺。",
-      "long_description": "带 LED 的种植手机，导板手术下视野清晰，低速控制平顺。 无菌供货，并为牙科专业人员提供临床支持。"
+      "long_description": "带 LED 的种植手机，导板手术下视野清晰，低速控制平顺。 无菌供货，并为牙科专业人员提供临床支持。",
+      "image_url": "/products/pexels-6502549.jpg"
     },
     {
       "product_id": "DEN-1009",
@@ -194,7 +202,8 @@
       },
       "in_stock": true,
       "short_description": "无线根管马达，内置根尖定位，成形精准自适应。",
-      "long_description": "无线根管马达，内置根尖定位，成形精准自适应。 无菌供货，并为牙科专业人员提供临床支持。"
+      "long_description": "无线根管马达，内置根尖定位，成形精准自适应。 无菌供货，并为牙科专业人员提供临床支持。",
+      "image_url": "/products/pexels-10820368.jpg"
     },
     {
       "product_id": "DEN-1010",
@@ -215,7 +224,8 @@
       },
       "in_stock": true,
       "short_description": "带程序记忆的根管马达，配操作灯，参数调用方便。",
-      "long_description": "带程序记忆的根管马达，配操作灯，参数调用方便。 无菌供货，并为牙科专业人员提供临床支持。"
+      "long_description": "带程序记忆的根管马达，配操作灯，参数调用方便。 无菌供货，并为牙科专业人员提供临床支持。",
+      "image_url": "/products/pexels-4971514.jpg"
     },
     {
       "product_id": "DEN-1011",
@@ -238,7 +248,8 @@
       },
       "in_stock": true,
       "short_description": "亮屏根尖定位仪，湿性根管内读数依然稳定。",
-      "long_description": "亮屏根尖定位仪，湿性根管内读数依然稳定。 无菌供货，并为牙科专业人员提供临床支持。"
+      "long_description": "亮屏根尖定位仪，湿性根管内读数依然稳定。 无菌供货，并为牙科专业人员提供临床支持。",
+      "image_url": "/products/pexels-6529107.jpg"
     },
     {
       "product_id": "DEN-1012",
@@ -259,7 +270,8 @@
       },
       "in_stock": true,
       "short_description": "小巧根尖定位仪，可视化指引清晰，自动校准。",
-      "long_description": "小巧根尖定位仪，可视化指引清晰，自动校准。 无菌供货，并为牙科专业人员提供临床支持。"
+      "long_description": "小巧根尖定位仪，可视化指引清晰，自动校准。 无菌供货，并为牙科专业人员提供临床支持。",
+      "image_url": "/products/pexels-10820368.jpg"
     },
     {
       "product_id": "DEN-1013",
@@ -280,7 +292,8 @@
       },
       "in_stock": true,
       "short_description": "热牙胶充填系统，配多种工作尖，实现致密三维充填。",
-      "long_description": "热牙胶充填系统，配多种工作尖，实现致密三维充填。 无菌供货，并为牙科专业人员提供临床支持。"
+      "long_description": "热牙胶充填系统，配多种工作尖，实现致密三维充填。 无菌供货，并为牙科专业人员提供临床支持。",
+      "image_url": "/products/pexels-4971514.jpg"
     },
     {
       "product_id": "DEN-1014",
@@ -303,7 +316,8 @@
       },
       "in_stock": true,
       "short_description": "携热器，软化并压实牙胶至根尖封闭，用于垂直加压。",
-      "long_description": "携热器，软化并压实牙胶至根尖封闭，用于垂直加压。 无菌供货，并为牙科专业人员提供临床支持。"
+      "long_description": "携热器，软化并压实牙胶至根尖封闭，用于垂直加压。 无菌供货，并为牙科专业人员提供临床支持。",
+      "image_url": "/products/pexels-6529107.jpg"
     },
     {
       "product_id": "DEN-1015",
@@ -324,7 +338,8 @@
       },
       "in_stock": true,
       "short_description": "无线充填系统，温度精确可控，充填效果稳定。",
-      "long_description": "无线充填系统，温度精确可控，充填效果稳定。 无菌供货，并为牙科专业人员提供临床支持。"
+      "long_description": "无线充填系统，温度精确可控，充填效果稳定。 无菌供货，并为牙科专业人员提供临床支持。",
+      "image_url": "/products/pexels-10820368.jpg"
     },
     {
       "product_id": "DEN-1016",
@@ -345,7 +360,8 @@
       },
       "in_stock": true,
       "short_description": "超声根管治疗仪，带 LED，用于冲洗与根管活化。",
-      "long_description": "超声根管治疗仪，带 LED，用于冲洗与根管活化。 无菌供货，并为牙科专业人员提供临床支持。"
+      "long_description": "超声根管治疗仪，带 LED，用于冲洗与根管活化。 无菌供货，并为牙科专业人员提供临床支持。",
+      "image_url": "/products/pexels-4971514.jpg"
     },
     {
       "product_id": "DEN-1017",
@@ -368,7 +384,8 @@
       },
       "in_stock": true,
       "short_description": "LED 光固化机，光谱宽、固化快，各色树脂均匀固化。",
-      "long_description": "LED 光固化机，光谱宽、固化快，各色树脂均匀固化。 无菌供货，并为牙科专业人员提供临床支持。"
+      "long_description": "LED 光固化机，光谱宽、固化快，各色树脂均匀固化。 无菌供货，并为牙科专业人员提供临床支持。",
+      "image_url": "/products/pexels-31188650.jpg"
     },
     {
       "product_id": "DEN-1018",
@@ -389,7 +406,8 @@
       },
       "in_stock": true,
       "short_description": "多模式光固化机，导光棒纤细，适合邻接面操作。",
-      "long_description": "多模式光固化机，导光棒纤细，适合邻接面操作。 无菌供货，并为牙科专业人员提供临床支持。"
+      "long_description": "多模式光固化机，导光棒纤细，适合邻接面操作。 无菌供货，并为牙科专业人员提供临床支持。",
+      "image_url": "/products/pexels-5355843.jpg"
     },
     {
       "product_id": "DEN-1019",
@@ -410,7 +428,8 @@
       },
       "in_stock": false,
       "short_description": "宽光谱光固化机，可快速固化大块填充与通用树脂。",
-      "long_description": "宽光谱光固化机，可快速固化大块填充与通用树脂。 无菌供货，并为牙科专业人员提供临床支持。"
+      "long_description": "宽光谱光固化机，可快速固化大块填充与通用树脂。 无菌供货，并为牙科专业人员提供临床支持。",
+      "image_url": "/products/pexels-3952132.jpg"
     },
     {
       "product_id": "DEN-1020",
@@ -433,7 +452,8 @@
       },
       "in_stock": true,
       "short_description": "笔式光固化机，多档程序，握持舒适平衡。",
-      "long_description": "笔式光固化机，多档程序，握持舒适平衡。 无菌供货，并为牙科专业人员提供临床支持。"
+      "long_description": "笔式光固化机，多档程序，握持舒适平衡。 无菌供货，并为牙科专业人员提供临床支持。",
+      "image_url": "/products/pexels-31188650.jpg"
     },
     {
       "product_id": "DEN-1021",
@@ -454,7 +474,8 @@
       },
       "in_stock": true,
       "short_description": "光斑均匀、光强稳定的光固化机，电池续航满足全天门诊。",
-      "long_description": "光斑均匀、光强稳定的光固化机，电池续航满足全天门诊。 无菌供货，并为牙科专业人员提供临床支持。"
+      "long_description": "光斑均匀、光强稳定的光固化机，电池续航满足全天门诊。 无菌供货，并为牙科专业人员提供临床支持。",
+      "image_url": "/products/pexels-5355843.jpg"
     },
     {
       "product_id": "DEN-1022",
@@ -475,7 +496,8 @@
       },
       "in_stock": true,
       "short_description": "高输出宽光谱光固化机，树脂聚合快速可靠。",
-      "long_description": "高输出宽光谱光固化机，树脂聚合快速可靠。 无菌供货，并为牙科专业人员提供临床支持。"
+      "long_description": "高输出宽光谱光固化机，树脂聚合快速可靠。 无菌供货，并为牙科专业人员提供临床支持。",
+      "image_url": "/products/pexels-3952132.jpg"
     },
     {
       "product_id": "DEN-1023",
@@ -498,7 +520,8 @@
       },
       "in_stock": true,
       "short_description": "龈上喷砂，舒适高效地去除菌斑与色素。",
-      "long_description": "龈上喷砂，舒适高效地去除菌斑与色素。 无菌供货，并为牙科专业人员提供临床支持。"
+      "long_description": "龈上喷砂，舒适高效地去除菌斑与色素。 无菌供货，并为牙科专业人员提供临床支持。",
+      "image_url": "/products/pexels-31188653.jpg"
     },
     {
       "product_id": "DEN-1024",
@@ -519,7 +542,8 @@
       },
       "in_stock": true,
       "short_description": "龈下喷砂，细喷嘴适合牙周与种植体维护。",
-      "long_description": "龈下喷砂，细喷嘴适合牙周与种植体维护。 无菌供货，并为牙科专业人员提供临床支持。"
+      "long_description": "龈下喷砂，细喷嘴适合牙周与种植体维护。 无菌供货，并为牙科专业人员提供临床支持。",
+      "image_url": "/products/pexels-12374355.jpg"
     },
     {
       "product_id": "DEN-1025",
@@ -540,7 +564,8 @@
       },
       "in_stock": false,
       "short_description": "超声洁牙机，水雾稳定、工作尖通用，适合日常洁治。",
-      "long_description": "超声洁牙机，水雾稳定、工作尖通用，适合日常洁治。 无菌供货，并为牙科专业人员提供临床支持。"
+      "long_description": "超声洁牙机，水雾稳定、工作尖通用，适合日常洁治。 无菌供货，并为牙科专业人员提供临床支持。",
+      "image_url": "/products/pexels-9951390.jpg"
     },
     {
       "product_id": "DEN-1026",
@@ -563,7 +588,8 @@
       },
       "in_stock": false,
       "short_description": "多模式超声洁牙机，LED 手柄，清除牙石精准。",
-      "long_description": "多模式超声洁牙机，LED 手柄，清除牙石精准。 无菌供货，并为牙科专业人员提供临床支持。"
+      "long_description": "多模式超声洁牙机，LED 手柄，清除牙石精准。 无菌供货，并为牙科专业人员提供临床支持。",
+      "image_url": "/products/pexels-31188653.jpg"
     },
     {
       "product_id": "DEN-1027",
@@ -584,7 +610,8 @@
       },
       "in_stock": true,
       "short_description": "带 LED 的超声洁牙机，握持舒适，洁治高效。",
-      "long_description": "带 LED 的超声洁牙机，握持舒适，洁治高效。 无菌供货，并为牙科专业人员提供临床支持。"
+      "long_description": "带 LED 的超声洁牙机，握持舒适，洁治高效。 无菌供货，并为牙科专业人员提供临床支持。",
+      "image_url": "/products/pexels-12374355.jpg"
     },
     {
       "product_id": "DEN-1028",
@@ -605,7 +632,8 @@
       },
       "in_stock": true,
       "short_description": "菌斑引导治疗设备，集洁治与喷砂于一体，微创清洁。",
-      "long_description": "菌斑引导治疗设备，集洁治与喷砂于一体，微创清洁。 无菌供货，并为牙科专业人员提供临床支持。"
+      "long_description": "菌斑引导治疗设备，集洁治与喷砂于一体，微创清洁。 无菌供货，并为牙科专业人员提供临床支持。",
+      "image_url": "/products/pexels-9951390.jpg"
     },
     {
       "product_id": "DEN-1029",
@@ -628,7 +656,8 @@
       },
       "in_stock": true,
       "short_description": "口内扫描仪，全彩捕捉，全口扫描快速精准。",
-      "long_description": "口内扫描仪，全彩捕捉，全口扫描快速精准。 无菌供货，并为牙科专业人员提供临床支持。"
+      "long_description": "口内扫描仪，全彩捕捉，全口扫描快速精准。 无菌供货，并为牙科专业人员提供临床支持。",
+      "image_url": "/products/pexels-6501852.jpg"
     },
     {
       "product_id": "DEN-1030",
@@ -649,7 +678,8 @@
       },
       "in_stock": true,
       "short_description": "无线口内扫描仪，实时色彩与比色，修复体精准。",
-      "long_description": "无线口内扫描仪，实时色彩与比色，修复体精准。 无菌供货，并为牙科专业人员提供临床支持。"
+      "long_description": "无线口内扫描仪，实时色彩与比色，修复体精准。 无菌供货，并为牙科专业人员提供临床支持。",
+      "image_url": "/products/pexels-6501881.jpg"
     },
     {
       "product_id": "DEN-1031",
@@ -670,7 +700,8 @@
       },
       "in_stock": true,
       "short_description": "加热工作尖口内扫描仪，取像清晰，全口印模可靠。",
-      "long_description": "加热工作尖口内扫描仪，取像清晰，全口印模可靠。 无菌供货，并为牙科专业人员提供临床支持。"
+      "long_description": "加热工作尖口内扫描仪，取像清晰，全口印模可靠。 无菌供货，并为牙科专业人员提供临床支持。",
+      "image_url": "/products/pexels-6502019.jpg"
     },
     {
       "product_id": "DEN-1032",
@@ -693,7 +724,8 @@
       },
       "in_stock": true,
       "short_description": "锥形束 CT，大视野，适合种植规划与三维诊断。",
-      "long_description": "锥形束 CT，大视野，适合种植规划与三维诊断。 无菌供货，并为牙科专业人员提供临床支持。"
+      "long_description": "锥形束 CT，大视野，适合种植规划与三维诊断。 无菌供货，并为牙科专业人员提供临床支持。",
+      "image_url": "/products/pexels-6501852.jpg"
     },
     {
       "product_id": "DEN-1033",
@@ -714,7 +746,8 @@
       },
       "in_stock": true,
       "short_description": "高频牙片机，数码定时，影像清晰、剂量低。",
-      "long_description": "高频牙片机，数码定时，影像清晰、剂量低。 无菌供货，并为牙科专业人员提供临床支持。"
+      "long_description": "高频牙片机，数码定时，影像清晰、剂量低。 无菌供货，并为牙科专业人员提供临床支持。",
+      "image_url": "/products/pexels-6501881.jpg"
     },
     {
       "product_id": "DEN-1034",
@@ -735,7 +768,8 @@
       },
       "in_stock": true,
       "short_description": "带移动支架的数码牙片机，椅旁拍片灵活方便。",
-      "long_description": "带移动支架的数码牙片机，椅旁拍片灵活方便。 无菌供货，并为牙科专业人员提供临床支持。"
+      "long_description": "带移动支架的数码牙片机，椅旁拍片灵活方便。 无菌供货，并为牙科专业人员提供临床支持。",
+      "image_url": "/products/pexels-6502019.jpg"
     },
     {
       "product_id": "DEN-1035",
@@ -758,7 +792,8 @@
       },
       "in_stock": true,
       "short_description": "数码全景与头颅 X 光系统，影像清晰，诊断细节丰富。",
-      "long_description": "数码全景与头颅 X 光系统，影像清晰，诊断细节丰富。 无菌供货，并为牙科专业人员提供临床支持。"
+      "long_description": "数码全景与头颅 X 光系统，影像清晰，诊断细节丰富。 无菌供货，并为牙科专业人员提供临床支持。",
+      "image_url": "/products/pexels-6501852.jpg"
     },
     {
       "product_id": "DEN-1036",
@@ -779,7 +814,8 @@
       },
       "in_stock": true,
       "short_description": "牙科综合治疗椅，配 LED 灯与器械车，调节平稳安静。",
-      "long_description": "牙科综合治疗椅，配 LED 灯与器械车，调节平稳安静。 无菌供货，并为牙科专业人员提供临床支持。"
+      "long_description": "牙科综合治疗椅，配 LED 灯与器械车，调节平稳安静。 无菌供货，并为牙科专业人员提供临床支持。",
+      "image_url": "/products/pexels-4269265.jpg"
     },
     {
       "product_id": "DEN-1037",
@@ -800,7 +836,8 @@
       },
       "in_stock": true,
       "short_description": "种植配置治疗椅，器械盘加强，后仰范围大，适合口腔外科。",
-      "long_description": "种植配置治疗椅，器械盘加强，后仰范围大，适合口腔外科。 无菌供货，并为牙科专业人员提供临床支持。"
+      "long_description": "种植配置治疗椅，器械盘加强，后仰范围大，适合口腔外科。 无菌供货，并为牙科专业人员提供临床支持。",
+      "image_url": "/products/pexels-6812507.jpg"
     },
     {
       "product_id": "DEN-1038",
@@ -823,7 +860,8 @@
       },
       "in_stock": true,
       "short_description": "集成器械盘的牙科治疗椅，人体工学设计，坚固耐用。",
-      "long_description": "集成器械盘的牙科治疗椅，人体工学设计，坚固耐用。 无菌供货，并为牙科专业人员提供临床支持。"
+      "long_description": "集成器械盘的牙科治疗椅，人体工学设计，坚固耐用。 无菌供货，并为牙科专业人员提供临床支持。",
+      "image_url": "/products/pexels-9062527.jpg"
     },
     {
       "product_id": "DEN-1039",
@@ -844,7 +882,8 @@
       },
       "in_stock": true,
       "short_description": "带自动回位支臂的牙科治疗机，椅面贴合身形，适合长时间操作。",
-      "long_description": "带自动回位支臂的牙科治疗机，椅面贴合身形，适合长时间操作。 无菌供货，并为牙科专业人员提供临床支持。"
+      "long_description": "带自动回位支臂的牙科治疗机，椅面贴合身形，适合长时间操作。 无菌供货，并为牙科专业人员提供临床支持。",
+      "image_url": "/products/pexels-4269265.jpg"
     },
     {
       "product_id": "DEN-1040",
@@ -865,7 +904,8 @@
       },
       "in_stock": false,
       "short_description": "种植治疗椅，靠背宽大、头枕可调，适合口腔手术。",
-      "long_description": "种植治疗椅，靠背宽大、头枕可调，适合口腔手术。 无菌供货，并为牙科专业人员提供临床支持。"
+      "long_description": "种植治疗椅，靠背宽大、头枕可调，适合口腔手术。 无菌供货，并为牙科专业人员提供临床支持。",
+      "image_url": "/products/pexels-6812507.jpg"
     },
     {
       "product_id": "DEN-1041",
@@ -888,7 +928,8 @@
       },
       "in_stock": true,
       "short_description": "人体工学座椅与可靠器械盘的牙科治疗椅，适合全科诊疗。",
-      "long_description": "人体工学座椅与可靠器械盘的牙科治疗椅，适合全科诊疗。 无菌供货，并为牙科专业人员提供临床支持。"
+      "long_description": "人体工学座椅与可靠器械盘的牙科治疗椅，适合全科诊疗。 无菌供货，并为牙科专业人员提供临床支持。",
+      "image_url": "/products/pexels-9062527.jpg"
     },
     {
       "product_id": "DEN-1042",
@@ -909,7 +950,8 @@
       },
       "in_stock": true,
       "short_description": "台式压力蒸汽灭菌器，循环显示清晰，灭菌可靠。",
-      "long_description": "台式压力蒸汽灭菌器，循环显示清晰，灭菌可靠。 无菌供货，并为牙科专业人员提供临床支持。"
+      "long_description": "台式压力蒸汽灭菌器，循环显示清晰，灭菌可靠。 无菌供货，并为牙科专业人员提供临床支持。",
+      "image_url": "/products/pexels-6627665.jpg"
     },
     {
       "product_id": "DEN-1043",
@@ -930,7 +972,8 @@
       },
       "in_stock": true,
       "short_description": "超声清洗机，灭菌前有效去除器械上的碎屑。",
-      "long_description": "超声清洗机，灭菌前有效去除器械上的碎屑。 无菌供货，并为牙科专业人员提供临床支持。"
+      "long_description": "超声清洗机，灭菌前有效去除器械上的碎屑。 无菌供货，并为牙科专业人员提供临床支持。",
+      "image_url": "/products/pexels-9259926.jpg"
     },
     {
       "product_id": "DEN-1044",
@@ -953,7 +996,8 @@
       },
       "in_stock": true,
       "short_description": "自动手机注油机，每次循环后为涡轮润滑并清洁。",
-      "long_description": "自动手机注油机，每次循环后为涡轮润滑并清洁。 无菌供货，并为牙科专业人员提供临床支持。"
+      "long_description": "自动手机注油机，每次循环后为涡轮润滑并清洁。 无菌供货，并为牙科专业人员提供临床支持。",
+      "image_url": "/products/pexels-6627664.jpg"
     },
     {
       "product_id": "DEN-1045",
@@ -974,7 +1018,8 @@
       },
       "in_stock": true,
       "short_description": "纸塑封口机，用于安全、可追溯的无菌包装。",
-      "long_description": "纸塑封口机，用于安全、可追溯的无菌包装。 无菌供货，并为牙科专业人员提供临床支持。"
+      "long_description": "纸塑封口机，用于安全、可追溯的无菌包装。 无菌供货，并为牙科专业人员提供临床支持。",
+      "image_url": "/products/pexels-6627665.jpg"
     },
     {
       "product_id": "DEN-1046",
@@ -995,7 +1040,8 @@
       },
       "in_stock": true,
       "short_description": "正压装置，保持诊室空气洁净、环境受控。",
-      "long_description": "正压装置，保持诊室空气洁净、环境受控。 无菌供货，并为牙科专业人员提供临床支持。"
+      "long_description": "正压装置，保持诊室空气洁净、环境受控。 无菌供货，并为牙科专业人员提供临床支持。",
+      "image_url": "/products/pexels-9259926.jpg"
     },
     {
       "product_id": "DEN-1047",
@@ -1018,7 +1064,8 @@
       },
       "in_stock": true,
       "short_description": "等离子空气消毒机，安静稳定，适合诊室日常消毒。",
-      "long_description": "等离子空气消毒机，安静稳定，适合诊室日常消毒。 无菌供货，并为牙科专业人员提供临床支持。"
+      "long_description": "等离子空气消毒机，安静稳定，适合诊室日常消毒。 无菌供货，并为牙科专业人员提供临床支持。",
+      "image_url": "/products/pexels-6627664.jpg"
     },
     {
       "product_id": "DEN-1048",
@@ -1039,7 +1086,8 @@
       },
       "in_stock": true,
       "short_description": "FG 柄车针混合装，用于备牙与修整，单次使用保持锋利。",
-      "long_description": "FG 柄车针混合装，用于备牙与修整，单次使用保持锋利。 无菌供货，并为牙科专业人员提供临床支持。"
+      "long_description": "FG 柄车针混合装，用于备牙与修整，单次使用保持锋利。 无菌供货，并为牙科专业人员提供临床支持。",
+      "image_url": "/products/pexels-6627456.jpg"
     },
     {
       "product_id": "DEN-1049",
@@ -1060,7 +1108,8 @@
       },
       "in_stock": true,
       "short_description": "0.06 锥度牙胶尖，多规格混合，根管充填致密可靠。",
-      "long_description": "0.06 锥度牙胶尖，多规格混合，根管充填致密可靠。 无菌供货，并为牙科专业人员提供临床支持。"
+      "long_description": "0.06 锥度牙胶尖，多规格混合，根管充填致密可靠。 无菌供货，并为牙科专业人员提供临床支持。",
+      "image_url": "/products/pexels-7789653.jpg"
     },
     {
       "product_id": "DEN-1050",
@@ -1105,7 +1154,8 @@
       ],
       "rating": 4.7,
       "review_count": 180,
-      "long_description": "含钻针、骨粉与屏障膜的种植套件；可选择不同配置以匹配病例。 无菌供货，并为牙科专业人员提供临床支持。"
+      "long_description": "含钻针、骨粉与屏障膜的种植套件；可选择不同配置以匹配病例。 无菌供货，并为牙科专业人员提供临床支持。",
+      "image_url": "/products/pexels-6627733.jpg"
     }
   ]
 }

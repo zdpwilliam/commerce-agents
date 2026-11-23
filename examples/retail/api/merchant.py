@@ -1,7 +1,7 @@
 # Copyright 2026 Anthropic PBC
 # SPDX-License-Identifier: Apache-2.0
 
-"""The ACME retail merchant router: the shared portal routes over ``MockRetailMerchant``,
+"""The 恒信 retail merchant router: the shared portal routes over ``MockRetailMerchant``,
 plus the KPI trends and insight cards the retail portal's home page shows."""
 
 from __future__ import annotations

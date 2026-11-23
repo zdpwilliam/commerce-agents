@@ -1,7 +1,7 @@
 # Copyright 2026 Anthropic PBC
 # SPDX-License-Identifier: Apache-2.0
 
-"""ACME retail example API: the mock retailer behind the shared storefront routes, the
+"""恒信 retail example API: the mock retailer behind the shared storefront routes, the
 merchant router under /api/merchant, and the retail-only routes below.
 
     uvicorn retail.api.main:app --app-dir examples --reload --port 8000
@@ -51,7 +51,7 @@ def product_detail(product: ProductDetails) -> dict:
 
 
 host = build_storefront_host(
-    title="ACME Retail demo API",
+    title="恒信牙科演示 API",
     example_root=DATA_DIR.parent,
     backend=backend,
     agent=agent,

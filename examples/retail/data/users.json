@@ -3,7 +3,7 @@
     {
       "user_id": "demo-user",
       "display_name": "普里娅医生",
-      "loyalty_tier": "ACME 牙科会员",
+      "loyalty_tier": "恒信牙科医疗器械会员",
       "default_location": "枫岭区",
       "preferences": {
         "spending": "通常选择中端临床方案",

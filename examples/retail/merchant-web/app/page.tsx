@@ -28,9 +28,9 @@ function StoreMark() {
   return (
     <span
       aria-hidden
-      className="grid h-[34px] w-[34px] shrink-0 place-items-center rounded-[10px] bg-(--ink) text-[16px] font-bold text-(--brand) shadow-[inset_0_-3px_0_rgba(0,0,0,0.18)]"
+      className="grid h-[34px] w-[34px] shrink-0 place-items-center rounded-md bg-(--ink) text-[18px] font-bold text-(--brand)"
     >
-      A
+      恒
     </span>
   );
 }
@@ -82,7 +82,7 @@ export default function PortalPage() {
   return (
     <>
       <PortalShell
-        brand={{ mark: <StoreMark />, name: "ACME 牙科", detail: "商家工作台" }}
+        brand={{ mark: <StoreMark />, name: "恒信牙科医疗器械", detail: "商家工作台" }}
         nav={nav}
         view={view}
         onViewChange={setView}
