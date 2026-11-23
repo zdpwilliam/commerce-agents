@@ -71,5 +71,5 @@ async def cart_add(request: CartAddRequest, record: host.CurrentSession) -> dict
     return await host.direct_add(
         record,
         request,
-        note="Customer tapped the add-to-cart button on {title} ({product_id}), quantity {quantity}.",
+        note="顾客点击了 {title}（{product_id}）的加入购物车按钮，数量 {quantity}。",
     )

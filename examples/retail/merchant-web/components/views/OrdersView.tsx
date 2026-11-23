@@ -16,7 +16,7 @@ function IssueRow({ issue, onAskAssistant }: { issue: OrderIssue; onAskAssistant
       icon={style.icon}
       tone={style.tone}
       title={issue.summary}
-      meta={[style.label, `Order ${issue.order_id}`, issue.listing_id ?? "", issue.opened_at ? `opened ${formatDayMonth(issue.opened_at)}` : ""].filter(Boolean).join(" · ")}
+      meta={[style.label, `订单 ${issue.order_id}`, issue.listing_id ?? "", issue.opened_at ? `发起于 ${formatDayMonth(issue.opened_at)}` : ""].filter(Boolean).join(" · ")}
       note={
         issue.buyer_message_excerpt ? (
           <div className="mt-1 rounded-[10px] bg-(--ground) px-3 py-2">
@@ -28,7 +28,7 @@ function IssueRow({ issue, onAskAssistant }: { issue: OrderIssue; onAskAssistant
       }
       action={{
         label: issue.kind === "buyer_message" ? "起草回复" : "提问",
-        onClick: () => onAskAssistant(`What are my options for order ${issue.order_id}? ${issue.summary}.`),
+        onClick: () => onAskAssistant(`订单 ${issue.order_id} 有哪些处理方案？${issue.summary}。`),
       }}
     />
   );
@@ -48,9 +48,9 @@ export default function OrdersView({
 
   return (
     <div className="ac-reveal flex flex-col gap-4">
-      <PageHeader title="订单" subtitle={data ? (issues.length ? plural(issues.length, "open issue") : "暂无未处理问题") : undefined} />
+      <PageHeader title="订单" subtitle={data ? (issues.length ? plural(issues.length, "个未处理问题", "个未处理问题") : "暂无未处理问题") : undefined} />
       {failed && !data ? (
-        <Notice>The merchant API isn&apos;t reachable, so order issues can&apos;t load.</Notice>
+        <Notice>无法连接商家接口，订单问题加载失败。</Notice>
       ) : !data ? (
         <div className="grid gap-4 xl:grid-cols-[minmax(0,1fr)_320px]">
           <Skeleton className="h-96" />
@@ -60,7 +60,7 @@ export default function OrdersView({
         <div className="grid items-start gap-4 xl:grid-cols-[minmax(0,1fr)_320px]">
           <Panel title="未处理问题" subtitle={issues.length ? String(issues.length) : undefined}>
             {issues.length === 0 ? (
-              <p className="px-[18px] pb-4 text-[13.5px] text-(--ink-soft)">No open order issues.</p>
+              <p className="px-[18px] pb-4 text-[13.5px] text-(--ink-soft)">暂无未处理的订单问题。</p>
             ) : (
               <AttentionList>
                 {issues.map((issue) => (
@@ -73,7 +73,7 @@ export default function OrdersView({
             {!recentOrders ? (
               <Skeleton className="mx-[18px] mb-4 h-40" />
             ) : recentOrders.length === 0 ? (
-              <p className="px-[18px] pb-4 text-[13px] text-(--ink-soft)">No recent orders to show.</p>
+              <p className="px-[18px] pb-4 text-[13px] text-(--ink-soft)">暂无最近订单。</p>
             ) : (
               <RecordList rows={orderRows(recentOrders)} />
             )}

@@ -49,7 +49,7 @@ function PriceIntelligenceRow({ intel }: { intel: PriceIntelligence }) {
             : intel.position === "high"
               ? "接近自身价格区间高位"
               : "处于自身常见价位区间"}
-          {" "}· last {intel.days} days
+          {" "}· 近 {intel.days} 天
         </div>
       </div>
     </div>
@@ -60,14 +60,14 @@ function ReviewAspectsRow({ synthesis }: { synthesis: ReviewAspects }) {
   return (
     <div data-review-aspects className="mt-2">
       <div className="text-[11px] font-semibold uppercase tracking-wide text-(--ink-soft)">
-        From {synthesis.review_count.toLocaleString()} customer reviews
+        来自 {synthesis.review_count.toLocaleString()} 条顾客评价
       </div>
       <div className="mt-1.5 flex flex-wrap gap-1.5">
         {synthesis.aspects.map((aspect) => (
           <div
             key={aspect.name}
             className="rounded-lg border border-(--line) bg-(--card) px-2 py-1"
-            title={`${aspect.name}: ${aspect.positive_pct}% positive across ${aspect.mentions.toLocaleString()} mentions`}
+            title={`${aspect.name}：${aspect.positive_pct}% 好评，共 ${aspect.mentions.toLocaleString()} 次提及`}
           >
             <div className="flex items-baseline gap-1.5 text-[13px]">
               <span className="font-medium text-(--ink)">{aspect.name}</span>
@@ -79,7 +79,7 @@ function ReviewAspectsRow({ synthesis }: { synthesis: ReviewAspects }) {
                 {aspect.positive_pct}%
               </span>
               <span className="text-[11px] text-(--ink-soft)">
-                {aspect.mentions.toLocaleString()} mentions
+                {aspect.mentions.toLocaleString()} 次提及
               </span>
             </div>
             <div className="mt-1 h-1 w-full overflow-hidden rounded-full bg-(--well)">
@@ -111,7 +111,7 @@ function VariantList({ family, variants }: { family: Product; variants: Product[
             <button
               type="button"
               disabled={!available}
-              onClick={() => ask(`Add the ${family.title} in ${label} (${variant.product_id}) to my cart.`)}
+              onClick={() => ask(`把 ${family.title}（${label}，${variant.product_id}）加入我的购物车。`)}
               className="rounded-full border border-(--line) bg-(--card) px-2.5 py-1 text-[12px] text-(--ink) transition-colors hover:border-(--ink) disabled:cursor-not-allowed disabled:text-(--ink-soft)/70 disabled:line-through"
             >
               {label}
@@ -168,7 +168,7 @@ function ProductDetail({
                 <Rating rating={full.rating} count={full.review_count} />
                 {full.in_stock === false ? (
                   <span className="rounded-full bg-(--ink)/85 px-2 py-0.5 text-[11px] font-medium text-(--surface)">
-                    Out of stock
+                    缺货
                   </span>
                 ) : null}
               </div>
@@ -189,7 +189,7 @@ function ProductDetail({
         <p className="mt-2 text-[13px] leading-snug text-(--ink)">{reason}</p>
       ) : null}
       {details === null ? (
-        <p className="mt-2 animate-pulse text-[13px] text-(--ink-soft)">Loading details…</p>
+        <p className="mt-2 animate-pulse text-[13px] text-(--ink-soft)">正在加载详情…</p>
       ) : (
         <div className="ac-reveal">
           {details.price_intelligence ? (

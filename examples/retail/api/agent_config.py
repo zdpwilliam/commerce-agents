@@ -16,7 +16,7 @@ from shopping_agent import ShoppingAgentConfig
 def build_shopping_config() -> ShoppingAgentConfig:
     return ShoppingAgentConfig(
         brand_name="ACME",
-        assistant_name="ACME Assistant",
+        assistant_name="ACME 助手",
         brand_voice="professional, warm, and brief",
     )
 
@@ -25,7 +25,7 @@ def build_merchant_config(store_name: str) -> MerchantAgentConfig:
     return MerchantAgentConfig(
         brand_name=store_name,
         require_host_approval=host_approval_default(),
-        approval_surface="the Approve button on the change preview card",
+        approval_surface="变更预览卡片上的「批准」按钮",
         # This deployment runs the run_analysis delegate over MockRetailMerchant's
         # read-only SQL view of the fixtures. MERCHANT_ANALYSIS_CODE_EXECUTION=1 adds the
         # code-execution sandbox (first-party API only); MERCHANT_ANALYSIS_MODEL overrides

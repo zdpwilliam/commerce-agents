@@ -14,8 +14,8 @@ import { CHANGE_STATUS } from "./cards";
 /** The question a KPI tile prefills: why the figure moved against the comparison window. */
 export function askWhy(label: string, changePct: number | null | undefined, comparison: string): string {
   const name = label.toLowerCase();
-  if (changePct == null) return `How is ${name} trending, and what's behind it?`;
-  return `Why is ${name} ${changePct >= 0 ? "up" : "down"} ${Math.abs(changePct).toFixed(1)}% against the ${comparison || "prior period"}?`;
+  if (changePct == null) return `${name}目前的趋势如何，原因是什么？`;
+  return `为什么${name}相比${comparison || "上一周期"}${changePct >= 0 ? "上升" : "下降"}了 ${Math.abs(changePct).toFixed(1)}%？`;
 }
 
 /** A ratio's change from its parts' changes, e.g. average order value from sales and orders. */
@@ -31,11 +31,11 @@ export function ApprovalsBanner({ changes, onReview }: { changes: { change_id: s
     <section className="flex flex-wrap items-center gap-x-4 gap-y-2 rounded-2xl border border-(--violet)/20 bg-(--violet-soft) px-[18px] py-3">
       <KindIcon icon="edit" tone="violet" size={32} />
       <div className="min-w-0 flex-1">
-        <div className="text-[14px] font-semibold text-(--ink)">{plural(changes.length, "change")} awaiting approval</div>
+        <div className="text-[14px] font-semibold text-(--ink)">有 {plural(changes.length, "项变更", "项变更")} 待批准</div>
         <div className="mt-0.5 truncate text-[12.5px] text-(--ink-soft)">{changes.map((change) => change.summary).join(" · ")}</div>
       </div>
       <Button variant="primary" size="sm" onClick={onReview}>
-        Review
+        查看
       </Button>
     </section>
   );
@@ -80,7 +80,7 @@ export function QueueOverflow({ hidden, link }: { hidden: number; link?: { label
   if (hidden <= 0) return null;
   return (
     <div className="flex items-center gap-2 border-t border-(--line) px-[18px] py-2.5 text-[12.5px] text-(--ink-soft)">
-      <span>{plural(hidden, "more item")} in the queue</span>
+      <span>队列中还有 {plural(hidden, "项", "项")}</span>
       {link ? <ViewLink label={link.label} onClick={link.onClick} className="ml-auto" /> : null}
     </div>
   );

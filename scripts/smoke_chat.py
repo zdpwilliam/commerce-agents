@@ -38,19 +38,19 @@ VERTICAL_TURNS: dict[str, list[dict[str, Any]]] = {
     "retail": [
         {
             "message": (
-                "I'm taking my partner and our 6-year-old camping for the first time next month. "
-                "We need a tent — nothing too heavy to deal with, ideally under $250."
+                "我想给诊所添置一台牙科种植手机，预算在 3000 元以内，"
+                "最好扭矩可控、能高温高压灭菌。"
             ),
             "expect_tools": {"search_products"},
             "expect_events": {"ui", "turn_complete"},
         },
         {
-            "message": "Compare the top two options for me — mostly care about space and ease of setup.",
+            "message": "帮我对比一下前两个选项，主要看扭矩范围和接口兼容性。",
             "expect_tools": set(),
             "expect_events": {"ui", "turn_complete"},
         },
         {
-            "message": "The family one sounds right. Add it to my cart, and remind me what returns look like just in case.",
+            "message": "就选第一个吧，加入购物车，顺便提醒我退货政策是怎样的。",
             "expect_tools": {"add_to_cart"},
             "expect_events": {"cart_update", "turn_complete"},
         },
@@ -142,23 +142,22 @@ MERCHANT_TURNS: dict[str, dict[str, list[dict[str, Any]]]] = {
         # trend check and the fortnight's sales drivers.
         "morning": [
             {
-                "message": "What needs my attention this morning?",
+                "message": "今天有哪些需要我关注的事项？",
                 "expect_tools": {"get_business_snapshot"},
                 "expect_events": {"ui", "turn_complete"},
                 "forbid_tools": {"apply_change"},
             },
             {
                 "message": (
-                    "Restock the ocean wall decals with enough to cover the next month at the "
-                    "current pace, and fix that listing's description so it covers what's been "
-                    "missing. Show me both before anything goes live."
+                    "给种植手机补货，数量按当前销售速度覆盖未来一个月，"
+                    "并完善该商品的描述，把缺失的信息补全。先在预览里给我看，别急着上线。"
                 ),
                 "expect_tools": {"stage_inventory_action"},
                 "expect_events": {"ui", "change_update", "turn_complete"},
                 "forbid_tools": {"apply_change"},
             },
             {
-                "message": "Looks right — approve the restock.",
+                "message": "看起来没问题，批准补货。",
                 "expect_tools": {"apply_change"},
                 "expect_events": {"turn_complete"},
                 "forbid_applied_change": True,
@@ -166,16 +165,15 @@ MERCHANT_TURNS: dict[str, dict[str, list[dict[str, Any]]]] = {
             {"portal_approve_kind": "inventory_action"},
             {
                 "message": (
-                    "Kids-room decor feels like it's having a moment. Pull the numbers — is the "
-                    "under-the-sea line really outperforming the rest of the store this month?"
+                    "儿童牙科专区最近好像有起色，拉一下数据——"
+                    "这个月它的表现真的比店内其他品类好吗？"
                 ),
                 "expect_events": {"ui", "turn_complete"},
                 "forbid_tools": {"stage_price_update", "stage_promotion", "apply_change"},
             },
             {
                 "message": (
-                    "Why did sales move over the last two weeks — which category or listings "
-                    "drove it, and by how much?"
+                    "过去两周销售额为什么变化——是哪个品类或商品带动的，影响多大？"
                 ),
                 "expect_events": {"ui", "turn_complete"},
                 "forbid_tools": {"stage_price_update", "stage_promotion", "apply_change"},
@@ -185,8 +183,7 @@ MERCHANT_TURNS: dict[str, dict[str, list[dict[str, Any]]]] = {
         "trend": [
             {
                 "message": (
-                    "The ocean-room collection looks like it's trending — how is it actually "
-                    "doing compared to the rest of the store this month?"
+                    "光固化机系列最近好像卖得不错——这个月它和店内其他商品比起来表现如何？"
                 ),
                 "expect_tools": {"get_business_snapshot"},
                 "expect_events": {"ui", "turn_complete"},
@@ -194,16 +191,15 @@ MERCHANT_TURNS: dict[str, dict[str, list[dict[str, Any]]]] = {
             },
             {
                 "message": (
-                    "Set up a weekend promotion on the three best-selling ocean-room listings "
-                    "and refresh their titles so they're easier to find. Show me the margin "
-                    "impact before anything goes live."
+                    "给销量前三的光固化机做一个周末促销，并优化标题让它们更容易被搜到。"
+                    "先给我看毛利影响，别急着上线。"
                 ),
                 "expect_tools": {"stage_promotion"},
                 "expect_events": {"ui", "change_update", "turn_complete"},
                 "forbid_tools": {"apply_change"},
             },
             {
-                "message": "The promotion looks right — approve it. Hold the title changes for now.",
+                "message": "促销看起来没问题，批准吧。标题修改先暂停。",
                 "expect_tools": {"apply_change"},
                 "expect_events": {"turn_complete"},
                 "forbid_applied_change": True,

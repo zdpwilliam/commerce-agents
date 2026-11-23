@@ -170,16 +170,16 @@ def session_dependency(store: SessionStore[StateT], start_route: str) -> Any:
     ) -> Iterator[SessionRecord[StateT]]:
         if not session_id:
             raise HTTPException(
-                status_code=401, detail=f"Start a session first (POST {start_route})"
+                status_code=401, detail=f"请先创建会话（POST {start_route}）"
             )
         try:
             record = store.require(session_id)
         except UnknownSessionError as error:
-            raise HTTPException(status_code=401, detail="Unknown session") from error
+            raise HTTPException(status_code=401, detail="会话不存在") from error
         yield record
         try:
             store.save(record)
         except SessionConflictError as error:
-            raise HTTPException(status_code=409, detail="The session changed; retry") from error
+            raise HTTPException(status_code=409, detail="会话已变更，请重试") from error
 
     return Annotated[SessionRecord[StateT], Depends(current_session, scope="function")]

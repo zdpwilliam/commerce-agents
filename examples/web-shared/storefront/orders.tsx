@@ -94,35 +94,35 @@ export interface OrderNouns {
 
 /** Retail's vocabulary; a vertical spreads this and overrides what differs. */
 export const ORDER_NOUNS: OrderNouns = {
-  one: "order",
+  one: "笔订单",
   title: "订单",
   cardTitle: "即将送达",
   noneOpen: "暂无在途订单",
   openVerb: "送达",
-  closedWhen: (order, date) => (order.status === "delivered" ? `Delivered ${date}` : `Placed ${formatDayMonth(order.placed_at)}`),
+  closedWhen: (order, date) => (order.status === "delivered" ? `已于 ${date} 送达` : `下单于 ${formatDayMonth(order.placed_at)}`),
   filters: [
     { id: "open", label: "配送中", match: isOpen },
     { id: "delayed", label: "延误", match: (order) => order.status === "delayed" },
     { id: "closed", label: "历史", match: (order) => !isOpen(order) },
   ],
   handoff(order) {
-    const ref = `order ${order.order_id}`;
-    if (order.status === "delayed") return { label: "询问原因", prompt: `Why is ${ref} delayed, and when will it arrive?` };
-    if (order.status === "delivered") return { label: "询问退货", prompt: `Can I still return something from ${ref}?` };
-    if (isOpen(order)) return { label: "提问", prompt: `Where is ${ref} right now?` };
-    return { label: "提问", prompt: `What's the status of ${ref}?` };
+    const ref = `订单 ${order.order_id}`;
+    if (order.status === "delayed") return { label: "询问原因", prompt: `为什么${ref}延误了，什么时候能到？` };
+    if (order.status === "delivered") return { label: "询问退货", prompt: `${ref}里的商品还能退货吗？` };
+    if (isOpen(order)) return { label: "提问", prompt: `${ref}现在到哪了？` };
+    return { label: "提问", prompt: `${ref}目前是什么状态？` };
   },
 };
 
 function orderTitle(order: Order): string {
   const [first, ...rest] = order.items;
   if (!first) return order.order_id;
-  return rest.length ? `${first.title} + ${rest.length} more` : first.title;
+  return rest.length ? `${first.title} 等 ${rest.length} 件` : first.title;
 }
 
 function When({ order, nouns }: { order: Order; nouns: OrderNouns }) {
   const estimate = estimateOf(order);
-  if (!estimate) return <span>Placed {formatDayMonth(order.placed_at)}</span>;
+  if (!estimate) return <span>下单于 {formatDayMonth(order.placed_at)}</span>;
   if (!isOpen(order)) return <span>{nouns.closedWhen(order, estimate.date)}</span>;
   return (
     <span className={order.status === "delayed" ? "font-semibold text-(--warn)" : ""} title={estimate.note ?? undefined}>
@@ -172,7 +172,7 @@ export function ArrivingPanel({
   thumb: (order: Order) => ReactNode;
   onSeeAll?: () => void;
 }) {
-  if (!orders) return failed ? <Notice>Couldn&apos;t load your {nouns.title.toLowerCase()}.</Notice> : <Skeleton className="h-[188px]" />;
+  if (!orders) return failed ? <Notice>无法加载您的{nouns.title.toLowerCase()}。</Notice> : <Skeleton className="h-[188px]" />;
   // A shopper with no history gets no card; one with nothing open sees the two most recent.
   if (!orders.length) return null;
   const open = upcoming(orders).slice(0, 3);
@@ -180,8 +180,8 @@ export function ArrivingPanel({
   return (
     <Panel
       title={nouns.cardTitle}
-      subtitle={open.length ? plural(orders.length, nouns.one) : nouns.noneOpen}
-      action={onSeeAll ? <MoreLink label={`All ${nouns.title.toLowerCase()}`} onClick={onSeeAll} /> : null}
+      subtitle={open.length ? plural(orders.length, nouns.one, nouns.one) : nouns.noneOpen}
+      action={onSeeAll ? <MoreLink label={`全部${nouns.title.toLowerCase()}`} onClick={onSeeAll} /> : null}
     >
       <ul>
         {shown.map((order) => (
@@ -215,7 +215,7 @@ export function OrdersView({
     <StorePage>
       <PageHeader title={nouns.title} subtitle={subtitle}>
         <Segmented
-          label={`Filter ${title}`}
+          label={`筛选${title}`}
           value={filter}
           onChange={setFilter}
           options={[
@@ -226,7 +226,7 @@ export function OrdersView({
       </PageHeader>
       {orders === null ? (
         failed ? (
-          <Notice>Couldn&apos;t load your {title}. The assistant can still look them up.</Notice>
+          <Notice>无法加载您的{title}，您仍可以向助手查询。</Notice>
         ) : (
           <Skeleton className="h-[320px]" />
         )
@@ -239,7 +239,7 @@ export function OrdersView({
           </ul>
         </Panel>
       ) : (
-        <Notice>No {title} here.</Notice>
+        <Notice>这里没有{title}。</Notice>
       )}
     </StorePage>
   );

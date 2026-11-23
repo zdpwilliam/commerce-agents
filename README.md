@@ -81,7 +81,7 @@ await agent.update_memory(messages, session)   # 记忆提取；仅此路径
 **Agent SDK.** 相同的提示词、skills 和工具，由 SDK 运行循环；宿主预取 grounding 读取，回合结束后不再执行任何操作：
 
 ```bash
-python shopping-agent/runtime-agent-sdk/main.py --once "a two-person tent under $250"
+python shopping-agent/runtime-agent-sdk/main.py --once "预算 500 元以内的牙科种植手机"
 python merchant-agent/runtime-agent-sdk/main.py          # 用 y/N 批准暂存的变更
 ```
 

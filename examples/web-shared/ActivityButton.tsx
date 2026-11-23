@@ -25,11 +25,11 @@ export function ActivityButton({
           <span className="relative inline-flex h-2 w-2 rounded-full bg-(--accent)" />
         </span>
       ) : null}
-      Activity
+      活动
       {newMemoryCount > 0 ? (
         <span
           className="rounded-full bg-(--accent-soft) px-1.5 py-0.5 text-[11px] font-bold text-(--ink)"
-          title={`${newMemoryCount} fact${newMemoryCount === 1 ? "" : "s"} saved this session`}
+          title={`本次会话已保存 ${newMemoryCount} 条记忆`}
         >
           {newMemoryCount}
         </span>

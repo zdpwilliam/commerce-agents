@@ -83,7 +83,7 @@ export function Composer({
         }}
         rows={1}
         aria-label={label}
-        placeholder={busy ? "Working…" : placeholder}
+        placeholder={busy ? "处理中…" : placeholder}
         className={`max-h-40 min-w-0 flex-1 resize-none text-(--ink) outline-none transition placeholder:text-(--ink-soft)/70 ${VARIANTS[variant].input}`}
       />
       <button

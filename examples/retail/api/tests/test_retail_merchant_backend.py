@@ -165,7 +165,7 @@ async def test_multi_item_price_update_carries_per_item_margin_notes(merchant, o
     )
     # Change-level margins are set for single-listing moves only; multi-item changes get a note per listing.
     assert change.margin_before_pct is None and change.margin_after_pct is None
-    assert len([note for note in change.guardrail_notes if "margin" in note]) == 2
+    assert len([note for note in change.guardrail_notes if "毛利率" in note]) == 2
 
 
 def test_kpi_trends_match_the_snapshot_window(merchant):

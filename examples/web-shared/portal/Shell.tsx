@@ -106,7 +106,7 @@ export function PortalShell<V extends string>({
           }`}
         >
           <Icon name="spark" className="text-(--accent)" />
-          <span className="hidden flex-1 xl:block">Assistant</span>
+          <span className="hidden flex-1 xl:block">助手</span>
           {assistantBusy ? (
             <span className="relative hidden h-2 w-2 xl:flex" aria-label="处理中">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-(--accent) opacity-60" />
@@ -155,7 +155,7 @@ export function PortalShell<V extends string>({
             }`}
           >
             <Icon name="spark" size={15} />
-            Assistant
+            助手
           </button>
         </header>
 

@@ -18,16 +18,16 @@ function triagePrompt(item: DigestEntry): { label: string; prompt: string } | nu
   const listingRef = item.listing ? `${item.listing.title} (${item.listing.listing_id})` : item.ref_id;
   switch (item.kind) {
     case "low_stock":
-      return listingRef ? { label: "起草补货", prompt: `Draft a restock plan for ${listingRef}.` } : null;
+      return listingRef ? { label: "起草补货", prompt: `为 ${listingRef} 起草一份补货计划。` } : null;
     case "slow_mover":
-      return listingRef ? { label: "方案说明", prompt: `Plan a markdown for ${listingRef}.` } : null;
+      return listingRef ? { label: "方案说明", prompt: `为 ${listingRef} 制定降价方案。` } : null;
     case "order_issue":
       return {
         label: "起草回复",
-        prompt: item.ref_id ? `Help me handle order ${item.ref_id}: ${item.headline}` : `Help me handle this order issue: ${item.headline}`,
+        prompt: item.ref_id ? `帮我处理订单 ${item.ref_id}：${item.headline}` : `帮我处理这个订单问题：${item.headline}`,
       };
     case "metric":
-      return { label: "询问原因", prompt: `What's driving this: ${item.headline}?` };
+      return { label: "询问原因", prompt: `这是什么原因造成的：${item.headline}？` };
     default:
       return null;
   }

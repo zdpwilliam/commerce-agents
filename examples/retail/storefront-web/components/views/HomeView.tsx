@@ -46,7 +46,7 @@ function Brief({ orders }: { orders: Order[] | null }) {
   const next = estimateOf(open.find((order) => order.status !== "delayed") ?? open[0])?.date;
   return (
     <>
-      {plural(open.length, "笔订单")}配送中{next ? `；下一笔预计 ${next} 送达` : ""}。{" "}
+      {plural(open.length, "笔订单", "笔订单")}配送中{next ? `；下一笔预计 ${next} 送达` : ""}。{" "}
       {late.length ? <span className="font-semibold text-(--warn)">{late.length === 1 ? "有 1 笔" : `有 ${late.length} 笔`}延误。</span> : null}
     </>
   );

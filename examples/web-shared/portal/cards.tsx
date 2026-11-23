@@ -116,7 +116,7 @@ export function useChangeActions<T extends ChangeLike>(
     setError(null);
     const updated = await onAct(change.change_id, action);
     if (updated) setChange(updated);
-    else setError("That action did not go through. Check the API and try again.");
+    else setError("操作未成功，请检查 API 后重试。");
     setBusy(null);
   };
 
@@ -142,21 +142,21 @@ export function ApproveBar({
       {change.status === "staged" ? (
         <div className="flex flex-wrap items-center gap-2">
           <Button variant="accent" size="sm" icon="check" onClick={() => onAct("apply")} disabled={busy !== null || !canAct}>
-            {busy === "apply" ? "Applying…" : "批准"}
+            {busy === "apply" ? "批准中…" : "批准"}
           </Button>
           <Button variant="secondary" size="sm" onClick={() => onAct("discard")} disabled={busy !== null || !canAct}>
-            {busy === "discard" ? "Dismissing…" : "忽略"}
+            {busy === "discard" ? "忽略中…" : "忽略"}
           </Button>
-          <span className="text-[11.5px] leading-tight text-(--ink-soft)">Nothing applies until you approve.</span>
+          <span className="text-[11.5px] leading-tight text-(--ink-soft)">在您批准前不会应用任何更改。</span>
         </div>
       ) : (
         <div className="flex items-center gap-2 text-[13px] text-(--ink-soft)">
           <Icon name={change.status === "applied" ? "check" : "x"} size={15} className={change.status === "applied" ? "text-(--ok)" : "text-(--ink-faint)"} />
           {change.status === "applied"
-            ? `Approved${change.applied_by ? ` by ${change.applied_by}` : ""}${change.applied_at ? ` on ${formatDate(change.applied_at)}` : ""}.`
-            : `Dismissed${
-                change.discarded_by ? ` by ${change.discarded_by}${change.discarded_by_kind === "agent" ? "'s assistant" : ""}` : ""
-              }. Nothing was changed.`}
+            ? `已批准${change.applied_by ? `（${change.applied_by}）` : ""}${change.applied_at ? `，${formatDate(change.applied_at)}` : ""}`
+            : `已忽略${
+                change.discarded_by ? `（${change.discarded_by}${change.discarded_by_kind === "agent" ? "的助手" : ""}）` : ""
+              }，未做任何更改。`}
         </div>
       )}
       {error ? <div className="mt-2 text-[13px] text-(--danger)">{error}</div> : null}
@@ -227,11 +227,11 @@ export function LongTextDiff({ item }: { item: DiffItem }) {
       </div>
       <div className="grid gap-2 px-3 py-2.5 text-[13px] leading-snug">
         <div>
-          <div className="text-[11.5px] font-semibold text-(--ink-soft)">Before</div>
+          <div className="text-[11.5px] font-semibold text-(--ink-soft)">修改前</div>
           <p className="mt-0.5 whitespace-pre-line break-words text-(--ink-soft)">{formatValue(item.field, item.before)}</p>
         </div>
         <div>
-          <div className="text-[11.5px] font-semibold text-(--ink)">After</div>
+          <div className="text-[11.5px] font-semibold text-(--ink)">修改后</div>
           <p className="mt-0.5 whitespace-pre-line break-words font-medium text-(--ink)">{formatValue(item.field, item.after)}</p>
         </div>
       </div>
@@ -263,15 +263,15 @@ export function MarginHeadroom({
       <div
         className="relative h-2 rounded-full bg-(--well)"
         role="img"
-        aria-label={`New price ${formatMoney(item.after)}, previous ${formatMoney(item.before)}, ${costLabel.toLowerCase()} ${formatMoney(cost)}`}
+        aria-label={`新价 ${formatMoney(item.after)}，原价 ${formatMoney(item.before)}，${costLabel.toLowerCase()} ${formatMoney(cost)}`}
       >
         <div className={`absolute inset-y-0 left-0 rounded-full ${headroom > 0 ? "bg-(--accent)" : "bg-(--danger)"}`} style={{ width: at(item.after) }} />
         <div className="absolute -inset-y-0.5 w-0.5 rounded bg-(--danger)" style={{ left: at(cost) }} />
         <div className="absolute -inset-y-0.5 w-0.5 rounded bg-(--ink-soft)/70" style={{ left: at(item.before) }} />
       </div>
       <p className="mt-1.5 text-[12.5px] tabular-nums text-(--ink-soft)">
-        {costLabel} {formatMoney(cost)} · <b className="font-semibold text-(--ink)">{formatMoney(headroom)} headroom</b> · {deltaPts >= 0 ? "+" : ""}
-        {deltaPts.toFixed(1)} margin pts
+        {costLabel} {formatMoney(cost)} · <b className="font-semibold text-(--ink)">{formatMoney(headroom)} 利润空间</b> · {deltaPts >= 0 ? "+" : ""}
+        {deltaPts.toFixed(1)} 个百分点
       </p>
     </div>
   );
@@ -284,18 +284,18 @@ export function PriceBand({ current, floor, ceiling }: { current: number; floor:
   const high = Math.max(ceiling, current) * 1.12;
   const at = (value: number) => `${((value - low) / (high - low)) * 100}%`;
   return (
-    <div className="relative mt-1 h-[54px]" role="img" aria-label={`${formatMoney(current)} now, floor ${formatMoney(floor)}, ceiling ${formatMoney(ceiling)}`}>
+    <div className="relative mt-1 h-[54px]" role="img" aria-label={`当前 ${formatMoney(current)}，下限 ${formatMoney(floor)}，上限 ${formatMoney(ceiling)}`}>
       <div className="absolute inset-x-0 top-[22px] h-2 rounded-full bg-(--well)" />
       <div className="absolute top-[22px] h-2 rounded-full bg-(--accent)/70" style={{ left: at(floor), right: `calc(100% - ${at(ceiling)})` }} />
       <div className="absolute top-[15px] h-[22px] w-[3px] -translate-x-1/2 rounded bg-(--ink)" style={{ left: at(current) }} />
       <span className="absolute top-0 -translate-x-1/2 whitespace-nowrap text-[11.5px] font-semibold tabular-nums text-(--ink)" style={{ left: at(current) }}>
-        {formatMoney(current)} now
+        当前 {formatMoney(current)}
       </span>
       <span className="absolute top-[36px] -translate-x-1/2 whitespace-nowrap text-[11.5px] tabular-nums text-(--ink-soft)" style={{ left: at(floor) }}>
-        floor {formatMoney(floor)}
+        下限 {formatMoney(floor)}
       </span>
       <span className="absolute top-[36px] -translate-x-1/2 whitespace-nowrap text-[11.5px] tabular-nums text-(--ink-soft)" style={{ left: at(ceiling) }}>
-        ceiling {formatMoney(ceiling)}
+        上限 {formatMoney(ceiling)}
       </span>
     </div>
   );

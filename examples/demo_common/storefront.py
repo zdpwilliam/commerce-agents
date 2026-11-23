@@ -46,8 +46,8 @@ StorefrontRecord = SessionRecord[ShoppingSessionState]
 
 # What the add button is told when a cart gate holds its write.
 _HELD_ADD_TEXT = {
-    PROVENANCE_GATE: "Product not in this session's results",
-    OPTIONS_GATE: "Choose the product's options with the assistant before adding it",
+    PROVENANCE_GATE: "该商品不在本次会话的搜索结果中",
+    OPTIONS_GATE: "请先和助手选好该商品的规格，再加入购物车",
 }
 
 
@@ -143,10 +143,10 @@ class StorefrontHost:
             # The result text is written for the model; the button gets its first sentence,
             # or the gate's short reason.
             detail = _HELD_ADD_TEXT.get(execution.blocked or "", execution.result_text)
-            raise HTTPException(status_code=400, detail=detail.split(". ")[0] + ".")
+            raise HTTPException(status_code=400, detail=detail.split(". ")[0] + "。")
         product = record.state.seen_products.get(request.product_id)
         if product is None:
-            raise HTTPException(status_code=400, detail="Product not in this session's results")
+            raise HTTPException(status_code=400, detail="该商品不在本次会话的搜索结果中")
         # The title is catalog-authored and the note enters model context unfenced.
         record.pending_app_events.append(
             note.format(
@@ -217,7 +217,7 @@ def build_storefront_host(
     async def get_product(product_id: str) -> dict:
         product = read_product(product_id)
         if product is None:
-            raise HTTPException(status_code=404, detail="Product not found")
+            raise HTTPException(status_code=404, detail="未找到该商品")
         return detail_of(product)
 
     @app.get("/api/cart")
@@ -237,7 +237,7 @@ def build_storefront_host(
     async def edit_memory_fact(edit: MemoryFactEdit, record: CurrentSession) -> dict:
         existing = {fact.key: fact for fact in await host.memory_store.get_facts(record.user_id)}
         if edit.key not in existing:
-            raise HTTPException(status_code=404, detail="No such fact")
+            raise HTTPException(status_code=404, detail="没有这条记忆")
         try:
             corrected = agent.memory.validate(
                 edit.key,
@@ -248,7 +248,7 @@ def build_storefront_host(
         except MemoryWriteRejected as rejected:
             raise HTTPException(status_code=400, detail=str(rejected)) from None
         if not corrected.value:
-            raise HTTPException(status_code=400, detail="Value must not be empty")
+            raise HTTPException(status_code=400, detail="值不能为空")
         await host.memory_store.upsert_facts(record.user_id, [corrected])
         return {"ok": True, "fact": corrected.model_dump(mode="json")}
 

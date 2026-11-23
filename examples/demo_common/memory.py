@@ -90,5 +90,5 @@ def install_memory_routes(
     @target.delete(path)
     async def delete_memory_fact(ref: MemoryFactRef, record: current_session) -> dict:
         if not await memory_store.delete_fact(record.user_id, ref.key):
-            raise HTTPException(status_code=404, detail="No such fact")
+            raise HTTPException(status_code=404, detail="未找到该记忆条目")
         return {"ok": True, "deleted": ref.key}

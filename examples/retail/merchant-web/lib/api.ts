@@ -9,8 +9,8 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
 export const api = new AgentApi(API_URL, "/api/merchant");
 
 export const UNREACHABLE =
-  "Couldn't reach the retail API on port 8000. Start it with " +
-  "`uvicorn retail.api.main:app --app-dir examples --port 8000` and try again.";
+  "无法连接到 8000 端口的零售 API。请先启动服务：" +
+  "`uvicorn retail.api.main:app --app-dir examples --port 8000`，然后重试。";
 
 export function fetchOverview(): Promise<OverviewResponse | null> {
   return api.get<OverviewResponse>("/overview");

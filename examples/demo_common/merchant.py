@@ -206,7 +206,7 @@ def build_merchant_router(
         session = context(record)
         listing = await backend.get_listing(session, listing_id)
         if listing is None:
-            raise HTTPException(status_code=404, detail="Listing not found")
+            raise HTTPException(status_code=404, detail="未找到该商品")
         pricing = await backend.get_pricing_context(session, listing.listing_id)
         return {
             "listing": _dump(listing),
@@ -260,9 +260,9 @@ def build_merchant_router(
             raise HTTPException(status_code=400, detail=execution.result_text)
         if execution.blocked is not None:
             return {"ok": False, "change": None, "reason": execution.result_text}
-        verb = "approved and applied" if action == "apply_change" else "dismissed"
+        verb = "批准并应用了" if action == "apply_change" else "驳回了"
         record.pending_app_events.append(
-            f"Operator {verb} change {change_id} from the preview card."
+            f"操作员从预览卡片{verb}变更 {change_id}。"
         )
         change = next(
             (

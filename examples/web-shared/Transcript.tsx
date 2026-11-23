@@ -94,7 +94,7 @@ export function LatestPill({ onClick }: { onClick: () => void }) {
         onClick={onClick}
         className="pointer-events-auto rounded-full border border-(--line) bg-(--card) px-3.5 py-1.5 text-[13px] font-semibold text-(--ink) shadow-md transition hover:border-(--accent)"
       >
-        ↓ Latest
+        ↓ 最新
       </button>
     </div>
   );

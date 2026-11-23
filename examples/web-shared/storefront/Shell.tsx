@@ -158,7 +158,7 @@ export function StoreShell<V extends string>({
               ref={bagButtonRef}
               type="button"
               onClick={() => onPanelOpenChange(true)}
-              aria-label={`Open ${bag.label.toLowerCase()}, ${bag.count} ${bag.noun}${bag.count === 1 ? "" : "s"}`}
+              aria-label={`打开${bag.label.toLowerCase()}，${bag.count}${bag.noun}`}
               className="flex h-[34px] items-center gap-2 rounded-full bg-(--ink) pl-3 pr-1.5 text-[13px] font-semibold text-(--surface) transition hover:brightness-110 xl:hidden"
             >
               <Icon name="bag" size={16} />
@@ -176,7 +176,7 @@ export function StoreShell<V extends string>({
             <button
               type="button"
               onClick={() => setAccountOpen(true)}
-              aria-label={`${shopper.name}: profile and memory`}
+              aria-label={`${shopper.name}：个人资料与记忆`}
               className="flex items-center gap-2.5 rounded-full py-0.5 pl-0.5 pr-1 text-left transition-colors hover:bg-(--well)/60 md:pr-3"
             >
               <Avatar name={shopper.name} />
@@ -203,7 +203,7 @@ export function StoreShell<V extends string>({
                 send={ask}
                 ready={chat.ready}
                 busy={chat.busy}
-                label={`Message ${assistantName}`}
+                label={`给${assistantName}发消息`}
                 placeholder={placeholder}
                 className="mx-auto max-w-[760px]"
               />
@@ -248,7 +248,7 @@ export function StoreShell<V extends string>({
             trace={chat.trace}
             memory={chat.memory}
             newMemoryKeys={chat.newMemoryKeys}
-            memoryTitle={`What ${assistantName} knows`}
+            memoryTitle={`${assistantName}了解的信息`}
             onClose={() => setActivityOpen(false)}
           />
         ) : null}

@@ -22,6 +22,7 @@
         }
       ],
       "total": 39400.0,
+      "currency": "CNY",
       "estimated_delivery": "2026-06-25",
       "tracking_url": "https://track.example.com/DN-78214"
     },
@@ -39,6 +40,7 @@
         }
       ],
       "total": 350.0,
+      "currency": "CNY",
       "estimated_delivery": "2026-06-27 (updated after a carrier delay; the original 2026-06-21 estimate was missed)",
       "tracking_url": "https://track.example.com/DN-77903"
     },
@@ -62,6 +64,7 @@
         }
       ],
       "total": 178000.0,
+      "currency": "CNY",
       "estimated_delivery": "2026-06-05",
       "tracking_url": "https://track.example.com/DN-77410"
     },
@@ -79,6 +82,7 @@
         }
       ],
       "total": 38000.0,
+      "currency": "CNY",
       "estimated_delivery": "2026-06-28",
       "tracking_url": "https://track.example.com/DN-76988"
     },
@@ -106,6 +110,7 @@
         }
       ],
       "total": 40549.0,
+      "currency": "CNY",
       "estimated_delivery": "2026-06-25 (updated after a warehouse delay; the original 2026-06-12 estimate was missed)",
       "tracking_url": "https://track.example.com/DN-79102"
     },
@@ -129,6 +134,7 @@
         }
       ],
       "total": 13919.0,
+      "currency": "CNY",
       "estimated_delivery": "2026-06-30",
       "tracking_url": "https://track.example.com/DN-79236"
     }

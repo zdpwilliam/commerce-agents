@@ -11,13 +11,13 @@ const COPY = {
   title: "商家助手",
   intro: "咨询经营表现、库存、定价或活动。",
   starters: [
-    "What needs my attention this morning?",
-    "How did sales do this week compared to last?",
-    "Which listings are running low on stock?",
-    "Which slow movers should we mark down?",
+    "今天有哪些需要我关注的事项？",
+    "本周销售和上周相比怎么样？",
+    "哪些商品库存不足了？",
+    "哪些滞销商品应该降价？",
   ],
   label: "向商家助手提问",
-  placeholder: "Ask about sales, stock, pricing…",
+  placeholder: "咨询销售、库存、定价…",
 };
 
 export default function AssistantPanel({

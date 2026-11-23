@@ -348,9 +348,9 @@ def test_ids_containing_slashes_reach_the_id_routes(client, main):
     headers = start_operator(client)
     weird = "gid://acme/Listing/7"
     listing = client.get(f"/api/merchant/listings/{weird}", headers=headers)
-    assert listing.status_code == 404 and listing.json()["detail"] == "Listing not found"
+    assert listing.status_code == 404 and listing.json()["detail"] == "未找到该商品"
     product = client.get(f"/api/products/{weird}")
-    assert product.status_code == 404 and product.json()["detail"] == "Product not found"
+    assert product.status_code == 404 and product.json()["detail"] == "未找到该商品"
     applied = client.post(f"/api/merchant/changes/{weird}/apply", headers=headers)
     assert applied.status_code == 200 and weird in applied.json()["reason"]
 
@@ -417,7 +417,7 @@ def test_preview_card_buttons_report_a_hold_apart_from_an_apply(
     assert applied["ok"] is True and applied["change"]["status"] == "applied"
     record = stored()
     assert record.pending_app_events == [
-        f"Operator approved and applied change {staged.change_id} from the preview card."
+        f"操作员从预览卡片批准并应用了变更 {staged.change_id}。"
     ]
     assert not record.state.approved_change_ids
     again = client.post(f"/api/merchant/changes/{staged.change_id}/apply", headers=headers)
@@ -450,9 +450,9 @@ async def test_orders_are_newest_first_per_user_and_resolve_case_insensitively(
 
 async def test_unknown_users_get_a_guest_profile(backend, session):
     known = await backend.get_preferences(session)
-    assert known.user_id == session.user_id and known.display_name not in (None, "Guest")
+    assert known.user_id == session.user_id and known.display_name not in (None, "访客")
     stranger = ShoppingSessionContext(session_id="s-9", user_id="someone-new")
-    assert (await backend.get_preferences(stranger)).display_name == "Guest"
+    assert (await backend.get_preferences(stranger)).display_name == "访客"
 
 
 async def test_cart_lines_belong_to_the_session(backend, session, other_session, cart_product):

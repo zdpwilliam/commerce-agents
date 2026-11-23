@@ -189,14 +189,14 @@ def stream_turn(
             if any(word in described for word in ("authentication", "credential", "api_key")):
                 yield to_sse(
                     AgentEvent.error(
-                        "No Anthropic API credentials are configured, so chat can't run. Set "
-                        f"ANTHROPIC_API_KEY in {env_hint} or the repo-root .env and restart; "
-                        "everything except chat works without one."
+                        "尚未配置 Anthropic API 凭据，无法使用对话功能。请在 "
+                        f"{env_hint} 或项目根目录的 .env 中设置 ANTHROPIC_API_KEY 后重启；"
+                        "除对话外的其他功能均可正常使用。"
                     )
                 )
             else:
                 yield to_sse(
-                    AgentEvent.error("Something went wrong on our side. Please try again.")
+                    AgentEvent.error("抱歉，处理时出现问题，请重试。")
                 )
         else:
             spawn_background(agent.update_memory(record.messages, session))

@@ -92,8 +92,8 @@ export default function StorefrontPage() {
           subtitle={
             orders
               ? late
-                ? `${plural(late, "笔订单")}延误。可询问原因，或对已送达商品申请退货。`
-                : `${plural(upcoming(orders).length, "笔订单")}配送中。可询问其中任意一笔，或申请退货。`
+                ? `${plural(late, "笔订单", "笔订单")}延误。可询问原因，或对已送达商品申请退货。`
+                : `${plural(upcoming(orders).length, "笔订单", "笔订单")}配送中。可询问其中任意一笔，或申请退货。`
               : undefined
           }
           thumb={(order) => <OrderThumb order={order} />}

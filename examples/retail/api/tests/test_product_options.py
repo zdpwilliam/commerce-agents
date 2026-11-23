@@ -48,7 +48,7 @@ def test_the_detail_route_resolves_a_family_and_a_variant(client):
 def test_the_add_button_on_a_family_is_held_with_the_route_to_a_variant(add):
     response, record = add("DEN-1050", "DEN-1050")
     assert response.status_code == 400
-    assert "options" in response.json()["detail"]
+    assert "规格" in response.json()["detail"]
     assert record.pending_app_events == []
 
 
@@ -65,5 +65,5 @@ def test_a_sold_out_variant_is_refused_with_its_in_stock_siblings_named(add):
     response, record = add("DEN-1050-GRAFT", "DEN-1050", "DEN-1050-GRAFT")
     assert response.status_code == 400
     detail = response.json()["detail"]
-    assert "DEN-1050-GRAFT is out of stock" in detail and "DEN-1050-FULL" in detail
+    assert "DEN-1050-GRAFT 已售罄" in detail and "DEN-1050-FULL" in detail
     assert record.pending_app_events == []

@@ -103,7 +103,7 @@ FREE_SHIPPING_OVER = 500
 STANDARD_SHIPPING = FulfillmentOption(method="delivery", eta="3-5 个工作日（标准）", fee=60.0)
 EXPRESS_SHIPPING = FulfillmentOption(method="delivery", eta="2 个工作日（加急）", fee=120.0)
 FREIGHT_SHIPPING = FulfillmentOption(
-    method="shipping", eta="5-7 business days (freight)", fee=290.0
+    method="shipping", eta="5-7 个工作日（货运）", fee=290.0
 )
 _STORE_OPENS, _STORE_CLOSES = 9, 21
 
@@ -111,7 +111,7 @@ _STORE_OPENS, _STORE_CLOSES = 9, 21
 class MockRetail(StorefrontBackend):
     def __init__(self, data_dir: Path = DATA_DIR) -> None:
         catalog, self.products, self.variants = load_catalog(data_dir)
-        self.store_name: str = catalog.get("store_name", "the store")
+        self.store_name: str = catalog.get("store_name", "本店")
         self._users = load_users(data_dir)
         self._orders = load_orders(data_dir)
         self._policies = load_policies(data_dir)

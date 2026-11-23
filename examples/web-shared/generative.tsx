@@ -12,7 +12,7 @@ export interface GenerativeBlockProps {
 export function UnknownBlock({ component }: { component: string }) {
   return (
     <p className="rounded-(--radius) border border-(--line) bg-(--card) px-4 py-3 text-[13px] text-(--ink-soft)">
-      This page has no view for “{component}” yet.
+      此页面暂不支持展示“{component}”。
     </p>
   );
 }

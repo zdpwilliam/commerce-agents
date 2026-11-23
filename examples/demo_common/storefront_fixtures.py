@@ -172,9 +172,9 @@ def unavailable_detail(product: Product, family: ProductDetails | None) -> str:
     label = product.product_id
     if family is not None and family.product_id != product.product_id:
         in_stock = [v.product_id for v in family.variants if v.in_stock]
-        listed = ", ".join(in_stock[:6]) if in_stock else "no other variant"
-        return f"{label} is out of stock; in-stock variants of {family.product_id}: {listed}"
-    return f"{label} is out of stock"
+        listed = ", ".join(in_stock[:6]) if in_stock else "无其他可用规格"
+        return f"{label} 已售罄；{family.product_id} 目前有货的规格：{listed}"
+    return f"{label} 已售罄"
 
 
 def option_text(product: Product) -> str:
@@ -189,7 +189,7 @@ def load_users(data_dir: Path) -> dict[str, UserPreferences]:
 
 def preferences_of(users: Mapping[str, UserPreferences], user_id: str) -> UserPreferences:
     """The fixture profile, or a guest profile for an id the fixtures do not carry."""
-    return users.get(user_id) or UserPreferences(user_id=user_id, display_name="Guest")
+    return users.get(user_id) or UserPreferences(user_id=user_id, display_name="访客")
 
 
 def load_orders(data_dir: Path) -> list[tuple[str, Order]]:

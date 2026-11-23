@@ -50,7 +50,7 @@ def test_unseen_or_unknown_products_are_refused(add, product_id):
 
 def test_a_device_with_options_is_held_and_its_variant_goes_in(add):
     response, record = add("AM-DEV-203", "AM-DEV-203")
-    assert response.status_code == 400 and "options" in response.json()["detail"]
+    assert response.status_code == 400 and "规格" in response.json()["detail"]
     assert record.pending_app_events == []
     response, _ = add("AM-DEV-203-512-GRAPHITE", "AM-DEV-203", "AM-DEV-203-512-GRAPHITE")
     [line] = response.json()["cart"]["items"]

@@ -19,19 +19,19 @@ function FreeShippingMeter({ subtotal }: { subtotal: number }) {
     <div data-free-shipping-meter className="mb-3">
       <div className={`text-[13px] ${free ? "font-semibold text-(--ok)" : "text-(--ink-2)"}`}>
         {free ? (
-          <>Free shipping on this order ✓</>
+          <>本单免运费 ✓</>
         ) : remaining > 0 ? (
           <>
-            <span className="font-bold text-(--ink)">{formatMoney(remaining)}</span> away from free shipping
+            再购 <span className="font-bold text-(--ink)">{formatMoney(remaining)}</span> 即可免运费
           </>
         ) : (
-          <>Anything more ships free</>
+          <>再加购任意商品即可免运费</>
         )}
       </div>
       <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-(--well)">
         <div className={`h-full rounded-full transition-[width] duration-500 ease-out ${free ? "bg-(--ok)" : "bg-(--accent)"}`} style={{ width: `${pct}%` }} />
       </div>
-      {!free ? <div className="mt-1 text-[11.5px] text-(--ink-soft)">Standard shipping is free on orders over {formatMoney(threshold)}.</div> : null}
+      {!free ? <div className="mt-1 text-[11.5px] text-(--ink-soft)">订单金额超过 {formatMoney(threshold)} 即可享标准配送免运费。</div> : null}
     </div>
   );
 }
@@ -68,23 +68,23 @@ export default function CartPanel({ cart, checkoutStaged = false }: { cart: Cart
   return (
     <BagPanel
       title="购物车"
-      count={plural(count, "item")}
+      count={plural(count, "件", "件")}
       isEmpty={items.length === 0}
       empty={
         <>
-          Nothing in the cart yet.
+          购物车还是空的。
           <br />
-          Ask ACME Assistant for anything in the store.
+          店内任何商品都可以咨询 ACME 助手。
         </>
       }
       footer={
         <>
           {items.length ? <FreeShippingMeter subtotal={cart?.subtotal ?? 0} /> : null}
-          <TotalRow label={count ? `Subtotal · ${plural(count, "item")}` : "小计"} value={formatMoney(cart?.subtotal ?? 0, cart?.currency)} />
+          <TotalRow label={count ? `小计 · ${plural(count, "件", "件")}` : "小计"} value={formatMoney(cart?.subtotal ?? 0, cart?.currency)} />
           <CheckoutButton staged={checkoutStaged} disabled={items.length === 0} prompt="查看我的购物车。" />
           {items.length ? (
             <div className="mt-2.5 flex justify-center">
-              <AskLink label="询问此购物车" prompt="Look over my cart: anything missing or worth swapping?" />
+              <AskLink label="询问此购物车" prompt="帮我看看购物车：有没有遗漏或值得替换的商品？" />
             </div>
           ) : null}
         </>
@@ -106,7 +106,7 @@ export default function CartPanel({ cart, checkoutStaged = false }: { cart: Cart
                   </div>
                   <div className="shrink-0 text-right">
                     <div className="text-[14px] font-bold tabular-nums text-(--ink)">{formatMoney(item.line_total)}</div>
-                    {item.quantity > 1 ? <div className="text-[11px] text-(--ink-soft)">{formatMoney(item.price)} each</div> : null}
+                    {item.quantity > 1 ? <div className="text-[11px] text-(--ink-soft)">单价 {formatMoney(item.price)}</div> : null}
                   </div>
                 </div>
                 <DeliveryPromise product={product} className="mt-0.5" />
@@ -115,10 +115,10 @@ export default function CartPanel({ cart, checkoutStaged = false }: { cart: Cart
                     quantity={item.quantity}
                     itemTitle={lineName(item)}
                     onChange={(quantity) =>
-                      ask(quantity < 1 ? `Remove the ${lineName(item)} from my cart.` : `Change the ${lineName(item)} quantity to ${quantity}.`)
+                      ask(quantity < 1 ? `把 ${lineName(item)} 从购物车移除。` : `将 ${lineName(item)} 的数量改为 ${quantity}。`)
                     }
                   />
-                  <RemoveLink itemTitle={lineName(item)} onClick={() => ask(`Remove the ${lineName(item)} from my cart.`)} />
+                  <RemoveLink itemTitle={lineName(item)} onClick={() => ask(`把 ${lineName(item)} 从购物车移除。`)} />
                 </div>
               </div>
             </li>

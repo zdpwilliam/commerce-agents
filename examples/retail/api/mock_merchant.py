@@ -237,16 +237,16 @@ class MockRetailMerchant(MerchantBackend):
         if worst is not None:
             product, rate, row = worst
             sold = row.get("sales_last_30d")
-            pace = f" on {sold} sales in 30 days" if sold else ""
+            pace = f"，近 30 天售出 {sold} 件" if sold else ""
             insights.append(
                 {
                     "insight_id": f"return-rate-{product.product_id}",
                     "kind": "returns",
-                    "headline": f"Returns on {product.title} are running at {rate:.0f}%",
-                    "detail": f"{rate:.0f}% of units come back{pace}; "
-                    "worth a look at the listing content before restocking.",
-                    "prompt": f"Returns on {product.title} ({product.product_id}) are at "
-                    f"{rate:.0f}%. What's the likely cause and what would you change?",
+                    "headline": f"{product.title} 的退货率偏高，目前为 {rate:.0f}%",
+                    "detail": f"退货率达 {rate:.0f}%{pace}；"
+                    "补货前建议先检查一下商品详情页的内容。",
+                    "prompt": f"{product.title}（{product.product_id}）的退货率为 {rate:.0f}%。"
+                    "可能的原因是什么？你会做哪些调整？",
                 }
             )
 
@@ -257,18 +257,16 @@ class MockRetailMerchant(MerchantBackend):
             prior = sum(r.get("kids_room_sales", 0.0) for r in rows[-14:-7])
             change = change_pct(current, prior)
             if change is not None and abs(change) >= 5:
-                direction = "up" if change >= 0 else "down"
+                direction = "上升" if change >= 0 else "下降"
                 insights.append(
                     {
                         "insight_id": "segment-trend-kids-room",
                         "kind": "trend",
-                        "headline": f"Kids' room sales are {direction} "
-                        f"{abs(change):.0f}% week-over-week",
-                        "detail": f"${current:,.0f} this week vs ${prior:,.0f} last week "
-                        "for the kids-room segment.",
-                        "prompt": f"Kids' room sales are {direction} {abs(change):.0f}% "
-                        "week-over-week. What's driving it, and is anything at risk of "
-                        "stocking out?",
+                        "headline": f"儿童专区销售额环比{direction} {abs(change):.0f}%",
+                        "detail": f"本周儿童专区销售额 ¥{current:,.0f}，"
+                        f"上周 ¥{prior:,.0f}。",
+                        "prompt": f"儿童专区销售额环比{direction} {abs(change):.0f}%。"
+                        "是什么带动了变化，有哪些商品面临缺货风险？",
                     }
                 )
 
@@ -558,7 +556,7 @@ class MockRetailMerchant(MerchantBackend):
         # applying is the operator's own act.
         return self.ledger.stage(
             kind=ChangeKind.LISTING_UPDATE,
-            summary=note or f"Update listing content on {listing.listing_id}",
+            summary=note or f"更新商品 {listing.listing_id} 的详情内容",
             items=items,
             actor=session.operator,
             actor_kind=ActorKind.AGENT,
@@ -602,15 +600,15 @@ class MockRetailMerchant(MerchantBackend):
                 margin_after = margin_pct(item.new_price, unit_cost)
                 margins.append((margin_before, margin_after))
                 margin_notes.append(
-                    f"{resolved} margin: {margin_before}% → {margin_after}% "
-                    f"({margin_after - margin_before:+.1f} pts)"
+                    f"{resolved} 毛利率：{margin_before}% → {margin_after}% "
+                    f"（{margin_after - margin_before:+.1f} 个百分点）"
                 )
             change_items.append(
                 ChangeItem(target=resolved, field="price", before=before, after=item.new_price)
             )
         return self.ledger.stage(
             kind=ChangeKind.PRICE_UPDATE,
-            summary=note or f"Price update for {len(items)} listing(s)",
+            summary=note or f"调整 {len(items)} 个商品的价格",
             items=change_items,
             actor=session.operator,
             actor_kind=ActorKind.AGENT,
@@ -650,7 +648,7 @@ class MockRetailMerchant(MerchantBackend):
             )
         return self.ledger.stage(
             kind=ChangeKind.INVENTORY_ACTION,
-            summary=note or f"Inventory action for {len(items)} listing(s)",
+            summary=note or f"对 {len(items)} 个商品执行库存操作",
             items=change_items,
             actor=session.operator,
             actor_kind=ActorKind.AGENT,
@@ -686,8 +684,8 @@ class MockRetailMerchant(MerchantBackend):
                 margin_after = margin_pct(promo_price, unit_cost)
                 margins.append((margin_before, margin_after))
                 margin_notes.append(
-                    f"{listing_id} margin: {margin_before}% → {margin_after}% "
-                    f"({margin_after - margin_before:+.1f} pts) for the window"
+                    f"{listing_id} 毛利率：{margin_before}% → {margin_after}% "
+                    f"（{margin_after - margin_before:+.1f} 个百分点），活动期内"
                 )
             items.append(
                 ChangeItem(
@@ -699,8 +697,8 @@ class MockRetailMerchant(MerchantBackend):
             )
         return self.ledger.stage(
             kind=ChangeKind.PROMOTION,
-            summary=f"{promotion.name} ({promotion.discount_pct:.0f}% off, "
-            f"{promotion.starts} to {promotion.ends})",
+            summary=f"{promotion.name}（{promotion.discount_pct:.0f}% 折扣，"
+            f"{promotion.starts} 至 {promotion.ends}）",
             items=items,
             actor=session.operator,
             actor_kind=ActorKind.AGENT,
@@ -949,10 +947,10 @@ class MockRetailMerchant(MerchantBackend):
             "limitations": [
                 DataLimitation(
                     source="campaigns",
-                    note="email sends report spend only; their attributed revenue is not available",
+                    note="邮件营销渠道仅有花费数据，无法提供归因收入",
                 ).model_dump(),
                 DataLimitation(
-                    source="orders", note="order and sales history covers the last 90 days"
+                    source="orders", note="订单与销售记录仅覆盖最近 90 天"
                 ).model_dump(),
             ],
             "alerts": {
