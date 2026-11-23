@@ -94,7 +94,7 @@ const APEX_LOCATOR: Product = {
   brand: "Woodpecker",
   price: 2590.0,
   currency: "CNY",
-  image_url: "/products/pexels-6529107.jpg",
+  image_url: "/products/pexels-6627654.jpg",
   rating: 4.5,
   review_count: 1467,
   category: "根管治疗",
