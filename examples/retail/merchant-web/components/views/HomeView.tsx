@@ -188,9 +188,7 @@ export default function HomeView({
       <>
         <PageHeader title={title} subtitle={today} />
         <Notice>
-          无法连接 8100 端口的商家接口。请先运行{" "}
-          <code className="rounded bg-(--well) px-1 font-mono text-[13px]">uvicorn retail.api.main:app --app-dir examples --port 8100</code>
-          {" "}后刷新页面。
+          无法连接到商家接口。请确认 API 服务已启动，且反向代理已把 /api 转发到 API 服务，然后刷新页面。
         </Notice>
       </>
     );

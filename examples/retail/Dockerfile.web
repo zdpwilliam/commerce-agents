@@ -17,7 +17,10 @@ RUN npm ci --no-audit --no-fund
 
 # Both values are inlined at build time. Declared after npm ci so both apps share the
 # dependency-install layer and only the final build layer differs.
-ARG NEXT_PUBLIC_API_URL=http://localhost:8100
+# API root path behind the nginx gateway. AgentApi appends its own "/api" prefix, so
+# requests become /agent/api/api/...; the gateway strips /agent/api/ before reaching FastAPI.
+# Set to an absolute origin (http://host:port) only if the API is on a different host.
+ARG NEXT_PUBLIC_API_URL=/agent/api
 ENV NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
 
 # Subpath prefix for reverse-proxy deployments (e.g. /agent-shopping or /agent-merchant).

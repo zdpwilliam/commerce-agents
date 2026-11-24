@@ -25,11 +25,47 @@ docker compose down                              # 停止并移除容器
 
 - 凭据在运行时从仓库根目录 `.env` 和本目录 `.env`（若存在）注入容器，不会烘焙进镜像。若 `.env` 里的 `ANTHROPIC_BASE_URL` 指向 `localhost`，容器里需改成 `host.docker.internal` 或局域网 IP；指向局域网 LM Studio 时无需改动。
 - `./data` 绑定挂载到容器的同一路径，记忆和商户变更直接写在宿主 `examples/retail/data/`，`docker compose down -v` 也不会删除。
-- 前端的 API 地址在 `next build` 时烘焙，默认 `http://localhost:8100`（浏览器访问宿主映射端口）。若浏览器通过别的地址访问 API，构建前设置 `NEXT_PUBLIC_API_URL`，例如 `NEXT_PUBLIC_API_URL=http://example.com:8100 docker compose up --build`。
+- 前端的 API 根路径默认是 `/agent/api`（`NEXT_PUBLIC_API_URL`），由浏览器按当前页面来源解析——远程访问不会把 `localhost` 指向访问者本机。`AgentApi` 会再拼上自己的 `/api` 前缀，最终请求 `/agent/api/api/...`。只有当 API 在完全不同的域名时才把它设为绝对地址。
 - `api` 带健康检查，两个前端会等它就绪后再启动。
 - Python 依赖默认走清华 PyPI 镜像（国内构建快）；在其他地区可覆盖：`PIP_INDEX_URL=https://pypi.org/simple docker compose up --build`。
-- **反向代理子路径部署**：两个前端默认按 nginx 子路径构建——门店 `/agent-shopping`、商户 `/agent-merchant`（`next.config.ts` 的 `basePath`），生成的资源 URL 自带前缀。nginx 用带尾斜杠的 `proxy_pass` 剥掉前缀转发即可，无需额外 `location /_next/`。前缀可改：`STOREFRONT_BASE_PATH`、`MERCHANT_BASE_PATH`。
-- 前端的 API 地址同为构建期烘焙。若浏览器经代理远程访问，`localhost:8100` 会指向访问者本机而连不上；此时把 API 也经 nginx 暴露，并设 `NEXT_PUBLIC_API_URL` 为对外地址后重新构建。
+- **反向代理子路径部署**：三个服务挂在 nginx 子路径下——API `/agent/api/`、门店 `/agent-shopping/`、商户 `/agent-merchant/`。两个前端的 `basePath` 让资源 URL 自带前缀，nginx 用带尾斜杠的 `proxy_pass` 剥掉前缀转发。前缀可改：`STOREFRONT_BASE_PATH`、`MERCHANT_BASE_PATH`。
+
+反向代理配置（三段 `location` 同级放在 `server` 块内；**API 这段的 `proxy_pass` 带尾斜杠**，剥掉 `/agent/api/` 后 FastAPI 收到 `/api/...`）：
+
+```nginx
+# 后端 API：/agent/api/api/products -> http://127.0.0.1:8100/api/products
+location /agent/api/ {
+    proxy_pass http://127.0.0.1:8100/;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection "upgrade";
+    proxy_read_timeout 300s;   # SSE 对话流需要更长超时
+    access_log /var/log/nginx/agent.access.log;
+    error_log  /var/log/nginx/agent.error.log;
+}
+
+location /agent-shopping/ {
+    proxy_pass http://127.0.0.1:3000/;
+    proxy_set_header Host $host;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection "upgrade";
+}
+
+location /agent-merchant/ {
+    proxy_pass http://127.0.0.1:3100/;
+    proxy_set_header Host $host;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection "upgrade";
+}
+```
+
+注意 API 段的 `proxy_pass` **带尾斜杠**（剥前缀），而前端两段也带尾斜杠（同样剥前缀）——三者写法一致，因为它们各自的 location 前缀都不属于后端路由的一部分。
 
 也可以在 `examples/` 下执行 `npm ci` 后分别启动：
 
