@@ -4,13 +4,13 @@
 import { AgentApi } from "web-shared";
 import type { CartPayload, Product, ProductDetails } from "./types";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
+const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8100";
 
 export const api = new AgentApi(API_URL, "/api");
 
 export const UNREACHABLE =
-  "无法连接到 8000 端口的零售 API。请先启动服务：" +
-  "`uvicorn retail.api.main:app --app-dir examples --port 8000`，然后重试。";
+  "无法连接到 8100 端口的零售 API。请先启动服务：" +
+  "`uvicorn retail.api.main:app --app-dir examples --port 8100`，然后重试。";
 
 export async function fetchProducts(): Promise<Product[] | null> {
   const data = await api.get<{ products: Product[] }>("/products", { limit: "100" });

@@ -32,6 +32,6 @@ RUN pip install --no-cache-dir --break-system-packages -r requirements.txt
 COPY examples ./examples
 
 # uvicorn defaults to 127.0.0.1; bind to all interfaces so the port can be published.
-EXPOSE 8000
+EXPOSE 8100
 
-CMD ["uvicorn", "retail.api.main:app", "--app-dir", "examples", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "retail.api.main:app", "--app-dir", "examples", "--host", "0.0.0.0", "--port", "8100"]
