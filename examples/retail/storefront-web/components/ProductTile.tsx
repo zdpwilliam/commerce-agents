@@ -34,10 +34,18 @@ function ReturnsPromise({ className = "" }: { className?: string }) {
   );
 }
 
+// The API serves catalog photos under /products. Behind the gateway the API root is
+// /agent/api, so a root-relative "/products/x.jpg" must become "/agent/api/products/x.jpg".
+// Absolute URLs are passed through unchanged. Mirrors AgentApi.assetUrl in web-shared.
+const API_ROOT = (process.env.NEXT_PUBLIC_API_URL ?? "/agent/api").replace(/\/$/, "");
+function imageUrl(path: string): string {
+  return path.startsWith("/") ? `${API_ROOT}${path}` : path;
+}
+
 export function ProductImage({ product, className = "" }: { product: Product; className?: string }) {
   if (product.image_url) {
     // eslint-disable-next-line @next/next/no-img-element
-    return <img src={product.image_url} alt={product.title} className={`object-cover ${className}`} />;
+    return <img src={imageUrl(product.image_url)} alt={product.title} className={`object-cover ${className}`} />;
   }
   return (
     <div
