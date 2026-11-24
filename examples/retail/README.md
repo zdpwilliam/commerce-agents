@@ -44,7 +44,12 @@ location /agent/api/ {
     proxy_http_version 1.1;
     proxy_set_header Upgrade $http_upgrade;
     proxy_set_header Connection "upgrade";
-    proxy_read_timeout 300s;   # SSE 对话流需要更长超时
+    # 对话是 SSE 长流：必须关闭缓冲，并放宽读超时，否则模型慢时连接被掐断，
+    # 前端会报“无法连接到零售 API”（即使 products/session 都正常）。
+    proxy_buffering off;
+    proxy_cache off;
+    proxy_read_timeout 300s;
+    proxy_send_timeout 300s;
     access_log /var/log/nginx/agent.access.log;
     error_log  /var/log/nginx/agent.error.log;
 }
