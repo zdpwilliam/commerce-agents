@@ -12,6 +12,8 @@ services:
     build:
       context: ../..
       dockerfile: examples/retail/Dockerfile.api
+      args:
+        PIP_INDEX_URL: ${PIP_INDEX_URL:-https://pypi.tuna.tsinghua.edu.cn/simple/}
     # Optional: credentials are injected at runtime, never baked into the image.
     env_file:
       - path: ../../.env

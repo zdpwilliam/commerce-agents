@@ -27,6 +27,7 @@ docker compose down                              # 停止并移除容器
 - `./data` 绑定挂载到容器的同一路径，记忆和商户变更直接写在宿主 `examples/retail/data/`，`docker compose down -v` 也不会删除。
 - 前端的 API 地址在 `next build` 时烘焙，默认 `http://localhost:8000`（浏览器访问宿主映射端口）。若浏览器通过别的地址访问 API，构建前设置 `NEXT_PUBLIC_API_URL`，例如 `NEXT_PUBLIC_API_URL=http://example.com:8000 docker compose up --build`。
 - `api` 带健康检查，两个前端会等它就绪后再启动。
+- Python 依赖默认走清华 PyPI 镜像（国内构建快）；在其他地区可覆盖：`PIP_INDEX_URL=https://pypi.org/simple docker compose up --build`。
 
 也可以在 `examples/` 下执行 `npm ci` 后分别启动：
 
