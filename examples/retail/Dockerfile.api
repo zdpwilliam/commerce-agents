@@ -21,7 +21,9 @@ COPY commerce-common ./commerce-common
 COPY shopping-agent ./shopping-agent
 COPY merchant-agent ./merchant-agent
 
-RUN pip install --no-cache-dir -r requirements.txt
+# --break-system-packages is safe inside the isolated container and keeps this working
+# if the base image ever ships a PEP 668 externally-managed Python.
+RUN pip install --no-cache-dir --break-system-packages -r requirements.txt
 
 COPY examples ./examples
 

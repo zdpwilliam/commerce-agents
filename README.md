@@ -12,10 +12,10 @@
 
 ```bash
 git clone https://github.com/anthropics/commerce-agents.git && cd commerce-agents
-python3 -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt       # 七个包及其固定版本的依赖
+./scripts/install.sh                  # 七个包及其依赖；自动创建 .venv（兼容 PEP 668）
 cp .env.example .env                  # 填入 ANTHROPIC_API_KEY
 (cd examples && npm ci)               # 八个 web 应用共用一个工作区
+source .venv/bin/activate             # 若 install.sh 新建了 .venv，激活后运行
 python scripts/run_demo.py retail     # API :8000 + 商店 :3000
 ```
 
