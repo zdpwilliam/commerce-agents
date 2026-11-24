@@ -198,5 +198,4 @@ export const SHOWCASE_CART: CartPayload = {
   item_count: 2,
   subtotal: 345.0,
   currency: "CNY",
-  image_url: "/products/pexels-7789653.jpg",
 };

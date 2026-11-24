@@ -1,0 +1,57 @@
+# Copyright 2026 Anthropic PBC
+# SPDX-License-Identifier: Apache-2.0
+#
+# Run from this directory: docker compose up --build
+# Build contexts are the repository root so the API can install its seven local
+# packages and both web apps can resolve the whole npm workspace.
+
+name: commerce-retail
+
+services:
+  api:
+    build:
+      context: ../..
+      dockerfile: examples/retail/Dockerfile.api
+    # Optional: credentials are injected at runtime, never baked into the image.
+    env_file:
+      - path: ../../.env
+        required: false
+      - path: ./.env
+        required: false
+    ports:
+      - "8000:8000"
+    # The retail demo persists memory and merchant edits back into data/.
+    volumes:
+      - ./data:/repo/examples/retail/data
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/health', timeout=2)"]
+      interval: 10s
+      timeout: 3s
+      retries: 12
+      start_period: 20s
+
+  storefront:
+    build:
+      context: ../..
+      dockerfile: examples/retail/Dockerfile.web
+      args:
+        APP: storefront
+        NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:8000}
+    ports:
+      - "3000:3000"
+    depends_on:
+      api:
+        condition: service_healthy
+
+  merchant:
+    build:
+      context: ../..
+      dockerfile: examples/retail/Dockerfile.web
+      args:
+        APP: merchant
+        NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:8000}
+    ports:
+      - "3100:3100"
+    depends_on:
+      api:
+        condition: service_healthy

@@ -13,6 +13,21 @@ python scripts/run_demo.py retail --merchant     # API :8000 + 商户后台 :310
 python scripts/run_demo.py retail --all          # 两个前端共用一个 API
 ```
 
+### Docker Compose（API + 两个前端）
+
+在 `examples/retail/` 下执行，三个服务一起起：
+
+```bash
+cd examples/retail
+docker compose up --build                        # 门店 :3000 + 商户 :3100 + API :8000
+docker compose down                              # 停止并移除容器
+```
+
+- 凭据在运行时从仓库根目录 `.env` 和本目录 `.env`（若存在）注入容器，不会烘焙进镜像。若 `.env` 里的 `ANTHROPIC_BASE_URL` 指向 `localhost`，容器里需改成 `host.docker.internal` 或局域网 IP；指向局域网 LM Studio 时无需改动。
+- `./data` 绑定挂载到容器的同一路径，记忆和商户变更直接写在宿主 `examples/retail/data/`，`docker compose down -v` 也不会删除。
+- 前端的 API 地址在 `next build` 时烘焙，默认 `http://localhost:8000`（浏览器访问宿主映射端口）。若浏览器通过别的地址访问 API，构建前设置 `NEXT_PUBLIC_API_URL`，例如 `NEXT_PUBLIC_API_URL=http://example.com:8000 docker compose up --build`。
+- `api` 带健康检查，两个前端会等它就绪后再启动。
+
 也可以在 `examples/` 下执行 `npm ci` 后分别启动：
 
 ```bash

@@ -1,0 +1,41 @@
+# Copyright 2026 Anthropic PBC
+# SPDX-License-Identifier: Apache-2.0
+#
+# One Dockerfile for both retail frontends. APP selects the workspace and PORT is the
+# port exposed (storefront 3000, merchant 3100); the port actually bound comes from the
+# app's own package.json "start" script.
+#   docker build -f examples/retail/Dockerfile.web --build-arg APP=storefront .
+
+FROM node:22-alpine AS build
+
+ARG APP=storefront
+
+WORKDIR /repo/examples
+# npm ci validates the entire workspace lockfile, so all eight web apps must exist.
+COPY examples/ ./
+RUN npm ci --no-audit --no-fund
+
+# NEXT_PUBLIC_* is inlined at build time. Declared after npm ci so both apps share the
+# dependency-install layer and only the final build layer differs.
+ARG NEXT_PUBLIC_API_URL=http://localhost:8000
+ENV NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+
+WORKDIR /repo/examples/retail/${APP}-web
+RUN npm run build
+
+
+FROM node:22-alpine
+
+ARG APP=storefront
+ARG PORT=3000
+
+WORKDIR /repo/examples
+COPY --from=build /repo/examples/package.json ./
+COPY --from=build /repo/examples/node_modules ./node_modules
+COPY --from=build /repo/examples/web-shared ./web-shared
+COPY --from=build /repo/examples/retail/${APP}-web ./retail/${APP}-web
+
+WORKDIR /repo/examples/retail/${APP}-web
+EXPOSE ${PORT}
+
+CMD ["npm", "start"]
