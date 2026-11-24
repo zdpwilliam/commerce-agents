@@ -28,6 +28,8 @@ docker compose down                              # 停止并移除容器
 - 前端的 API 地址在 `next build` 时烘焙，默认 `http://localhost:8100`（浏览器访问宿主映射端口）。若浏览器通过别的地址访问 API，构建前设置 `NEXT_PUBLIC_API_URL`，例如 `NEXT_PUBLIC_API_URL=http://example.com:8100 docker compose up --build`。
 - `api` 带健康检查，两个前端会等它就绪后再启动。
 - Python 依赖默认走清华 PyPI 镜像（国内构建快）；在其他地区可覆盖：`PIP_INDEX_URL=https://pypi.org/simple docker compose up --build`。
+- **反向代理子路径部署**：两个前端默认按 nginx 子路径构建——门店 `/agent-shopping`、商户 `/agent-merchant`（`next.config.ts` 的 `basePath`），生成的资源 URL 自带前缀。nginx 用带尾斜杠的 `proxy_pass` 剥掉前缀转发即可，无需额外 `location /_next/`。前缀可改：`STOREFRONT_BASE_PATH`、`MERCHANT_BASE_PATH`。
+- 前端的 API 地址同为构建期烘焙。若浏览器经代理远程访问，`localhost:8100` 会指向访问者本机而连不上；此时把 API 也经 nginx 暴露，并设 `NEXT_PUBLIC_API_URL` 为对外地址后重新构建。
 
 也可以在 `examples/` 下执行 `npm ci` 后分别启动：
 

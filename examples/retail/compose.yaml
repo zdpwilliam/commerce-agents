@@ -39,6 +39,7 @@ services:
       args:
         APP: storefront
         NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:8100}
+        BASE_PATH: ${STOREFRONT_BASE_PATH:-/agent-shopping}
     ports:
       - "3000:3000"
     depends_on:
@@ -52,6 +53,7 @@ services:
       args:
         APP: merchant
         NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:8100}
+        BASE_PATH: ${MERCHANT_BASE_PATH:-/agent-merchant}
     ports:
       - "3100:3100"
     depends_on:

@@ -15,10 +15,15 @@ WORKDIR /repo/examples
 COPY examples/ ./
 RUN npm ci --no-audit --no-fund
 
-# NEXT_PUBLIC_* is inlined at build time. Declared after npm ci so both apps share the
+# Both values are inlined at build time. Declared after npm ci so both apps share the
 # dependency-install layer and only the final build layer differs.
 ARG NEXT_PUBLIC_API_URL=http://localhost:8100
 ENV NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+
+# Subpath prefix for reverse-proxy deployments (e.g. /agent-shopping or /agent-merchant).
+# next.config.ts reads BASE_PATH and sets Next.js basePath accordingly.
+ARG BASE_PATH
+ENV BASE_PATH=${BASE_PATH}
 
 WORKDIR /repo/examples/retail/${APP}-web
 RUN npm run build
