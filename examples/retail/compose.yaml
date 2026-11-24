@@ -20,6 +20,10 @@ services:
         required: false
       - path: ./.env
         required: false
+    environment:
+      # FastAPI rejects unknown Host headers (DNS-rebinding guard). Behind a gateway,
+      # add the public domain(s) here; comma-separated, ports are stripped automatically.
+      DEMO_ALLOWED_HOSTS: ${DEMO_ALLOWED_HOSTS:-}
     ports:
       - "8100:8100"
     # The retail demo persists memory and merchant edits back into data/.

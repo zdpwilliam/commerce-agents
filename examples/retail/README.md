@@ -27,6 +27,7 @@ docker compose down                              # 停止并移除容器
 - `./data` 绑定挂载到容器的同一路径，记忆和商户变更直接写在宿主 `examples/retail/data/`，`docker compose down -v` 也不会删除。
 - 前端的 API 根路径默认是 `/agent/api`（`NEXT_PUBLIC_API_URL`），由浏览器按当前页面来源解析——远程访问不会把 `localhost` 指向访问者本机。`AgentApi` 会再拼上自己的 `/api` 前缀，最终请求 `/agent/api/api/...`。只有当 API 在完全不同的域名时才把它设为绝对地址。
 - `api` 带健康检查，两个前端会等它就绪后再启动。
+- **反向代理部署必须设置域名白名单**：API 用 `TrustedHostMiddleware` 防 DNS rebinding，默认只接受 `localhost`/`127.0.0.1`。请求 Host 是公网域名（如 `aisuper.site`）会被返回 **400**，即使路径转发正确。启动时设 `DEMO_ALLOWED_HOSTS=aisuper.site`（多个域名逗号分隔）即可；该变量已接在 compose 的 `api.environment`。
 - Python 依赖默认走清华 PyPI 镜像（国内构建快）；在其他地区可覆盖：`PIP_INDEX_URL=https://pypi.org/simple docker compose up --build`。
 - **反向代理子路径部署**：三个服务挂在 nginx 子路径下——API `/agent/api/`、门店 `/agent-shopping/`、商户 `/agent-merchant/`。两个前端的 `basePath` 让资源 URL 自带前缀，nginx 用带尾斜杠的 `proxy_pass` 剥掉前缀转发。前缀可改：`STOREFRONT_BASE_PATH`、`MERCHANT_BASE_PATH`。
 
